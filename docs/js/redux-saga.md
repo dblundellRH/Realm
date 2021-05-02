@@ -55,9 +55,6 @@ import saga from './saga';
 
 // ...
 
-// `mode` is an optional argument, default value is `DAEMON`
-const withSaga = injectSaga({ key: 'yourcomponent', saga, mode: DAEMON });
-
 export default compose(
   withSaga,
 )(YourComponent);

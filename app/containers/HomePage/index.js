@@ -8,12 +8,11 @@ import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, ReactReduxContext } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
 import {
   makeSelectRepos,
   makeSelectLoading,
@@ -31,7 +30,6 @@ import { loadRepos } from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
-import saga from './saga';
 
 const key = 'home';
 
@@ -44,7 +42,8 @@ export function HomePage({
   onChangeUsername,
 }) {
   useInjectReducer({ key, reducer });
-  useInjectSaga({ key, saga });
+
+  const context = React.useContext(ReactReduxContext);
 
   useEffect(() => {
     // When initial state username is not null, submit the form to load repos
@@ -56,6 +55,8 @@ export function HomePage({
     error,
     repos,
   };
+
+  console.log(context.store.getState());
 
   return (
     <article>
@@ -75,6 +76,11 @@ export function HomePage({
             <FormattedMessage {...messages.startProjectMessage} />
           </p>
         </CenteredSection>
+
+        <section>
+          <p>Hello <span>{}</span></p>
+        </section>
+
         <Section>
           <H2>
             <FormattedMessage {...messages.trymeHeader} />
