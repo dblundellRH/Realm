@@ -10,12 +10,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IntlProvider } from 'react-intl';
 
-export function LanguageProvider({ locale, messages, children }) {
+export function LanguageProvider({ locale, children }) {
   return (
     <IntlProvider
       locale={locale}
       key={locale}
-      messages={messages[locale]}
+      messages={{}}
     >
       {React.Children.only(children)}
     </IntlProvider>
@@ -24,7 +24,6 @@ export function LanguageProvider({ locale, messages, children }) {
 
 LanguageProvider.propTypes = {
   locale: PropTypes.string,
-  messages: PropTypes.object,
   children: PropTypes.element.isRequired,
 };
 

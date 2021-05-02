@@ -8,15 +8,19 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import styled from 'styled-components';
 
 import HomePage from 'containers/HomePage/index';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
+import useRealmStore from '../../hooks/useRealmStore';
+import useUserStore from '../../hooks/useUserStore';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
+  const user = useUserStore()
+  const realm = useRealmStore()
+
   return (
     <>
       <Helmet
@@ -26,10 +30,16 @@ export default function App() {
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
 
-      <Header />
+      <Header
+        user={user}
+        realm={realm}
+      />
 
       <main>
-        <HomePage />
+        <HomePage
+          user={user}
+          realm={realm}
+        />
       </main>
 
       <Footer />

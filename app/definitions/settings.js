@@ -1,0 +1,4 @@
+export default {
+    INITIAL_RESOURCE_VALUE: 40,
+    INITIAL_KEY_RESOURCE_VALUE: 60,
+}

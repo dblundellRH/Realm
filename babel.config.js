@@ -12,6 +12,7 @@ module.exports = {
     'styled-components',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
+    'module:jsx-control-statements',
   ],
   env: {
     production: {
