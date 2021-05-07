@@ -18,8 +18,8 @@ import useUserStore from '../../hooks/useUserStore';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
-  const user = useUserStore()
-  const realm = useRealmStore()
+  const user = useUserStore();
+  const realm = useRealmStore();
 
   return (
     <>

@@ -35,7 +35,7 @@ openSansObserver.load().then(() => {
 
 const MOUNT_NODE = document.getElementById('app');
 
-const render = messages => {
+const render = (messages) => {
   ReactDOM.render(
     <LanguageProvider messages={messages}>
       <App />
@@ -46,17 +46,15 @@ const render = messages => {
 
 // Chunked polyfill for browsers without Intl support
 if (!window.Intl) {
-  new Promise(resolve => {
+  new Promise((resolve) => {
     resolve(import('intl'));
   })
-    .then(() =>
-      Promise.all([
+    .then(() => Promise.all([
         import('intl/locale-data/jsonp/en.js'),
         import('intl/locale-data/jsonp/de.js'),
-      ]),
-    )
+      ]))
     .then(() => render())
-    .catch(err => {
+    .catch((err) => {
       throw err;
     });
 } else {

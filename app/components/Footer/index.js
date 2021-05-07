@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function Footer({ realm }) {
   return (
     <footer>
-      {`Footer`}
+      {'Footer'}
 
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <p>Debug menu:</p>

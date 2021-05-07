@@ -6,25 +6,27 @@ import ResourceBadge from '../ResourceBadge';
 function Header({ realm, user }) {
   return (
     <header>
-      {`Header`}
+      {'Header'}
 
-      <div style={{
+      <div
+        style={{
         display: 'flex',
         justifyContent: 'space-around',
-      }}>
-        <p style={{ border: user.faction === FACTION_NAMES.ROYALISTS ? '1px solid black' : undefined}}>
+      }}
+      >
+        <p style={{ border: user.faction === FACTION_NAMES.ROYALISTS ? '1px solid black' : undefined }}>
           <ResourceBadge
             faction={FACTION_NAMES.ROYALISTS}
           />
           S: <progress max="100" value={realm.securityStatus}>{realm.securityStatus}%</progress>
         </p>
-        <p style={{ border: user.faction === FACTION_NAMES.GUILDS ? '1px solid black' : undefined}}>
+        <p style={{ border: user.faction === FACTION_NAMES.GUILDS ? '1px solid black' : undefined }}>
           <ResourceBadge
             faction={FACTION_NAMES.GUILDS}
           />
           W: <progress max="100" value={realm.wealthStatus}>{realm.wealthStatus}%</progress>
         </p>
-        <p style={{ border: user.faction === FACTION_NAMES.SERFS ? '1px solid black' : undefined}}>
+        <p style={{ border: user.faction === FACTION_NAMES.SERFS ? '1px solid black' : undefined }}>
           <ResourceBadge
             faction={FACTION_NAMES.SERFS}
           />
