@@ -6,6 +6,8 @@ export default function useRealmStore() {
   const [foodStatus, setFoodStatus] = useState(50);
   const [securityStatus, setSecurityStatus] = useState(50);
 
+  const [gameStart, setGameStart] = useState(false);
+
   return {
     turnCount,
     setTurnCount,
@@ -15,5 +17,7 @@ export default function useRealmStore() {
     setFoodStatus,
     securityStatus,
     setSecurityStatus,
+    gameStart,
+    setGameStart,
   };
 }

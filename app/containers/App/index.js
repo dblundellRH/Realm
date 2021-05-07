@@ -42,7 +42,9 @@ export default function App() {
         />
       </main>
 
-      <Footer />
+      <Footer
+        realm={realm}
+      />
 
       <GlobalStyle />
     </>

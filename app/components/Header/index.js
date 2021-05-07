@@ -1,5 +1,7 @@
 import React from 'react';
-import FACTIONS, { FACTION_NAMES } from '../../definitions/factions';
+import { FACTION_NAMES } from '../../definitions/factions';
+import ResourceBadge from '../ResourceBadge';
+
 
 function Header({ realm, user }) {
   return (
@@ -10,37 +12,22 @@ function Header({ realm, user }) {
         display: 'flex',
         justifyContent: 'space-around',
       }}>
-        <p>
-          <span style={{
-              display: 'block',
-              width: '20px',
-              height: '20px',
-              backgroundColor: FACTIONS[FACTION_NAMES.ROYALISTS].colour,
-              float: 'left',
-              marginRight: '5px',
-            }}></span>
+        <p style={{ border: user.faction === FACTION_NAMES.ROYALISTS ? '1px solid black' : undefined}}>
+          <ResourceBadge
+            faction={FACTION_NAMES.ROYALISTS}
+          />
           S: <progress max="100" value={realm.securityStatus}>{realm.securityStatus}%</progress>
         </p>
-        <p>
-          <span style={{
-            display: 'block',
-            width: '20px',
-            height: '20px',
-            backgroundColor: FACTIONS[FACTION_NAMES.GUILDS].colour,
-            float: 'left',
-            marginRight: '5px',
-          }}></span>
+        <p style={{ border: user.faction === FACTION_NAMES.GUILDS ? '1px solid black' : undefined}}>
+          <ResourceBadge
+            faction={FACTION_NAMES.GUILDS}
+          />
           W: <progress max="100" value={realm.wealthStatus}>{realm.wealthStatus}%</progress>
         </p>
-        <p>
-          <span style={{
-            display: 'block',
-            width: '20px',
-            height: '20px',
-            backgroundColor: FACTIONS[FACTION_NAMES.SERFS].colour,
-            float: 'left',
-            marginRight: '5px',
-          }}></span>
+        <p style={{ border: user.faction === FACTION_NAMES.SERFS ? '1px solid black' : undefined}}>
+          <ResourceBadge
+            faction={FACTION_NAMES.SERFS}
+          />
           F: <progress max="100" value={realm.foodStatus}>{realm.foodStatus}%</progress>
         </p>
       </div>
