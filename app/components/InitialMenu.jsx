@@ -107,7 +107,10 @@ resources.
       </select>
 
       <If condition={user.name && user.faction && !realm.gameStart}>
-            <button onClick={() => realm.setGameStart(true)}>Start game</button>
+            <button onClick={() => {
+              realm.setGameStart(true)
+              realm.setTurnCount(1)
+            }}>Start game</button>
       </If>
     </>
   );

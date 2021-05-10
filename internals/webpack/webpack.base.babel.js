@@ -105,6 +105,12 @@ module.exports = options => ({
           },
         },
       },
+      {
+        test: /\.json$/,
+        use: {
+          loader: 'json-loader'
+        }
+      }
     ],
   },
   plugins: options.plugins.concat([

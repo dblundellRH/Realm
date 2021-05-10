@@ -10,27 +10,42 @@ function Header({ realm, user }) {
 
       <div
         style={{
-        display: 'flex',
-        justifyContent: 'space-around',
-      }}
+          display: 'flex',
+          justifyContent: 'space-around',
+        }}
       >
         <p style={{ border: user.faction === FACTION_NAMES.ROYALISTS ? '1px solid black' : undefined }}>
           <ResourceBadge
             faction={FACTION_NAMES.ROYALISTS}
           />
-          S: <progress max="100" value={realm.securityStatus}>{realm.securityStatus}%</progress>
+          S:
+          {' '}
+          <progress max="100" value={realm.securityStatus}>
+            {realm.securityStatus}
+%
+          </progress>
         </p>
         <p style={{ border: user.faction === FACTION_NAMES.GUILDS ? '1px solid black' : undefined }}>
           <ResourceBadge
             faction={FACTION_NAMES.GUILDS}
           />
-          W: <progress max="100" value={realm.wealthStatus}>{realm.wealthStatus}%</progress>
+          W:
+          {' '}
+          <progress max="100" value={realm.wealthStatus}>
+            {realm.wealthStatus}
+%
+          </progress>
         </p>
         <p style={{ border: user.faction === FACTION_NAMES.SERFS ? '1px solid black' : undefined }}>
           <ResourceBadge
             faction={FACTION_NAMES.SERFS}
           />
-          F: <progress max="100" value={realm.foodStatus}>{realm.foodStatus}%</progress>
+          F:
+          {' '}
+          <progress max="100" value={realm.foodStatus}>
+            {realm.foodStatus}
+%
+          </progress>
         </p>
       </div>
     </header>

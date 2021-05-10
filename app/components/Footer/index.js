@@ -14,7 +14,7 @@ function Footer({ realm }) {
           <input
             type="number"
             value={realm.securityStatus}
-            onChange={e => realm.setSecurityStatus(e.target.value)}
+            onChange={e => handleUpdate(e.target.value, realm.setSecurityStatus)}
           />
         </label>
 
@@ -23,7 +23,7 @@ function Footer({ realm }) {
           <input
             type="number"
             value={realm.wealthStatus}
-            onChange={e => realm.setWealthStatus(e.target.value)}
+            onChange={e => handleUpdate(e.target.value, realm.setWealthStatus)}
           />
         </label>
 
@@ -32,12 +32,17 @@ function Footer({ realm }) {
           <input
             type="number"
             value={realm.foodStatus}
-            onChange={e => realm.setFoodStatus(e.target.value)}
+            onChange={e => handleUpdate(e.target.value, realm.setFoodStatus)}
           />
         </label>
       </div>
     </footer>
   );
+}
+
+function handleUpdate(value, fn) {
+  window.realm.debug = true;
+  fn(value);
 }
 
 Footer.propTypes = {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
 import InitialMenu from '../../components/InitialMenu';
-
+import EventSelector from '../../components/EventSelector';
 
 function HomePage({ user, realm }) {
   return (
@@ -23,8 +23,22 @@ function HomePage({ user, realm }) {
             realm={realm}
           />
         </When>
-        <Otherwise>
+
+        <When condition={realm.gameStart && !realm.gameEnd}>
+          <p>It is turn {realm.turnCount}</p>
           <p>Game!</p>
+
+          <EventSelector
+            realm={realm}
+          />
+        </When>
+
+        <When condition={realm.gameEnd}>
+          <p>Endgame</p>
+        </When>
+
+        <Otherwise>
+          <p>Not sure wtf this means?</p>
         </Otherwise>
       </Choose>
     </div>

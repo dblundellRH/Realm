@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   parser: 'babel-eslint',
-  extends: ['airbnb', 'plugin:jsx-control-statements/recommended'],
+  extends: ['plugin:jsx-control-statements/recommended'],
   plugins: ['react', 'react-hooks', 'jsx-a11y', 'jsx-control-statements'],
   env: {
     jest: true,

@@ -35,7 +35,12 @@ openSansObserver.load().then(() => {
 
 const MOUNT_NODE = document.getElementById('app');
 
+window.realm = {
+  debug: false
+}
+
 const render = (messages) => {
+
   ReactDOM.render(
     <LanguageProvider messages={messages}>
       <App />
@@ -52,7 +57,7 @@ if (!window.Intl) {
     .then(() => Promise.all([
         import('intl/locale-data/jsonp/en.js'),
         import('intl/locale-data/jsonp/de.js'),
-      ]))
+    ]))
     .then(() => render())
     .catch((err) => {
       throw err;
