@@ -7,8 +7,8 @@ import ResourceBadge from '../ResourceBadge';
 function Header({ realm, user }) {
   return (
     <header>
-      <p style={{ margin: 'auto' }}>
-        {'State of the Realm'}
+      <p style={{ textAlign: 'center', margin: 'auto' }}>
+        <strong>{'State of the Realm'}</strong>
       </p>
       <div
         style={{
@@ -25,7 +25,7 @@ function Header({ realm, user }) {
           <progress max="100" value={realm.securityStatus}>
             {realm.securityStatus}%
           </progress>
-          <span>{getEventPreviewEffect(RESOURCES.SECURITY.slug, realm.previewEvent, realm)}</span>
+          <span>{getEventPreviewEffect(RESOURCES.SECURITY.slug, realm)}</span>
         </p>
         <p style={{ border: user.faction === FACTION_NAMES.GUILDS ? '1px solid black' : undefined }}>
           <ResourceBadge
@@ -36,7 +36,7 @@ function Header({ realm, user }) {
           <progress max="100" value={realm.wealthStatus}>
             {realm.wealthStatus}%
           </progress>
-          <span>{getEventPreviewEffect(RESOURCES.WEALTH.slug, realm.previewEvent, realm)}</span>
+          <span>{getEventPreviewEffect(RESOURCES.WEALTH.slug, realm)}</span>
         </p>
         <p style={{ border: user.faction === FACTION_NAMES.SERFS ? '1px solid black' : undefined }}>
           <ResourceBadge
@@ -47,16 +47,17 @@ function Header({ realm, user }) {
           <progress max="100" value={realm.foodStatus}>
             {realm.foodStatus}%
           </progress>
+          <span>{getEventPreviewEffect(RESOURCES.FOOD.slug, realm)}</span>
         </p>
       </div>
     </header>
   );
 }
 
-function getEventPreviewEffect(resourceSlug, choice, realm) {
-  console.log('getEventPreviewEffect', resourceSlug, choice)
-  if (choice) {
-    const resourceToPreview = choice.effects.find(effect => effect.type === resourceSlug);
+function getEventPreviewEffect(resourceSlug, realm) {
+  console.log('getEventPreviewEffect', resourceSlug, realm.previewEvent)
+  if (realm.previewEvent) {
+    const resourceToPreview = realm.previewEvent.effects.find(effect => effect.type === resourceSlug);
 
     return resourceToPreview
       ? resourceToPreview.modifier + realm.getResourceValue(resourceSlug)

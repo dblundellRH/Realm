@@ -24,7 +24,7 @@ function EventSelector({ realm }) {
                                 onMouseEnter={() => realm.setPreviewEvent(choice)}
                                 onMouseLeave={() => realm.setPreviewEvent()}
                                 onFocus={() => realm.setPreviewEvent(choice)}
-                                onFocus={() => realm.setPreviewEvent()}
+                                onBlur={() => realm.setPreviewEvent()}
                                 onClick={() => events.handleEventChoice(choice)}
                             >
                                 {choice.description}

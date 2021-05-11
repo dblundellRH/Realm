@@ -47,7 +47,7 @@ function InitialMenu({ user, realm }) {
   }
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Choose>
         <When condition={user.name}>
           <p>
@@ -59,19 +59,11 @@ function InitialMenu({ user, realm }) {
                 <ResourceBadge
                     faction={user.faction}
                 />
-                        They favour the
-              {' '}
-              {' '}
-              {' '}
-              <strong>{FACTIONS[user.faction].keyResource.name}</strong>
-              {' '}
-              {' '}
-resource.
+                  They favour the <strong>{FACTIONS[user.faction].keyResource.name}</strong> resource.
             </p>
 
             <p>
                 They are less interested in the
-
                 {
                   Object.values(RESOURCES)
                     .filter(resource => resource.slug !== FACTIONS[user.faction].keyResource.slug)
@@ -80,7 +72,7 @@ resource.
                     })
                     .join('and')
                 }
-resources.
+                resources.
             </p>
           </If>
         </When>
@@ -112,7 +104,7 @@ resources.
               realm.setTurnCount(1)
             }}>Start game</button>
       </If>
-    </>
+    </div>
   );
 }
 

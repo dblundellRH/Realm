@@ -6,7 +6,6 @@ module.exports = {
   extends: ['plugin:jsx-control-statements/recommended'],
   plugins: ['react', 'react-hooks', 'jsx-a11y', 'jsx-control-statements'],
   env: {
-    jest: true,
     browser: true,
     node: true,
     es6: true,
