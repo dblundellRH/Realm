@@ -1,13 +1,15 @@
 import React from 'react';
 import { FACTION_NAMES } from '../../definitions/factions';
+import RESOURCES from '../../definitions/resources';
 import ResourceBadge from '../ResourceBadge';
 
 
 function Header({ realm, user }) {
   return (
     <header>
-      {'Header'}
-
+      <p style={{ margin: 'auto' }}>
+        {'State of the Realm'}
+      </p>
       <div
         style={{
           display: 'flex',
@@ -21,9 +23,9 @@ function Header({ realm, user }) {
           S:
           {' '}
           <progress max="100" value={realm.securityStatus}>
-            {realm.securityStatus}
-%
+            {realm.securityStatus}%
           </progress>
+          <span>{getEventPreviewEffect(RESOURCES.SECURITY.slug, realm.previewEvent, realm)}</span>
         </p>
         <p style={{ border: user.faction === FACTION_NAMES.GUILDS ? '1px solid black' : undefined }}>
           <ResourceBadge
@@ -32,9 +34,9 @@ function Header({ realm, user }) {
           W:
           {' '}
           <progress max="100" value={realm.wealthStatus}>
-            {realm.wealthStatus}
-%
+            {realm.wealthStatus}%
           </progress>
+          <span>{getEventPreviewEffect(RESOURCES.WEALTH.slug, realm.previewEvent, realm)}</span>
         </p>
         <p style={{ border: user.faction === FACTION_NAMES.SERFS ? '1px solid black' : undefined }}>
           <ResourceBadge
@@ -43,13 +45,23 @@ function Header({ realm, user }) {
           F:
           {' '}
           <progress max="100" value={realm.foodStatus}>
-            {realm.foodStatus}
-%
+            {realm.foodStatus}%
           </progress>
         </p>
       </div>
     </header>
   );
+}
+
+function getEventPreviewEffect(resourceSlug, choice, realm) {
+  console.log('getEventPreviewEffect', resourceSlug, choice)
+  if (choice) {
+    const resourceToPreview = choice.effects.find(effect => effect.type === resourceSlug);
+
+    return resourceToPreview
+      ? resourceToPreview.modifier + realm.getResourceValue(resourceSlug)
+      : undefined
+  }
 }
 
 export default Header;

@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet';
 
 import InitialMenu from '../../components/InitialMenu';
 import EventSelector from '../../components/EventSelector';
+import EndgameScreen from '../../components/EndgameScreen';
+
 
 function HomePage({ user, realm }) {
   return (
@@ -34,7 +36,10 @@ function HomePage({ user, realm }) {
         </When>
 
         <When condition={realm.gameEnd}>
-          <p>Endgame</p>
+          <EndgameScreen
+            realm={realm}
+            user={user}
+          />
         </When>
 
         <Otherwise>

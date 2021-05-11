@@ -20,7 +20,13 @@ function EventSelector({ realm }) {
                 <ul>
                     <For each="choice" of={events.activeEvent.choices} index="index">
                         <li key={index}>
-                            <button onClick={() => events.handleEventChoice(choice)}>
+                            <button
+                                onMouseEnter={() => realm.setPreviewEvent(choice)}
+                                onMouseLeave={() => realm.setPreviewEvent()}
+                                onFocus={() => realm.setPreviewEvent(choice)}
+                                onFocus={() => realm.setPreviewEvent()}
+                                onClick={() => events.handleEventChoice(choice)}
+                            >
                                 {choice.description}
                             </button>
                         </li>

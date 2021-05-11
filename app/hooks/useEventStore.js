@@ -16,6 +16,10 @@ export default function useEventStore(realm) {
     function handleEventChoice(choice) {
         console.log('handleEventChoice');
 
+        // Resets preview event
+        realm.setPreviewEvent();
+
+        // Applys event outcomes
         choice.effects.forEach(effect => {
             if (effect.type === RESOURCES.SECURITY.slug) {
                 realm.setSecurityStatus((prev) => updateResource(prev, effect))
@@ -69,6 +73,7 @@ export default function useEventStore(realm) {
                 updateEventStore(prev => prev.filter(event => event.title !== activeEvent.title))
             }
             else {
+                realm.setGameEnd(true);
                 console.log('You lost :(')
             }
         }
