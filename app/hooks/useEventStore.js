@@ -21,6 +21,7 @@ export default function useEventStore(realm) {
 
         // Applys event outcomes
         choice.effects.forEach(effect => {
+            console.log(effect, realm.activeModifiers);
             if (effect.type === RESOURCES.SECURITY.slug) {
                 realm.setSecurityStatus((prev) => updateResource(prev, effect))
             }
@@ -36,7 +37,19 @@ export default function useEventStore(realm) {
     }
 
     function updateResource(prev, effect) {
-        const updatedValue = parseInt(prev) + parseInt(effect.modifier)
+        let updatedValue = parseInt(prev) + parseInt(effect.modifier)
+
+        if (realm.activeModifiers) {
+            realm.activeModifiers.forEach(modifier => {
+                modifier.effects.forEach(modifierEffect => {
+                    if (modifierEffect.type === effect.type) {
+                        console.log('*** has modifiers matching effect type ***')
+                        updatedValue = updatedValue + parseInt(modifierEffect.modifier)
+                    }
+                })
+            })
+        }
+
         return updatedValue <= 0
             ? 0
             : updatedValue

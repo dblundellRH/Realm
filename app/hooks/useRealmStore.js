@@ -6,9 +6,12 @@ import SETTINGS from '../definitions/settings';
 
 export default function useRealmStore() {
   const [turnCount, setTurnCount] = useState(0);
+
   const [securityStatus, setSecurityStatus] = useState(50);
   const [wealthStatus, setWealthStatus] = useState(50);
   const [foodStatus, setFoodStatus] = useState(50);
+
+  const [activeModifiers, setActiveModifiers] = useState([]);
 
   const [previewEvent, setPreviewEvent]  = useState();
 
@@ -69,5 +72,7 @@ export default function useRealmStore() {
     previewEvent,
     setPreviewEvent,
     getResourceValue,
+    activeModifiers,
+    setActiveModifiers,
   };
 }

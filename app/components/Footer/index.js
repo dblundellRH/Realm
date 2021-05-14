@@ -1,8 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import MODIFIERS from '../../definitions/modifiers';
+
 
 function Footer({ realm }) {
+  function handleAddBoost() {
+    realm.setActiveModifiers(prev => {
+      return [
+        ...prev,
+        MODIFIERS.BOOST,
+      ];
+    })
+  }
+
+  function handleRemoveBoost() {
+    realm.setActiveModifiers(prev => prev.filter(modifier => modifier.slug !== MODIFIERS.BOOST.slug));
+  }
+
   return (
     <footer>
       <p><strong>Debug menu</strong></p>
@@ -33,6 +48,10 @@ function Footer({ realm }) {
             onChange={e => handleUpdate(e.target.value, realm.setFoodStatus)}
           />
         </label>
+
+        <p>Boosts</p>
+        <button onClick={handleAddBoost}>Add boost</button>
+        <button onClick={handleRemoveBoost}>Remove boost</button>
       </div>
     </footer>
   );

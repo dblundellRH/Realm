@@ -20,11 +20,26 @@ export default {
         },
         {
             description: 'choice description 2',
+            effects: [
+                {
+                    type: RESOURCES.FOOD.slug,
+                    modifier: 10,
+                },
+                {
+                    type: RESOURCES.WEALTH.slug,
+                    modifier: -10,
+                }
+            ]
 
         },
         {
             description: 'choice description 3',
-
+            effects: [
+                {
+                    type: RESOURCES.SECURITY.slug,
+                    modifier: -10,
+                }
+            ]
         }
     ]
 }

@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import InitialMenu from '../../components/InitialMenu';
 import EventSelector from '../../components/EventSelector';
 import EndgameScreen from '../../components/EndgameScreen';
+import ModifierInPlay from '../../components/ModifierInPlay';
 
 
 function HomePage({ user, realm }) {
@@ -28,7 +29,17 @@ function HomePage({ user, realm }) {
 
         <When condition={realm.gameStart && !realm.gameEnd}>
           <p>It is turn {realm.turnCount}</p>
-          <p>Game!</p>
+
+          <If condition={realm.activeModifiers && Array.isArray(realm.activeModifiers)}>
+            <For each="modifier" of={realm.activeModifiers}>
+              <ModifierInPlay
+                key={modifier.name}
+                name={modifier.name}
+                icon={modifier.icon}
+                description={modifier.description}
+              />
+            </For>
+          </If>
 
           <EventSelector
             realm={realm}
