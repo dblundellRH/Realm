@@ -10,7 +10,7 @@ import ModifierInPlay from '../../components/ModifierInPlay';
 
 function HomePage({ user, realm }) {
   return (
-    <div style={{ borderTop: '2px solid black', borderBottom: '2px solid black', padding: '2rem' }}>
+    <div style={{ borderTop: '2px solid black', borderBottom: '2px solid black', padding: '2rem', position: 'relative' }}>
       <Helmet>
         <title>Realm</title>
         <meta
@@ -28,7 +28,7 @@ function HomePage({ user, realm }) {
         </When>
 
         <When condition={realm.gameStart && !realm.gameEnd}>
-          <p>It is turn {realm.turnCount}</p>
+          <p style={{ position: 'absolute', top: '0', left: '0'}}>It is turn {realm.turnCount}</p>
 
           <If condition={realm.activeModifiers && Array.isArray(realm.activeModifiers)}>
             <For each="modifier" of={realm.activeModifiers}>

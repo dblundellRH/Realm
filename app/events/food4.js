@@ -2,31 +2,31 @@ import RESOURCES from '../definitions/resources';
 
 
 export default {
-    title: 'I\'m selling these fine leather jackets.',
-    description: 'Our people need clothing for the winter. We could slaughter some of our cattle to provide the leather, and make a tidy profit at the same time.',
+    title: 'Eastern roots',
+    description: 'A strangely dressed human is selling a number of strange vegetables they claim will feed dozens of families. Should we trust them?',
     choices: [
         {
-            description: 'Bring in the cows!',
+            description: 'I will try these pohtahytos',
             effects: [
                 {
                     type: RESOURCES.FOOD.slug,
-                    modifier: -10,
+                    modifier: 10,
                 },
                 {
                     type: RESOURCES.WEALTH.slug,
-                    modifier: 10,
+                    modifier: -10,
                 }
             ]
         },
         {
-            description: 'No, we\'ll need the milk they provide.',
+            description: 'Banish the scruffy villain!',
             effects: [
                 {
-                    type: RESOURCES.FOOD.slug,
+                    type: RESOURCES.WEALTH.slug,
                     modifier: 10,
                 },
                 {
-                    type: RESOURCES.WEALTH.slug,
+                    type: RESOURCES.FOOD.slug,
                     modifier: -10,
                 }
             ]

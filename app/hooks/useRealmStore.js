@@ -18,6 +18,8 @@ export default function useRealmStore() {
   const [gameEnd, setGameEnd] = useState(false);
   const [gameStart, setGameStart] = useState(false);
 
+  const [showDebugMenu, setShowDebugMenu] = useState(false);
+
   function getResourceValue(resource) {
     if (resource === RESOURCES.SECURITY.slug) {
       return securityStatus;
@@ -74,5 +76,7 @@ export default function useRealmStore() {
     getResourceValue,
     activeModifiers,
     setActiveModifiers,
+    showDebugMenu,
+    setShowDebugMenu,
   };
 }

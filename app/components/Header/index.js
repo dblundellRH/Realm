@@ -55,12 +55,26 @@ function Header({ realm, user }) {
 }
 
 function getEventPreviewEffect(resourceSlug, realm) {
-  console.log('getEventPreviewEffect', resourceSlug, realm.previewEvent)
   if (realm.previewEvent) {
     const resourceToPreview = realm.previewEvent.effects.find(effect => effect.type === resourceSlug);
+    let totalModifier = 0;
 
-    return resourceToPreview
-      ? resourceToPreview.modifier + realm.getResourceValue(resourceSlug)
+    if (realm.activeModifiers && realm.activeModifiers.length) {
+      realm.activeModifiers.forEach(modifier => {
+        const value = modifier.effects.find(effect => effect.type === resourceSlug);
+
+          if (value) {
+            totalModifier += value.modifier;
+          }
+      })
+    }
+
+    const newValue = resourceToPreview
+      ? resourceToPreview.modifier + realm.getResourceValue(resourceSlug) + totalModifier
+      : undefined
+
+    return newValue
+      ? `${realm[`${resourceSlug}Status`] > newValue ? '<' : '>'}${newValue}`
       : undefined
   }
 }

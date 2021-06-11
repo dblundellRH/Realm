@@ -23,11 +23,11 @@ export default {
             effects: [
                 {
                     type: RESOURCES.SECURITY.slug,
-                    modifier: 10,
+                    modifier: -10,
                 },
                 {
                     type: RESOURCES.WEALTH.slug,
-                    modifier: -10,
+                    modifier: 10,
                 }
             ]
         },

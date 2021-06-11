@@ -20,39 +20,41 @@ function Footer({ realm }) {
 
   return (
     <footer>
-      <p><strong>Debug menu</strong></p>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <label>
-          Security status:
-          <input
-            type="number"
-            value={realm.securityStatus}
-            onChange={e => handleUpdate(e.target.value, realm.setSecurityStatus)}
-          />
-        </label>
+      <p><strong onClick={() => realm.setShowDebugMenu(!realm.showDebugMenu)}>Toggle Debug menu</strong></p>
+      <If condition={realm.showDebugMenu}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <label>
+            Security status:
+            <input
+              type="number"
+              value={realm.securityStatus}
+              onChange={e => handleUpdate(e.target.value, realm.setSecurityStatus)}
+            />
+          </label>
 
-        <label>
-          Wealth status:
-          <input
-            type="number"
-            value={realm.wealthStatus}
-            onChange={e => handleUpdate(e.target.value, realm.setWealthStatus)}
-          />
-        </label>
+          <label>
+            Wealth status:
+            <input
+              type="number"
+              value={realm.wealthStatus}
+              onChange={e => handleUpdate(e.target.value, realm.setWealthStatus)}
+            />
+          </label>
 
-        <label>
-          Food status:
-          <input
-            type="number"
-            value={realm.foodStatus}
-            onChange={e => handleUpdate(e.target.value, realm.setFoodStatus)}
-          />
-        </label>
+          <label>
+            Food status:
+            <input
+              type="number"
+              value={realm.foodStatus}
+              onChange={e => handleUpdate(e.target.value, realm.setFoodStatus)}
+            />
+          </label>
 
-        <p>Boosts</p>
-        <button onClick={handleAddBoost}>Add boost</button>
-        <button onClick={handleRemoveBoost}>Remove boost</button>
-      </div>
+          <p>Boosts</p>
+          <button onClick={handleAddBoost}>Add boost</button>
+          <button onClick={handleRemoveBoost}>Remove boost</button>
+        </div>
+      </If>
     </footer>
   );
 }

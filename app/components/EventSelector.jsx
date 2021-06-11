@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import useEventStore from '../hooks/useEventStore';
-
+import Choice from './Choice';
 
 function EventSelector({ realm }) {
     const events = useEventStore(realm);
@@ -9,18 +9,23 @@ function EventSelector({ realm }) {
     return (
         <>
             <If condition={events.activeEvent}>
-                <h2>
+                <h2 style={{textDecoration: 'underline'}}>
                     {events.activeEvent.title}
                 </h2>
 
-                <p>
+                <p style={{marginBottom: '4rem'}}>
                     {events.activeEvent.description}
                 </p>
 
-                <ul>
+                <ul
+                    style={{ paddingLeft: '0' }}
+                >
                     <For each="choice" of={events.activeEvent.choices} index="index">
-                        <li key={index}>
-                            <button
+                        <li
+                            style={{ listStyle: 'none' }}
+                            key={index}
+                        >
+                            <Choice
                                 onMouseEnter={() => realm.setPreviewEvent(choice)}
                                 onMouseLeave={() => realm.setPreviewEvent()}
                                 onFocus={() => realm.setPreviewEvent(choice)}
@@ -28,7 +33,7 @@ function EventSelector({ realm }) {
                                 onClick={() => events.handleEventChoice(choice)}
                             >
                                 {choice.description}
-                            </button>
+                            </Choice>
                         </li>
                     </For>
                 </ul>

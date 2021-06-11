@@ -17,9 +17,6 @@ import 'sanitize.css/sanitize.css';
 // Import root app
 import App from 'containers/App';
 
-// Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
-
 // Load the favicon and the .htaccess file
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
@@ -39,32 +36,14 @@ window.realm = {
   debug: false
 }
 
-const render = (messages) => {
-
+const render = () => {
   ReactDOM.render(
-    <LanguageProvider messages={messages}>
-      <App />
-    </LanguageProvider>,
+    <App />,
     MOUNT_NODE,
   );
 };
 
-// Chunked polyfill for browsers without Intl support
-if (!window.Intl) {
-  new Promise((resolve) => {
-    resolve(import('intl'));
-  })
-    .then(() => Promise.all([
-        import('intl/locale-data/jsonp/en.js'),
-        import('intl/locale-data/jsonp/de.js'),
-    ]))
-    .then(() => render())
-    .catch((err) => {
-      throw err;
-    });
-} else {
-  render();
-}
+render();
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
