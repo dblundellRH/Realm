@@ -2,11 +2,11 @@ import RESOURCES from '../definitions/resources';
 
 
 export default {
-    title: '',
-    description: '',
+    title: 'Fire in the disco!',
+    description: 'Fires have broken out in the city, what should we focus on?',
     choices: [
         {
-            description: 'Stop them!',
+            description: 'Save the grain store!',
             effects: [
                 {
                     type: RESOURCES.FOOD.slug,
@@ -19,7 +19,7 @@ export default {
             ]
         },
         {
-            description: 'They have a hard job, we can allow this',
+            description: 'Save the barracks!',
             effects: [
                 {
                     type: RESOURCES.SECURITY.slug,
