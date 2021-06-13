@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
+import SETTINGS from '../../definitions/settings';
 import InitialMenu from '../../components/InitialMenu';
 import EventSelector from '../../components/EventSelector';
 import EndgameScreen from '../../components/EndgameScreen';
@@ -28,7 +29,7 @@ function HomePage({ user, realm }) {
         </When>
 
         <When condition={realm.gameStart && !realm.gameEnd}>
-          <p style={{ position: 'absolute', top: '0', left: '0'}}>It is turn {realm.turnCount}</p>
+          <p style={{ position: 'absolute', top: '0', left: '0'}}>It is turn {realm.turnCount} / {SETTINGS.MAX_TURN_COUNT}</p>
 
           <If condition={realm.activeModifiers && Array.isArray(realm.activeModifiers)}>
             <For each="modifier" of={realm.activeModifiers}>

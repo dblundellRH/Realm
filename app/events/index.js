@@ -4,6 +4,8 @@ import security3 from './security3'
 import security4 from './security4'
 import security5 from './security5'
 import security6 from './security6'
+import security7 from './security7'
+import security8 from './security8'
 
 import wealth1 from './wealth1';
 import wealth2 from './wealth2';
@@ -26,6 +28,8 @@ export default [
     security4,
     security5,
     security6,
+    security7,
+    security8,
 
     wealth1,
     wealth2,

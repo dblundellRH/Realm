@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import RESOURCES from '../definitions/RESOURCES';
+import RESOURCES from '../definitions/resources';
 import SETTINGS from '../definitions/settings';
 
 

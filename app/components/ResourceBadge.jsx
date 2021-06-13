@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FACTIONS from '../definitions/FACTIONS';
+import FACTIONS from '../definitions/factions';
 
 
 function ResourceBadge({ faction }) {

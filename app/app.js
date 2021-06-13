@@ -32,6 +32,7 @@ openSansObserver.load().then(() => {
 
 const MOUNT_NODE = document.getElementById('app');
 
+// Game debug mode
 window.realm = {
   debug: false
 }
