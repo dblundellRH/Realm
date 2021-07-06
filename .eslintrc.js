@@ -3,12 +3,22 @@ const path = require('path');
 
 module.exports = {
   parser: 'babel-eslint',
-  extends: ['plugin:jsx-control-statements/recommended'],
-  plugins: ['react', 'react-hooks', 'jsx-a11y', 'jsx-control-statements'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:jsx-control-statements/recommended',
+  ],
+  plugins: [
+    'react',
+    'react-hooks',
+    'jsx-a11y',
+    'jsx-control-statements'
+  ],
   env: {
     browser: true,
     node: true,
     es6: true,
+    "jsx-control-statements/jsx-control-statements": true,
   },
   parserOptions: {
     ecmaVersion: 6,
@@ -18,7 +28,7 @@ module.exports = {
     },
   },
   rules: {
-
+    "react/jsx-no-undef": [2, { "allowGlobals": true }]
   },
   settings: {
     'import/resolver': {

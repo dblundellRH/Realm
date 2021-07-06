@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { FACTION_NAMES } from '../../definitions/factions';
 import RESOURCES from '../../definitions/resources';
 import ResourceBadge from '../ResourceBadge';
@@ -77,6 +78,11 @@ function getEventPreviewEffect(resourceSlug, realm) {
       ? `${realm[`${resourceSlug}Status`] > newValue ? '<' : '>'}${newValue}`
       : undefined
   }
+}
+
+Header.propTypes = {
+  realm: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 }
 
 export default Header;
