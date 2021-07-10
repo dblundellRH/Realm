@@ -11,6 +11,8 @@ export default function useRealmStore() {
   const [wealthStatus, setWealthStatus] = useState(50);
   const [foodStatus, setFoodStatus] = useState(50);
 
+  const [factionConfidence, setFactionConfidence] = useState(80);
+
   const [activeModifiers, setActiveModifiers] = useState([]);
 
   const [previewEvent, setPreviewEvent]  = useState();
@@ -35,14 +37,14 @@ export default function useRealmStore() {
   }
 
   function isRealmInChaos() {
-    console.log('Any resources status at -100 or +100?', securityStatus, wealthStatus, foodStatus)
+    // console.log('Any resources status at 0 or +100?', securityStatus, wealthStatus, foodStatus)
     return securityStatus === 0 || securityStatus === 100 ||
       wealthStatus === 0 || wealthStatus === 100 ||
       foodStatus === 0 || foodStatus === 100
   }
 
   function isEndOfGame() {
-    console.log('isEndOfGame?', turnCount > SETTINGS.MAX_TURN_COUNT)
+    // console.log('isEndOfGame?', turnCount > SETTINGS.MAX_TURN_COUNT)
     return turnCount > SETTINGS.MAX_TURN_COUNT;
   }
 
@@ -78,5 +80,7 @@ export default function useRealmStore() {
     setActiveModifiers,
     showDebugMenu,
     setShowDebugMenu,
+    factionConfidence,
+    setFactionConfidence,
   };
 }

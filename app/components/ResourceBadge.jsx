@@ -6,10 +6,11 @@ import RESOURCES from '../definitions/resources';
 import FACTIONS from '../definitions/factions';
 
 
-function ResourceBadge({ faction, resourceName }) {
+function ResourceBadge({ faction, resourceName, isSelected }) {
     return (
         <Badge
             factionColour={FACTIONS[faction].colour}
+            isSelected={isSelected}
         >
             {resourceName.slice(0,1)}
         </Badge>
@@ -19,9 +20,14 @@ function ResourceBadge({ faction, resourceName }) {
 ResourceBadge.propTypes = {
     faction: PropTypes.oneOf(Object.values(FACTIONS).map(faction => faction.slug)).isRequired,
     resourceName: PropTypes.oneOf(Object.values(RESOURCES).map(resource => resource.name)).isRequired,
+    isSelected: PropTypes.bool,
 }
 
-const Badge = styled.span`
+ResourceBadge.defaultProps = {
+    isSelected: false,
+}
+
+const Badge = styled.div`
     display: block;
     width: 25px;
     height: 25px;
@@ -34,6 +40,24 @@ const Badge = styled.span`
     text-align: center;
     color: white;
     font-weight: 700;
+    position: relative;
+
+    ${props => props.isSelected && `
+        &::before {
+            content: '';
+            display: block;
+            width: 5px;
+            height: 4px;
+
+            background-color: black;
+
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    `}
 `
 
 export default ResourceBadge

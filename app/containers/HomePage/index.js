@@ -31,6 +31,8 @@ function HomePage({ user, realm }) {
         <When condition={realm.gameStart && !realm.gameEnd}>
           <p style={{ position: 'absolute', top: '0', left: '0'}}>It is turn {realm.turnCount} / {SETTINGS.MAX_TURN_COUNT}</p>
 
+          <p style={{ position: 'absolute', top: '0', right: '0'}}>Faction confidence: {realm.factionConfidence}%</p>
+
           <If condition={realm.activeModifiers && Array.isArray(realm.activeModifiers)}>
             <For each="modifier" of={realm.activeModifiers}>
               <ModifierInPlay
@@ -44,6 +46,7 @@ function HomePage({ user, realm }) {
 
           <EventSelector
             realm={realm}
+            user={user}
           />
         </When>
 

@@ -12,7 +12,9 @@ module.exports = function addProdMiddlewares(app, options) {
   app.use(compression());
   app.use(publicPath, express.static(outputPath));
 
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(outputPath, 'index.html')),
-  );
+  app
+    .route('/*')
+    .get(function(req, res) {
+      res.sendFile(path.resolve(outputPath, 'index.html'))
+    });
 };

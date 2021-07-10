@@ -22,8 +22,12 @@ export default {
             description: 'We can\'t spare the soldiers.',
             effects: [
                 {
+                    type: RESOURCES.SECURITY.slug,
+                    modifier: 10,
+                },
+                {
                     type: RESOURCES.WEALTH.slug,
-                    modifier: -20,
+                    modifier: -10,
                 }
             ]
         },

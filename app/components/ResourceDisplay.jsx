@@ -30,7 +30,7 @@ function ResourceDisplay({ user, realm, faction }) {
             : undefined
 
           return newValue
-            ? `${realm[`${resourceSlug}Status`] > newValue ? '<' : '>'}${newValue}`
+            ? `${realm[`${resourceSlug}Status`] > newValue ? ' < ' : ' > '}${newValue}`
             : undefined
         }
     }
@@ -49,7 +49,7 @@ function ResourceDisplay({ user, realm, faction }) {
               {realm.getResourceValue(resourceSlug)}%
             </progress>
 
-            <span>{getEventPreviewEffect(resourceSlug, realm)}</span>
+            <span>{getEventPreviewEffect(realm)}</span>
         </Container>
     )
 }

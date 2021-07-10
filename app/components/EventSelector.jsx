@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import useEventStore from '../hooks/useEventStore';
 import Choice from './Choice';
 
-function EventSelector({ realm }) {
-    const events = useEventStore(realm);
+
+function EventSelector({ realm, user }) {
+    const events = useEventStore(realm, user);
 
     return (
         <>
@@ -40,6 +42,11 @@ function EventSelector({ realm }) {
             </If>
         </>
     )
+}
+
+EventSelector.propTypes = {
+    realm: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
 }
 
 export default EventSelector;

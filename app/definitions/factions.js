@@ -1,11 +1,11 @@
 import RESOURCES from './resources';
 
+
 const FACTION_NAMES = {
     ROYALISTS: 'royalists',
     GUILDS: 'guilds',
     SERFS: 'serfs',
 }
-
 
 export default {
     [FACTION_NAMES.ROYALISTS]: {
