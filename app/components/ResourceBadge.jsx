@@ -27,7 +27,7 @@ ResourceBadge.defaultProps = {
     isSelected: false,
 }
 
-const Badge = styled.div`
+const Badge = styled.span`
     display: block;
     width: 25px;
     height: 25px;

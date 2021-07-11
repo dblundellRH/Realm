@@ -11,7 +11,7 @@ import ModifierInPlay from '../../components/ModifierInPlay';
 
 function HomePage({ user, realm }) {
   return (
-    <div style={{ borderTop: '2px solid black', borderBottom: '2px solid black', padding: '2rem', position: 'relative' }}>
+    <div style={{ borderTop: '2px solid black', borderBottom: '2px solid black',  position: 'relative' }}>
       <Helmet>
         <title>Realm</title>
         <meta
