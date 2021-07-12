@@ -23,9 +23,11 @@ function EventSelector({ realm, user }) {
                 <h2 style={{textDecoration: 'underline'}}>{events.activeEvent.title}</h2>
 
                 <p>{events.activeEvent.description}</p>
+            </If>
 
-                <p>A decision is required on this matter most urgently.</p>
+            <p>A decision is required on this matter most urgently.</p>
 
+            <If condition={events.activeEvent}>
                 <ul
                     className="event-list"
                 >

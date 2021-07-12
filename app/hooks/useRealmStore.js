@@ -11,6 +11,7 @@ export default function useRealmStore() {
   const [wealthStatus, setWealthStatus] = useState(50);
   const [foodStatus, setFoodStatus] = useState(50);
 
+  const [lastChoicesMade, setLastChoicesMade] = useState([]);
   const [factionConfidence, setFactionConfidence] = useState(80);
 
   const [activeModifiers, setActiveModifiers] = useState([]);
@@ -40,7 +41,8 @@ export default function useRealmStore() {
     // console.log('Any resources status at 0 or +100?', securityStatus, wealthStatus, foodStatus)
     return securityStatus === 0 || securityStatus === 100 ||
       wealthStatus === 0 || wealthStatus === 100 ||
-      foodStatus === 0 || foodStatus === 100
+      foodStatus === 0 || foodStatus === 100 ||
+      factionConfidence === 0
   }
 
   function isEndOfGame() {
@@ -82,5 +84,7 @@ export default function useRealmStore() {
     setShowDebugMenu,
     factionConfidence,
     setFactionConfidence,
+    lastChoicesMade,
+    setLastChoicesMade,
   };
 }

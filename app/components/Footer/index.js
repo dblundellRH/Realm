@@ -50,6 +50,15 @@ function Footer({ realm }) {
             />
           </label>
 
+          <label>
+            Faction confidence:
+            <input
+              type="number"
+              value={realm.factionConfidence}
+              onChange={e => handleUpdate(e.target.value, realm.setFactionConfidence)}
+            />
+          </label>
+
           <p>Boosts</p>
           <button onClick={handleAddBoost}>Add boost</button>
           <button onClick={handleRemoveBoost}>Remove boost</button>

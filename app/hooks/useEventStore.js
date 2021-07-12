@@ -6,6 +6,7 @@ import events from '../events';
 
 
 const CONFIDENCE_MODIFIER = 10;
+const LAST_CHOICES_LIMIT = 3;
 
 export default function useEventStore(realm, user) {
     const [eventStore, updateEventStore] = useState(events)
@@ -35,11 +36,29 @@ export default function useEventStore(realm, user) {
         })
     }
 
+    function updateLastChoicesMade(choice) {
+        const choices = realm.lastChoicesMade;
+
+        if (choices.length > LAST_CHOICES_LIMIT) {
+            const newChoices = choices.slice(1, choices.length - 1);
+            newChoices.push(choice);
+            realm.setLastChoicesMade(newChoices)
+        }
+        else {
+            choices.push(choice);
+            realm.setLastChoicesMade(choices)
+        }
+
+        // console.log('lastChoicesMade', realm.lastChoicesMade);
+    }
+
     function updateFactionConfidence(choice) {
         const userFaction = user.faction;
         const factionResourceSlug = FACTIONS[userFaction].keyResource.slug;
 
         const relevantEffects = choice.effects.filter(effect => effect.type === factionResourceSlug);
+
+        updateLastChoicesMade()
 
         if (relevantEffects && relevantEffects.length) {
             relevantEffects.forEach(effect => {

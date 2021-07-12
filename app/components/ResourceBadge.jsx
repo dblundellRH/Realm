@@ -9,7 +9,8 @@ import FACTIONS from '../definitions/factions';
 function ResourceBadge({ faction, resourceName, isSelected }) {
     return (
         <Badge
-            factionColour={FACTIONS[faction].colour}
+            factionBadgeColour={FACTIONS[faction].colour}
+            factionFontColour={FACTIONS[faction].fontColour}
             isSelected={isSelected}
         >
             {resourceName.slice(0,1)}
@@ -33,12 +34,12 @@ const Badge = styled.span`
     height: 25px;
 
     float: left;
-    background-color: ${props => props.factionColour};
+    background-color: ${props => props.factionBadgeColour};
     margin-right: 5px;
     border-radius: 25%;
 
     text-align: center;
-    color: white;
+    color: ${props => props.factionFontColour};
     font-weight: 700;
     position: relative;
 
@@ -50,7 +51,6 @@ const Badge = styled.span`
             height: 4px;
 
             background-color: black;
-
             position: absolute;
             top: -10px;
             left: 0;
