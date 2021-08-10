@@ -6,6 +6,10 @@ import SETTINGS from '../definitions/settings'
 export default function useUserStore() {
   const [name, setName] = useState(SETTINGS.DEFAULT_PLAYER_NAME);
   const [faction, setFaction] = useState('');
+  const [survivedNoConfidence, setSurvivedNoConfidence] = useState(0);
+
+  const [items, setItems] = useState([]);
+
 
   function resetUserState() {
     setName(SETTINGS.DEFAULT_PLAYER_NAME);
@@ -18,5 +22,9 @@ export default function useUserStore() {
     faction,
     setFaction,
     resetUserState,
+    items,
+    setItems,
+    survivedNoConfidence,
+    setSurvivedNoConfidence,
   };
 }

@@ -7,6 +7,7 @@ import InitialMenu from '../../components/InitialMenu';
 import EventSelector from '../../components/EventSelector';
 import EndgameScreen from '../../components/EndgameScreen';
 import ModifierInPlay from '../../components/ModifierInPlay';
+import CrisisModeScreen from '../../components/CrisisModeScreen';
 
 
 function HomePage({ user, realm }) {
@@ -28,7 +29,7 @@ function HomePage({ user, realm }) {
           />
         </When>
 
-        <When condition={realm.gameStart && !realm.gameEnd}>
+        <When condition={realm.gameStart && !realm.gameEnd && !realm.crisisMode}>
           <p style={{ position: 'absolute', top: '0', left: '0'}}>It is turn {realm.turnCount} / {SETTINGS.MAX_TURN_COUNT}</p>
 
           <p style={{ position: 'absolute', top: '0', right: '0'}}>Faction confidence: {realm.factionConfidence}%</p>
@@ -45,6 +46,13 @@ function HomePage({ user, realm }) {
           </If>
 
           <EventSelector
+            realm={realm}
+            user={user}
+          />
+        </When>
+
+        <When condition={realm.crisisMode}>
+          <CrisisModeScreen
             realm={realm}
             user={user}
           />

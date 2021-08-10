@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import MODIFIERS from '../../definitions/modifiers';
 
 
-function Footer({ realm }) {
+function Footer({ realm, user }) {
   function handleAddBoost() {
     realm.setActiveModifiers(prev => {
       return [
@@ -16,6 +16,18 @@ function Footer({ realm }) {
 
   function handleRemoveBoost() {
     realm.setActiveModifiers(prev => prev.filter(modifier => modifier.slug !== MODIFIERS.BOOST.slug));
+  }
+
+  function handleAddItem(item) {
+    user.setItems(prev => {
+      prev.push(item)
+
+      return prev;
+    })
+  }
+
+  function handleRemoveItem(item) {
+    user.setItems(user.items.filter(currentItem => currentItem.slug !== item.slug))
   }
 
   return (
@@ -60,8 +72,14 @@ function Footer({ realm }) {
           </label>
 
           <p>Boosts</p>
-          <button onClick={handleAddBoost}>Add boost</button>
-          <button onClick={handleRemoveBoost}>Remove boost</button>
+          <button onClick={handleAddBoost}>Add boost boost</button>
+          <button onClick={handleRemoveBoost}>Remove boost boost</button>
+
+          <button onClick={() => handleAddItem(MODIFIERS.ROUSING_SPEECH)}>Add speech boost</button>
+          <button onClick={() => handleRemoveItem(MODIFIERS.ROUSING_SPEECH)}>Remove speech boost</button>
+
+          <button onClick={() => realm.setCrisisMode(true)}>Enable Crisis</button>
+          <button onClick={() => realm.setCrisisMode(false)}>Disable Crisis</button>
         </div>
       </If>
     </footer>
@@ -74,11 +92,8 @@ function handleUpdate(value, fn) {
 }
 
 Footer.propTypes = {
-  realm: PropTypes.object,
-};
-
-Footer.defaultProps = {
-  realm: undefined,
+  user: PropTypes.object.isRequired,
+  realm: PropTypes.object.isRequired,
 };
 
 export default Footer;

@@ -43,6 +43,7 @@ export default function App() {
       </main>
 
       <Footer
+        user={user}
         realm={realm}
       />
 

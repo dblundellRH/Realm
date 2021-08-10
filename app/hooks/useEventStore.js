@@ -37,19 +37,19 @@ export default function useEventStore(realm, user) {
     }
 
     function updateLastChoicesMade(choice) {
-        const choices = realm.lastChoicesMade;
+        const choices = realm.lastChoicesMade
 
+        // Remove first choice in the array if total is more than LAST_CHOICES_LIMIT
         if (choices.length > LAST_CHOICES_LIMIT) {
             const newChoices = choices.slice(1, choices.length - 1);
             newChoices.push(choice);
             realm.setLastChoicesMade(newChoices)
         }
+        // Otherwise push to array
         else {
             choices.push(choice);
             realm.setLastChoicesMade(choices)
         }
-
-        // console.log('lastChoicesMade', realm.lastChoicesMade);
     }
 
     function updateFactionConfidence(choice) {
@@ -58,7 +58,8 @@ export default function useEventStore(realm, user) {
 
         const relevantEffects = choice.effects.filter(effect => effect.type === factionResourceSlug);
 
-        updateLastChoicesMade()
+        // Update array tracking previous choices
+        updateLastChoicesMade(choice)
 
         if (relevantEffects && relevantEffects.length) {
             relevantEffects.forEach(effect => {
@@ -67,14 +68,54 @@ export default function useEventStore(realm, user) {
                         // If it's a good effect, increase confidence
                         ? realm.factionConfidence + CONFIDENCE_MODIFIER > 100
                             ? 100
-                            : realm.factionConfidence + CONFIDENCE_MODIFIER
+                            : calculateConfidenceChange(factionResourceSlug, true)
                         // If it's a bad effect, decrease confidence
                         : realm.factionConfidence - CONFIDENCE_MODIFIER < 0
                             ? 0
-                            : realm.factionConfidence - CONFIDENCE_MODIFIER
+                            : calculateConfidenceChange(factionResourceSlug, false)
                 )
             })
         }
+    }
+
+    function calculateConfidenceChange(factionResourceSlug, isPositiveChange) {
+        const lastChoices = realm.lastChoicesMade.reduce((totalChanges, current) => {
+            if (current && current.effects) {
+                current.effects.map(effect => {
+                    totalChanges[effect.type] = effect.modifier > 0
+                    ? totalChanges[effect.type] + 1
+                    : totalChanges[effect.type] - 1;
+                })
+
+                return totalChanges;
+            }}, {
+                [RESOURCES.SECURITY.slug]: 0,
+                [RESOURCES.WEALTH.slug]: 0,
+                [RESOURCES.FOOD.slug]: 0,
+            }
+        );
+
+        const positiveRecentChoices = lastChoices[factionResourceSlug] <= 0 ? 0.5 : lastChoices[factionResourceSlug];
+        const negativeRecentChoices = lastChoices[factionResourceSlug] >= 0 ? 0.5 : lastChoices[factionResourceSlug];
+
+        // console.log('confidence', realm.factionConfidence)
+        // console.log('totalChanges', lastChoices[factionResourceSlug])
+        // console.log('CONFIDENCE_MODIFIER', (CONFIDENCE_MODIFIER * (lastChoices[factionResourceSlug])))
+        // console.log('isPositiveChange', isPositiveChange)
+        // console.log('positiveRecentChoices', positiveRecentChoices)
+        // console.log('negativeRecentChoices', negativeRecentChoices)
+
+        const updatedConfidence = isPositiveChange
+            ? realm.factionConfidence + (CONFIDENCE_MODIFIER * positiveRecentChoices)
+            : realm.factionConfidence + (CONFIDENCE_MODIFIER * negativeRecentChoices);
+
+        // console.log('updated confidence', updatedConfidence)
+
+        return updatedConfidence < 0
+            ? 0
+            : updatedConfidence > 100
+                ? 100
+                : updatedConfidence
     }
 
     function handleEventChoice(choice) {
@@ -83,6 +124,7 @@ export default function useEventStore(realm, user) {
         // Resets preview event
         realm.setPreviewEvent();
 
+        // Updates values
         updateChoiceValues(choice);
         updateFactionConfidence(choice);
     }
@@ -136,6 +178,10 @@ export default function useEventStore(realm, user) {
                 realm.setTurnCount(prev => prev + 1);
                 updateEventStore(prev => prev.filter(event => event.title !== activeEvent.title))
             }
+            else if (parseInt(realm.factionConfidence) === 0) {
+                realm.setTurnCount(prev => prev + 1);
+                realm.setCrisisMode(true);
+            }
             else {
                 realm.setGameEnd(true);
                 // console.log('You lost :(')
@@ -144,7 +190,7 @@ export default function useEventStore(realm, user) {
         else {
             window.realm.debug = false
         }
-    }, [realm.securityStatus, realm.wealthStatus, realm.foodStatus])
+    }, [realm.securityStatus, realm.wealthStatus, realm.foodStatus, realm.factionConfidence])
 
     return {
         eventStore,

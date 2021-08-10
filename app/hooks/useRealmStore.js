@@ -13,6 +13,7 @@ export default function useRealmStore() {
 
   const [lastChoicesMade, setLastChoicesMade] = useState([]);
   const [factionConfidence, setFactionConfidence] = useState(80);
+  const [crisisMode, setCrisisMode] = useState(false);
 
   const [activeModifiers, setActiveModifiers] = useState([]);
 
@@ -55,8 +56,23 @@ export default function useRealmStore() {
     setSecurityStatus(50);
     setWealthStatus(50);
     setFoodStatus(50);
+    setFactionConfidence(80);
+    setLastChoicesMade([]);
     setGameEnd(false);
     setGameStart(false);
+  }
+
+  function resetAfterCrisis() {
+    setSecurityStatus(50);
+    setWealthStatus(50);
+    setFoodStatus(50);
+
+    setFactionConfidence(50);
+    setLastChoicesMade([]);
+    setCrisisMode(false);
+
+    // There is a useEffect which needs resetting, hence the -2
+    setTurnCount(previousValue => previousValue - 2);
   }
 
   return {
@@ -86,5 +102,8 @@ export default function useRealmStore() {
     setFactionConfidence,
     lastChoicesMade,
     setLastChoicesMade,
+    crisisMode,
+    setCrisisMode,
+    resetAfterCrisis,
   };
 }
