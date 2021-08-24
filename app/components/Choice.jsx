@@ -50,7 +50,6 @@ const Button = styled.button`
     &::before {
         content: '${props => props.showSeal ? props.factionIcon : ''}';
         display: block;
-        flex-shrink: 0;
 
         line-height: 3.2;
 

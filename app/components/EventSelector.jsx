@@ -97,6 +97,8 @@ const EventContainer = styled.section`
             display: inline-block;
             font-weight: 700;
             margin-right: 1rem;
+
+            flex-shrink: 0;
         }
     }
 `
