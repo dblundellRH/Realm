@@ -33,7 +33,7 @@ const Container = styled.header`
     display: flex;
     justify-content: space-around;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 2rem;
   }
 `
 

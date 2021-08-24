@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import MODIFIERS from '../../definitions/modifiers';
 
@@ -31,7 +32,7 @@ function Footer({ realm, user }) {
   }
 
   return (
-    <footer>
+    <Container>
       <p><strong onClick={() => realm.setShowDebugMenu(!realm.showDebugMenu)}>Toggle Debug menu</strong></p>
       <If condition={realm.showDebugMenu}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -82,7 +83,7 @@ function Footer({ realm, user }) {
           <button onClick={() => realm.setCrisisMode(false)}>Disable Crisis</button>
         </div>
       </If>
-    </footer>
+    </Container>
   );
 }
 
@@ -95,5 +96,14 @@ Footer.propTypes = {
   user: PropTypes.object.isRequired,
   realm: PropTypes.object.isRequired,
 };
+
+const Container = styled.footer`
+  .resource-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+`
 
 export default Footer;

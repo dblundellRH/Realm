@@ -11,7 +11,7 @@ function InitialMenu({ user, realm }) {
       <Choose>
         <When condition={user.name}>
           <p>
-            Hello {user.name}{user.faction ?`, head of the ${FACTIONS[user.faction].name} faction` : ''}.
+            Hello {user.name}{user.faction ?`, ${FACTIONS[user.faction].factionTitle} of the ${FACTIONS[user.faction].name} faction` : ''}.
           </p>
         </When>
 

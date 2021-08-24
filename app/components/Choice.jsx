@@ -35,13 +35,22 @@ function Choice({ children, onMouseEnter, onMouseLeave, onFocus, onBlur, onClick
 }
 
 const Button = styled.button`
-    margin-bottom: 2rem;
+    display: inline-block;
     padding: 1rem;
+    padding-left: 0;
+    padding-top: 0;
     position: relative;
+
+    background: none;
+    border: none;
+
+    font-weight: 700;
+    text-align: left;
 
     &::before {
         content: '${props => props.showSeal ? props.factionIcon : ''}';
         display: block;
+        flex-shrink: 0;
 
         line-height: 3.2;
 
@@ -53,6 +62,7 @@ const Button = styled.button`
         z-index: 20;
 
         margin: auto;
+        text-align: center;
     }
 
     &::after {
@@ -72,6 +82,15 @@ const Button = styled.button`
         background-size: cover;
 
         margin: auto;
+    }
+
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: grey;
     }
 `;
 

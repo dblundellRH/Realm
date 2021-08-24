@@ -6,6 +6,7 @@ import FACTIONS from '../definitions/factions';
 import useEventStore from '../hooks/useEventStore';
 import Choice from './Choice';
 import scrollBgImage from '../images/scroll-bg.png';
+import Header from './Header';
 
 
 function EventSelector({ realm, user }) {
@@ -15,6 +16,13 @@ function EventSelector({ realm, user }) {
         <EventContainer
             backgroundImage={scrollBgImage}
         >
+            <If condition={!!(realm.turnCount % 2)}>
+                <Header
+                    realm={realm}
+                    user={user}
+                />
+            </If>
+
             <p><strong>To the {FACTIONS[user.faction].factionTitle},</strong></p>
 
             <p>A matter has arisen in the realm which requires your attention.</p>
@@ -27,8 +35,11 @@ function EventSelector({ realm, user }) {
 
             <p>A decision is required on this matter most urgently.</p>
 
+            <p>Your faithful servant,</p>
+            <p><em>Drumknott</em></p>
+
             <If condition={events.activeEvent}>
-                <ul
+                <ol
                     className="event-list"
                 >
                     <For each="choice" of={events.activeEvent.choices} index="index">
@@ -48,7 +59,7 @@ function EventSelector({ realm, user }) {
                             </Choice>
                         </li>
                     </For>
-                </ul>
+                </ol>
             </If>
         </EventContainer>
     )
@@ -67,12 +78,26 @@ const EventContainer = styled.section`
     background-size: cover;
 
     .event-list {
-        margin-top: 4rem;
+        margin-top: 3rem;
         padding-left: 0;
+        list-style: none;
+
+        list-style: none;
+        counter-reset: item;
     }
 
     .event-list-item {
-        list-style: none;
+        counter-increment: item;
+
+        display: flex;
+        align-items: flex-start;
+
+        &::before {
+            content: counter(item) ". ";
+            display: inline-block;
+            font-weight: 700;
+            margin-right: 1rem;
+        }
     }
 `
 

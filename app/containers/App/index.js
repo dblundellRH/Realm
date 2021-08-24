@@ -10,7 +10,6 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import HomePage from 'containers/HomePage/index';
-import Header from 'components/Header';
 import Footer from 'components/Footer';
 
 import useRealmStore from '../../hooks/useRealmStore';
@@ -22,18 +21,13 @@ export default function App() {
   const realm = useRealmStore();
 
   return (
-    <div style={{ width: '700px', margin: 'auto' }}>
+    <div style={{ width: '700px', margin: 'auto', marginTop: '2rem' }}>
       <Helmet
         titleTemplate="%s - React.js Boilerplate"
         defaultTitle="React.js Boilerplate"
       >
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
-
-      <Header
-        user={user}
-        realm={realm}
-      />
 
       <main>
         <HomePage

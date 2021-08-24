@@ -108,7 +108,6 @@
     "json-loader": "^0.5.7",
     "jsx-control-statements": "^3.2.8",
     "lint-staged": "8.1.5",
-    "ngrok": "3.1.1",
     "null-loader": "0.1.1",
     "offline-plugin": "5.0.6",
     "pre-commit": "1.2.2",

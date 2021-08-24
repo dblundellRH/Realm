@@ -32,7 +32,7 @@ export default {
     },
     [FACTION_NAMES.COMMONS]: {
         slug: FACTION_NAMES.COMMONS,
-        name: 'Commoner',
+        name: 'Commons',
         fullname: 'The Commons',
         logo: '',
         colour: 'red',

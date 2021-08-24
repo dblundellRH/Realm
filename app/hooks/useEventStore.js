@@ -124,13 +124,17 @@ export default function useEventStore(realm, user) {
         // Resets preview event
         realm.setPreviewEvent();
 
+        // Increase turn count by 1
+        realm.setTurnCount(prev => prev + 1);
+
         // Updates values
         updateChoiceValues(choice);
         updateFactionConfidence(choice);
     }
 
     function updateResource(prev, effect) {
-        let updatedValue = parseInt(prev) + parseInt(effect.modifier)
+        const diceRoll = Math.random() + 1;
+        let updatedValue = parseInt(prev) + (parseInt(effect.modifier) * diceRoll)
 
         if (realm.activeModifiers) {
             realm.activeModifiers.forEach(modifier => {
@@ -161,25 +165,23 @@ export default function useEventStore(realm, user) {
             // console.log('all outta events, I guess you win by default?')
             setActiveEvent(null);
         }
-    }, [eventStore])
+    }, [ eventStore ])
 
     useEffect(() => {
         // console.log('*** active event updated ***',);
         if (realm.isEndOfGame()) {
             realm.setGameEnd(true);
         }
-    }, [activeEvent])
+    }, [ activeEvent ])
 
     useEffect(() => {
         if (activeEvent && window.realm.debug !== true) {
-            const isValid = validateChoice()
+            const isValid = validateChoice();
 
             if (isValid) {
-                realm.setTurnCount(prev => prev + 1);
                 updateEventStore(prev => prev.filter(event => event.title !== activeEvent.title))
             }
             else if (parseInt(realm.factionConfidence) === 0) {
-                realm.setTurnCount(prev => prev + 1);
                 realm.setCrisisMode(true);
             }
             else {
@@ -190,7 +192,7 @@ export default function useEventStore(realm, user) {
         else {
             window.realm.debug = false
         }
-    }, [realm.securityStatus, realm.wealthStatus, realm.foodStatus, realm.factionConfidence])
+    }, [ realm.securityStatus, realm.wealthStatus, realm.foodStatus, realm.factionConfidence ])
 
     return {
         eventStore,

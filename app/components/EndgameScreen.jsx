@@ -11,14 +11,27 @@ function EndgameScreen({ realm, user }) {
         user.resetUserState();
     }
 
-    const failReason = realm.factionConfidence <= 0
-        ? `The problem was: <strong>${FACTIONS[user.faction].fullname}</strong> have thrown you in a dungeon.`
-        : `The problem was: <strong>${getFailedResource(realm).name}</strong> has a value of ${getFailedResource(realm).value}`
+    const hasFailed = realm.isRealmInChaos();
+    let failReason;
+
+    if (hasFailed) {
+        failReason = realm.factionConfidence <= 0
+            ? `The problem was: <strong>${FACTIONS[user.faction].fullname}</strong> have thrown you in a dungeon.`
+            : `The problem was: <strong>${getFailedResource(realm).name}</strong> has a value of ${getFailedResource(realm).value}`
+    }
 
     return (
         <>
-            <h2>GAME OVER</h2>
-            <p dangerouslySetInnerHTML={{ __html: failReason }} />
+            <Choose>
+                <When condition={hasFailed}>
+                    <h2>GAME OVER</h2>
+                    <p dangerouslySetInnerHTML={{ __html: failReason }} />
+                </When>
+                <Otherwise>
+                    <h2>You win!</h2>
+                    <p>Well done I guess.</p>
+                </Otherwise>
+            </Choose>
             <button onClick={handleResetGame}>Play again?</button>
         </>
     );

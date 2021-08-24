@@ -8,6 +8,8 @@ import EventSelector from '../../components/EventSelector';
 import EndgameScreen from '../../components/EndgameScreen';
 import ModifierInPlay from '../../components/ModifierInPlay';
 import CrisisModeScreen from '../../components/CrisisModeScreen';
+import FACTIONS from '../../definitions/factions';
+import FactionBadge from '../../components/FactionBadge';
 
 
 function HomePage({ user, realm }) {
@@ -31,8 +33,7 @@ function HomePage({ user, realm }) {
 
         <When condition={realm.gameStart && !realm.gameEnd && !realm.crisisMode}>
           <p style={{ position: 'absolute', top: '0', left: '0'}}>It is turn {realm.turnCount} / {SETTINGS.MAX_TURN_COUNT}</p>
-
-          <p style={{ position: 'absolute', top: '0', right: '0'}}>Faction confidence: {realm.factionConfidence}%</p>
+          <p style={{ position: 'absolute', top: '0', right: '0'}}><FactionBadge factionSlug={user.faction} /> {FACTIONS[user.faction].name} confidence: {realm.factionConfidence}%</p>
 
           <If condition={realm.activeModifiers && Array.isArray(realm.activeModifiers)}>
             <For each="modifier" of={realm.activeModifiers}>

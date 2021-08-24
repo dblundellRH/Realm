@@ -29,9 +29,11 @@ function ResourceDisplay({ user, realm, faction }) {
             ? resourceToPreview.modifier + realm.getResourceValue(resourceSlug) + totalModifier
             : undefined
 
-          return newValue
-            ? `${realm[`${resourceSlug}Status`] > newValue ? ' < ' : ' > '}${newValue}`
-            : undefined
+            return newValue ? '*' : undefined;
+
+          // return newValue
+          //   ? `${realm[`${resourceSlug}Status`] > newValue ? ' < ' : ' > '}`
+          //   : undefined
         }
     }
 
@@ -45,17 +47,34 @@ function ResourceDisplay({ user, realm, faction }) {
               isSelected={isSelected}
             />
 
-            <progress max="100" value={realm.getResourceValue(resourceSlug)}>
+            <progress max="100" value={realm.getResourceValue(resourceSlug)} className="progress-bar">
               {realm.getResourceValue(resourceSlug)}%
             </progress>
 
-            <span>{getEventPreviewEffect(realm)}</span>
+            <span className="preview-slot">{getEventPreviewEffect(realm)}</span>
         </Container>
     )
 }
 
 const Container = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
 
+  .preview-slot {
+    display: inline-block;
+    width: 1.5rem;
+    text-align: center;
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .progress-bar {
+    width: 7.5rem;
+  }
 `
 
 ResourceDisplay.propTypes = {

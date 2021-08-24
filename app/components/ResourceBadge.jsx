@@ -44,6 +44,8 @@ const Badge = styled.span`
     position: relative;
 
     ${props => props.isSelected && `
+        border: 2px solid white;
+
         &::before {
             content: '';
             display: block;
