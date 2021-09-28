@@ -1,4 +1,7 @@
 import RESOURCES from './resources';
+import LOGO_ROYALISTS from '../images/logo_royalists.png';
+import LOGO_COMMONS from '../images/logo_commons.png';
+import LOGO_GUILDS from '../images/logo_guilds.png';
 
 
 const FACTION_NAMES = {
@@ -12,7 +15,7 @@ export default {
         slug: FACTION_NAMES.ROYALISTS,
         name: 'Royalist',
         fullname: 'The Royalists',
-        logo: '',
+        logo: LOGO_ROYALISTS,
         colour: 'blue',
         fontColour: 'white',
         keyResource: RESOURCES.SECURITY,
@@ -23,7 +26,7 @@ export default {
         slug: FACTION_NAMES.GUILDS,
         name: 'Guild',
         fullname: 'The Guilds',
-        logo: '',
+        logo: LOGO_GUILDS,
         colour: 'gold',
         fontColour: '#404040',
         keyResource: RESOURCES.WEALTH,
@@ -34,7 +37,7 @@ export default {
         slug: FACTION_NAMES.COMMONS,
         name: 'Commons',
         fullname: 'The Commons',
-        logo: '',
+        logo: LOGO_COMMONS,
         colour: 'red',
         fontColour: 'white',
         keyResource: RESOURCES.FOOD,

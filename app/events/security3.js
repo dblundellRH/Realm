@@ -16,7 +16,10 @@ export default {
                     type: RESOURCES.WEALTH.slug,
                     modifier: -10,
                 }
-            ]
+            ],
+            outcome: {
+                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+            }
         },
         {
             description: 'What do a few villages matter?',
@@ -33,7 +36,10 @@ export default {
                     type: RESOURCES.FOOD.slug,
                     modifier: -10,
                 }
-            ]
+            ],
+            outcome: {
+                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+            }
         }
     ]
 }

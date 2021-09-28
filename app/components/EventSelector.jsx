@@ -2,28 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import FACTIONS from '../definitions/factions';
 import useEventStore from '../hooks/useEventStore';
 import Choice from './Choice';
 import scrollBgImage from '../images/scroll-bg.png';
-import Header from './Header';
+import EventOutcome from './EventOutcome';
 
 
 function EventSelector({ realm, user }) {
     const events = useEventStore(realm, user);
+    const userFaction = user.getFactionDetails();
+
+    function onEventSelection(choice) {
+        events.handleEventChoice(choice);
+    }
 
     return (
         <EventContainer
             backgroundImage={scrollBgImage}
         >
-            <If condition={!!(realm.turnCount % 2)}>
-                <Header
+            <If condition={!!events.showOutcome}>
+                <EventOutcome
+                    events={events}
+                    userFaction={userFaction}
                     realm={realm}
                     user={user}
                 />
             </If>
 
-            <p><strong>To the {FACTIONS[user.faction].factionTitle},</strong></p>
+            <p><strong>To the {userFaction.factionTitle},</strong></p>
 
             <p>A matter has arisen in the realm which requires your attention.</p>
 
@@ -52,7 +58,7 @@ function EventSelector({ realm, user }) {
                                 onMouseLeave={() => realm.setPreviewEvent()}
                                 onFocus={() => realm.setPreviewEvent(choice)}
                                 onBlur={() => realm.setPreviewEvent()}
-                                onClick={() => events.handleEventChoice(choice)}
+                                onClick={() => onEventSelection(choice)}
                                 factionIcon={user.faction}
                             >
                                 {choice.description}

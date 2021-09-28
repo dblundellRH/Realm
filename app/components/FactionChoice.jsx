@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 function FactionChoice({
     slug,
     name,
+    logo,
     themeColour,
     onClick,
     isSelected,
@@ -19,7 +20,9 @@ function FactionChoice({
         >
             <div
                 className="shield"
-            />
+            >
+                <img src={logo} alt=''/>
+            </div>
 
             <h2>
                 {name}
@@ -76,6 +79,16 @@ const Container = styled.button`
             transform-origin: 100% 100%;
         }
     }
+
+    img {
+        max-width: 70%;
+        height: auto;
+
+        position: relative;
+        z-index: 1;
+
+        margin-top: 5px;
+    }
 `
 FactionChoice.propTypes = {
     slug: PropTypes.string.isRequired,
@@ -83,6 +96,7 @@ FactionChoice.propTypes = {
     themeColour: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     isSelected: PropTypes.bool.isRequired,
+    logo: PropTypes.string.isRequired,
 }
 
 export default FactionChoice;

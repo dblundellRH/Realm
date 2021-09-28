@@ -16,7 +16,10 @@ export default {
                     type: RESOURCES.FOOD.slug,
                     modifier: -10,
                 }
-            ]
+            ],
+            outcome: {
+                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+            }
         },
         {
             description: 'It\'s more important they keep the rabbit population under control.',
@@ -29,7 +32,10 @@ export default {
                     type: RESOURCES.SECURITY.slug,
                     modifier: -10,
                 }
-            ]
+            ],
+            outcome: {
+                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+            }
         },
     ]
 }

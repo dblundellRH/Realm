@@ -33,8 +33,8 @@ function CrisisModeScreen({ realm, user }) {
             <Choose>
                 <When condition={isInCrisis}>
                     <h2>COUNCIL IN CRISIS</h2>
-                    <p>{FACTIONS[user.faction].factionTitle},</p>
-                    <p>Your constant neglect of {FACTIONS[user.faction].fullname} has caused them to lose confidence in your leadership.</p>
+                    <p>{user.getFactionDetails().factionTitle},</p>
+                    <p>Your constant neglect of {user.getFactionDetails().fullname} has caused them to lose confidence in your leadership.</p>
                     <p>Your former allies poised to overthrow you, and emergency meeting of the council has been called!</p>
 
                     <p>What will you do?</p>
@@ -77,7 +77,7 @@ function CrisisModeScreen({ realm, user }) {
 
                 <Otherwise>
                     <h2>CRISIS RESOLVED</h2>
-                    <p>{FACTIONS[user.faction].factionTitle},</p>
+                    <p>{user.getFactionDetails().factionTitle},</p>
                     <p>Your crafty political maneuvering has manged to buy you a lifeline.</p>
                     <p>Use it wisely, you may not be so fortunate next time.</p>
 

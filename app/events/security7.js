@@ -16,7 +16,10 @@ export default {
                     type: RESOURCES.WEALTH.slug,
                     modifier: -10,
                 }
-            ]
+            ],
+            outcome: {
+                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+            }
         },
         {
             description: 'We don\'t need these foreign ideas',
@@ -29,7 +32,10 @@ export default {
                     type: RESOURCES.WEALTH.slug,
                     modifier: 10,
                 },
-            ]
+            ],
+            outcome: {
+                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+            }
         }
     ]
 }

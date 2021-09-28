@@ -14,6 +14,7 @@ const FACTION_OPTIONS = Object.values(FACTIONS).map(faction => ({
     name: faction.fullname,
     themeColour: faction.colour,
     blurb: faction.blurb,
+    logo: faction.logo,
 }));
 
 function FactionMenu({ user, realm }) {
@@ -57,6 +58,7 @@ function FactionMenu({ user, realm }) {
                             name={faction.name}
                             themeColour={faction.themeColour}
                             slug={faction.slug}
+                            logo={faction.logo}
                             onClick={handleChooseFaction}
                             isSelected={faction.slug === user.faction}
                         />
@@ -66,22 +68,22 @@ function FactionMenu({ user, realm }) {
 
             <If condition={!!user.faction}>
                 <p>
-                    {FACTIONS[user.faction].blurb}
+                    {user.getFactionDetails().blurb}
                 </p>
 
                 <p>
                     <ResourceBadge
                         faction={user.faction}
-                        resourceName={FACTIONS[user.faction].keyResource.name}
+                        resourceName={user.getFactionDetails().keyResource.name}
                     />
-                    They favour the <strong>{FACTIONS[user.faction].keyResource.name}</strong> resource.
+                    They favour the <strong>{user.getFactionDetails().keyResource.name}</strong> resource.
                 </p>
 
                 <p>
                     They are less interested in the
                     {
                     Object.values(RESOURCES)
-                        .filter(resource => resource.slug !== FACTIONS[user.faction].keyResource.slug)
+                        .filter(resource => resource.slug !== user.getFactionDetails().keyResource.slug)
                         .map(resource => {
                         return ` ${resource.name} `
                         })

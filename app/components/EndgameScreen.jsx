@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import RESOURCES from '../definitions/resources';
-import FACTIONS from '../definitions/factions';
 
 
 function EndgameScreen({ realm, user }) {
@@ -16,7 +15,7 @@ function EndgameScreen({ realm, user }) {
 
     if (hasFailed) {
         failReason = realm.factionConfidence <= 0
-            ? `The problem was: <strong>${FACTIONS[user.faction].fullname}</strong> have thrown you in a dungeon.`
+            ? `The problem was: <strong>${user.getFactionDetails().fullname}</strong> have thrown you in a dungeon.`
             : `The problem was: <strong>${getFailedResource(realm).name}</strong> has a value of ${getFailedResource(realm).value}`
     }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FACTIONS from '../definitions/factions';
 import FactionMenu from '../components/FactionMenu';
 
 
@@ -11,7 +10,7 @@ function InitialMenu({ user, realm }) {
       <Choose>
         <When condition={user.name}>
           <p>
-            Hello {user.name}{user.faction ?`, ${FACTIONS[user.faction].factionTitle} of the ${FACTIONS[user.faction].name} faction` : ''}.
+            Hello {user.name}{user.faction ?`, ${user.getFactionDetails().factionTitle} of the ${user.getFactionDetails().name} faction` : ''}.
           </p>
         </When>
 

@@ -9,26 +9,48 @@ import ResourceDisplay from '../ResourceDisplay';
 function Header({ realm, user }) {
   return (
     <Container>
-      <p style={{ textAlign: 'center', margin: 'auto' }}>
+      <p className="title">
         <strong>{'State of the Realm'}</strong>
       </p>
 
-      <aside className="resource-container">
-        <For each="faction" of={Object.values(FACTIONS)}>
-          <ResourceDisplay
-            key={faction.slug}
-            faction={faction}
-            realm={realm}
-            user={user}
-            isSelected={user.faction === faction.slug}
-          />
-        </For>
-      </aside>
+      <Choose>
+        <When condition={!!(realm.turnCount % 2)}>
+          <aside className="resource-container">
+            <For each="faction" of={Object.values(FACTIONS)}>
+              <ResourceDisplay
+                key={faction.slug}
+                faction={faction}
+                realm={realm}
+                user={user}
+                isSelected={user.faction === faction.slug}
+              />
+            </For>
+          </aside>
+        </When>
+
+        <Otherwise>
+          <p>A report is currently being compiled on the state of the realm and will be available next month.</p>
+        </Otherwise>
+      </Choose>
     </Container>
   );
 }
 
+Header.propTypes = {
+  realm: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+}
+
 const Container = styled.header`
+  padding: 2rem 0;
+  margin: 2rem 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+  .title {
+    margin: 0;
+  }
+
   .resource-container {
     display: flex;
     justify-content: space-around;
@@ -36,10 +58,5 @@ const Container = styled.header`
     margin-bottom: 2rem;
   }
 `
-
-Header.propTypes = {
-  realm: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-}
 
 export default Header;

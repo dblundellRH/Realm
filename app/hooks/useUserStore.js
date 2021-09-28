@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import FACTIONS from '../definitions/factions';
 
 import SETTINGS from '../definitions/settings'
 
@@ -10,6 +11,9 @@ export default function useUserStore() {
 
   const [items, setItems] = useState([]);
 
+  function getFactionDetails() {
+    return FACTIONS[faction];
+  }
 
   function resetUserState() {
     setName(SETTINGS.DEFAULT_PLAYER_NAME);
@@ -26,5 +30,6 @@ export default function useUserStore() {
     setItems,
     survivedNoConfidence,
     setSurvivedNoConfidence,
+    getFactionDetails,
   };
 }

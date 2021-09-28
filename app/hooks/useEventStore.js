@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import RESOURCES from '../definitions/resources';
-import FACTIONS from '../definitions/factions';
 import events from '../events';
 
 
@@ -9,8 +8,10 @@ const CONFIDENCE_MODIFIER = 10;
 const LAST_CHOICES_LIMIT = 3;
 
 export default function useEventStore(realm, user) {
-    const [eventStore, updateEventStore] = useState(events)
+    const [eventStore, updateEventStore] = useState(events);
     const [activeEvent, setActiveEvent] = useState();
+    const [selectedChoice, setSelectedChoice] = useState(false);
+    const [showOutcome, setShowOutcome] = useState(false);
 
     function getNewEvent() {
         // console.log('getting new event...')
@@ -53,8 +54,7 @@ export default function useEventStore(realm, user) {
     }
 
     function updateFactionConfidence(choice) {
-        const userFaction = user.faction;
-        const factionResourceSlug = FACTIONS[userFaction].keyResource.slug;
+        const factionResourceSlug = user.getFactionDetails().keyResource.slug;
 
         const relevantEffects = choice.effects.filter(effect => effect.type === factionResourceSlug);
 
@@ -119,7 +119,8 @@ export default function useEventStore(realm, user) {
     }
 
     function handleEventChoice(choice) {
-        // console.log('handleEventChoice');
+        // Store choice
+        setSelectedChoice(choice);
 
         // Resets preview event
         realm.setPreviewEvent();
@@ -176,16 +177,19 @@ export default function useEventStore(realm, user) {
 
     useEffect(() => {
         if (activeEvent && window.realm.debug !== true) {
-            const isValid = validateChoice();
+            // console.log('check realm not buggered')
+            const isValid = validateChoice(selectedChoice);
 
             if (isValid) {
-                updateEventStore(prev => prev.filter(event => event.title !== activeEvent.title))
+                setShowOutcome(true);
             }
             else if (parseInt(realm.factionConfidence) === 0) {
+                setShowOutcome(false);
                 realm.setCrisisMode(true);
             }
             else {
                 realm.setGameEnd(true);
+                setShowOutcome(false);
                 // console.log('You lost :(')
             }
         }
@@ -196,9 +200,14 @@ export default function useEventStore(realm, user) {
 
     return {
         eventStore,
+        updateEventStore,
         activeEvent,
         setActiveEvent,
         getNewEvent,
         handleEventChoice,
+        showOutcome,
+        setShowOutcome,
+        selectedChoice,
+        setSelectedChoice,
     };
 }
