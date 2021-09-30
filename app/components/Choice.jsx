@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import WAX_SEAL_IMAGE from '../images/wax-seal.png';
 import ButtonChoice from './ButtonChoice';
 
 
@@ -13,7 +12,6 @@ function Choice({ children, onMouseEnter, onMouseLeave, onFocus, onBlur, onClick
             onFocus={onFocus}
             onBlur={onBlur}
             onClick={onClick}
-            waxSealImage={WAX_SEAL_IMAGE}
             factionIcon={factionIcon}
         >
             {/* Removes any stray full stops that we don't want */}

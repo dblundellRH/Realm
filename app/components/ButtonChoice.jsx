@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import WAX_SEAL_IMAGE from '../images/wax-seal.png';
+
 
 function ButtonChoice({
     onMouseEnter,
@@ -9,7 +11,6 @@ function ButtonChoice({
     onFocus,
     onBlur,
     onClick,
-    waxSealImage,
     factionIcon,
     children,
 }) {
@@ -33,8 +34,8 @@ function ButtonChoice({
             onBlur={onBlur}
             onClick={handleOnClick}
             showSeal={shouldShowSeal}
-            waxSealImage={waxSealImage}
-            factionIcon={factionIcon.slice(0,1).toUpperCase()}
+            waxSealImage={WAX_SEAL_IMAGE}
+            factionIcon={factionIcon}
         >
             {/* Removes any stray full stops that we don't want */}
             {React.Children.map(children, (child) => child.replace('.', ''))}
@@ -50,7 +51,6 @@ ButtonChoice.propTypes = {
     onBlur: PropTypes.func,
     onClick: PropTypes.func.isRequired,
     factionIcon: PropTypes.string.isRequired,
-    waxSealImage: PropTypes.string
 }
 
 ButtonChoice.defaultProps = {
@@ -58,7 +58,6 @@ ButtonChoice.defaultProps = {
     onMouseLeave: undefined,
     onFocus: undefined,
     onBlur: undefined,
-    waxSealImage: undefined,
 }
 
 const Button = styled.button`
@@ -75,8 +74,15 @@ const Button = styled.button`
     text-align: left;
 
     &::before {
-        content: '${props => props.showSeal ? props.factionIcon : ''}';
+        content: '';
         display: block;
+        background-image: url('${props => props.showSeal ? props.factionIcon : ''}');
+        background-size: cover;
+        filter: opacity(45%);
+
+        display: block;
+        width: 2rem;
+        height: 2rem;
 
         line-height: 3.2;
 
@@ -102,7 +108,7 @@ const Button = styled.button`
         bottom: 0;
         right: 0;
         left: 0;
-        z-index: 10;
+        z-index: 19;
 
         background-image: url(${props => props.showSeal ? props.waxSealImage : ''});
         background-size: cover;

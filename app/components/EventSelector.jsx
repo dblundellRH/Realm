@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import FACTIONS from '../definitions/FACTIONS';
 import useEventStore from '../hooks/useEventStore';
-import Choice from './Choice';
 import scrollBgImage from '../images/scroll-bg.png';
+import Choice from './Choice';
 import EventOutcome from './EventOutcome';
+import FactionBannerLogo from './FactionBannerLogo';
+import TitleHeading from './TitleHeading';
 
 
 function EventSelector({ realm, user }) {
@@ -29,7 +32,11 @@ function EventSelector({ realm, user }) {
                 />
             </If>
 
-            <p><strong>To the {userFaction.factionTitle},</strong></p>
+            <FactionBannerLogo
+                faction={userFaction}
+            />
+
+            <TitleHeading><strong>To the {userFaction.factionTitle},</strong></TitleHeading>
 
             <p>A matter has arisen in the realm which requires your attention.</p>
 
@@ -59,7 +66,7 @@ function EventSelector({ realm, user }) {
                                 onFocus={() => realm.setPreviewEvent(choice)}
                                 onBlur={() => realm.setPreviewEvent()}
                                 onClick={() => onEventSelection(choice)}
-                                factionIcon={user.faction}
+                                factionIcon={FACTIONS[user.faction].logo}
                             >
                                 {choice.description}
                             </Choice>

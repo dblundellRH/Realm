@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import FACTIONS from '../definitions/factions';
 import Header from './Header';
 import ButtonChoice from './ButtonChoice';
+import FactionBannerLogo from './FactionBannerLogo';
 
 function EventOutcome({
     userFaction,
@@ -11,7 +13,6 @@ function EventOutcome({
     realm,
     user,
 }) {
-
     function handleProceed() {
         events.setShowOutcome(false)
         events.updateEventStore(prev => prev.filter(event => event.title !== events.activeEvent.title))
@@ -20,13 +21,16 @@ function EventOutcome({
     return (
         <Container>
             <div className="outcome-details">
-                <img className="outcome-logo" src={userFaction.logo} alt="" />
+                <FactionBannerLogo
+                    faction={userFaction}
+                />
 
                 <h2><strong>My {userFaction.factionTitle},</strong></h2>
 
                 <p>Find below a report on the recent events.</p>
 
                 <div className="report-section">
+                    <h2 style={{textDecoration: 'underline'}}>A title for the event outcome</h2>
                     <p className="outcome-text">{events.selectedChoice.outcome.message}</p>
                 </div>
 
@@ -37,7 +41,7 @@ function EventOutcome({
 
                 <ButtonChoice
                     onClick={handleProceed}
-                    factionIcon={user.faction}
+                    factionIcon={FACTIONS[user.faction].logo}
                 >
                     Proceed
                 </ButtonChoice>
@@ -66,16 +70,8 @@ const Container = styled.div`
 
     z-index: 100;
 
-    .outcome-logo {
-        display: block;
-        margin: auto;
-
-        max-width: 20%;
-        height: auto;
-    }
-
     .outcome-details {
-        padding: 2rem 4rem;
+        padding: 1.5rem 3rem;
         border: 2px solid black;
         background-color: #eedbb2;
 
