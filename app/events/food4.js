@@ -3,10 +3,13 @@ import RESOURCES from '../definitions/resources';
 
 export default {
     title: 'Eastern roots',
-    description: 'A strangely dressed human is selling a number of strange vegetables they claim will feed dozens of families. Should we trust them?',
+    description: `
+        A strangely dressed trader is selling a number of plain looking vegetables which they claim they are versatile and will feed dozens of families.
+        People regard them wearily, and with suspicion. Should we trust them?
+    `,
     choices: [
         {
-            description: 'I will try these pohtahytos',
+            description: 'I will try these pohtahytos.',
             effects: [
                 {
                     type: RESOURCES.FOOD.slug,
@@ -18,11 +21,14 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    The vegetable proves to be popular, and already people are finding new ways to use it.
+                    The trader leaves our lands, their pockets much heavier than when they entered.
+                `
             }
         },
         {
-            description: 'Banish the scruffy villain!',
+            description: 'Banish the scruffy interloper!',
             effects: [
                 {
                     type: RESOURCES.WEALTH.slug,
@@ -34,7 +40,11 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    The people rejoice as your soldiers escort the struggling foreigner out of your lands.
+                    Although you have saved your coin, the following day an unexpected fire destroys part of your food stocks.
+                    The people do not rejoice.
+                `
             }
         },
     ]

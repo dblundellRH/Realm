@@ -2,8 +2,12 @@ import RESOURCES from '../definitions/resources';
 
 
 export default {
-    title: 'Nature\'s bounty',
-    description: 'We\'ve had a great harvest this season, what should we do with the additional food?',
+    title: `Nature's bounty`,
+    description: `
+        Our clerks report we've had a bountiful harvest this season.
+        We can more than adequately feed the people, leaving us with a surplus.
+        What shall we do with this unexpected bonus?
+    `,
     choices: [
         {
             description: 'Store it, we may need it come winter.',
@@ -18,11 +22,14 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    You prudently decide to store the excess food away against any future disaster.
+                    The Guilds mutter from behind their stacks of coin that you have missed an opportunity for profit.
+                `
             }
         },
         {
-            description: 'We can trade it with neighbouring kingdoms.',
+            description: `Trade it with neighbouring kingdoms.`,
             effects: [
                 {
                     type: RESOURCES.WEALTH.slug,
@@ -34,7 +41,9 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    The Guilds commend your sound judgement, whilst the people watch carts laden with precious food leave the city.
+                `
             }
         },
     ]

@@ -2,11 +2,15 @@ import RESOURCES from '../definitions/resources';
 
 
 export default {
-    title: '',
-    description: 'A protest about grain prices has turned into a riot. Should we send in the guard or let it fizzle out?',
+    title: 'Against the grain',
+    description: `
+        A protest about increasing grain prices has turned into a riot.
+        They are demanding we lower taxes to help the cost of living.
+        Should we agree to their demands, or send in the guard to deal with the rioters?
+    `,
     choices: [
         {
-            description: 'Send in the guard!',
+            description: 'Send in the guard.',
             effects: [
                 {
                     type: RESOURCES.SECURITY.slug,
@@ -18,11 +22,14 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    The protesters are brutally crushed by your soldiers.
+                    Grain prices remain unaffected.
+                `
             }
         },
         {
-            description: 'Agree to their demands!',
+            description: 'Agree to their demands.',
             effects: [
                 {
                     type: RESOURCES.SECURITY.slug,
@@ -34,7 +41,10 @@ export default {
                 },
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    Acknowledging the plight of the commoners, you reduce their tax burden to offset the increased cost of food.
+                    Some of the more hawkish elements of your government being to complain that you're too soft.
+                `
             }
         }
     ]

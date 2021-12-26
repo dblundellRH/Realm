@@ -20,6 +20,7 @@ import food3 from './food3';
 import food4 from './food4';
 import food5 from './food5';
 import food6 from './food6';
+import food7 from './food7';
 
 export default [
     security1,
@@ -44,4 +45,5 @@ export default [
     food4,
     food5,
     food6,
+    food7,
 ]

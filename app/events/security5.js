@@ -3,7 +3,10 @@ import RESOURCES from '../definitions/resources';
 
 export default {
     title: 'Captain Selfish',
-    description: 'One of your greatest captains has been found to be stealing supplies for his own use. You have fought together for years, and there is no man you\'d rather have guarding your back.',
+    description: `
+        A hero of the revolution, Captain Raynor, has been found to be stealing supplies for his own use.
+        It is unknown what has led to such an honourable man of character to fall so low, but arresting him could prove controversial.
+    `,
     choices: [
         {
             description: 'Arrest him, and reclaim the stolen goods.',
@@ -22,11 +25,14 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    The stolen supplies are recovered, and Captain Raynor lies in the gaols, a broken man.
+                    Truth being sometimes difficult and inconvenient, many soldiers refuse to believe his crimes and blame the government.
+                `
             }
         },
         {
-            description: 'We need his strength, and can spare the supplies.',
+            description: 'The man is a hero, we can look the other way.',
             effects: [
                 {
                     type: RESOURCES.FOOD.slug,
@@ -42,7 +48,10 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    You never find out why Raynor stole the supplies, but you find he is always reliable ally to you.
+                    The missing supplies do not go unnoticed, and all anyone knows is that you act cagey when they are mentioned.
+                `
             }
         }
     ]

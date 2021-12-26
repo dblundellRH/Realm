@@ -3,10 +3,14 @@ import RESOURCES from '../definitions/resources';
 
 export default {
     title: 'Foreign imports',
-    description: 'Our soldiers are out of shape; we should hire a foreign drill instructor to whip them into shape.',
+    description: `
+        Our soldiers are more of an untrained mob than an army,
+        but we have heard of a foreign drill instructor in the city who is available for hire.
+        Shall we make the necessary arrangements?
+    `,
     choices: [
         {
-            description: 'Spend the money!',
+            description: 'Spend the money.',
             effects: [
                 {
                     type: RESOURCES.SECURITY.slug,
@@ -18,11 +22,13 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    Although an costly hire, the instructor manages to drill your army into shape.
+                `
             }
         },
         {
-            description: 'We don\'t need these foreign ideas',
+            description: `We don't need these foreign ideas.`,
             effects: [
                 {
                     type: RESOURCES.SECURITY.slug,
@@ -34,7 +40,9 @@ export default {
                 },
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    Your army continues to operate more on a 'martial' than 'art' basis.
+                `
             }
         }
     ]

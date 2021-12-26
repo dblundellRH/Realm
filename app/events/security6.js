@@ -3,7 +3,10 @@ import RESOURCES from '../definitions/resources';
 
 export default {
     title: 'For-ward, MARCH',
-    description: 'We need to remind the people who keeps them safe, how about a military parade?',
+    description: `
+        The people are becoming complacent, we need to remind them who keeps them safe.
+        How about a military parade?
+    `,
     choices: [
         {
             description: 'Fetch my marching boots.',
@@ -18,7 +21,10 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    Although the point was made with an astonishing lack of subtlety, the people got the message,
+                    even though some were upset by the cost.
+                `
             }
         },
         {
@@ -34,7 +40,10 @@ export default {
                 },
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    The people continued to be indifferent,
+                    but at least you didn't waste money trying to convince them otherwise.
+                `
             }
         }
     ]

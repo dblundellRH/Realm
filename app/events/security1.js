@@ -3,7 +3,10 @@ import RESOURCES from '../definitions/resources';
 
 export default {
     title: 'A sharp dressed watchman',
-    description: 'The city watch are having to buy their own uniforms. In most cases they aren\'t able to afford proper equipment either. We should make sure they are properly funded.',
+    description: `
+        Shamefully, the city watch are so underfunded they are having to buy their own armour, which is hitting not only their pockets but their morale too.
+        For the sake law and order, we should make sure they are properly funded.
+    `,
     choices: [
         {
             description: 'Fund the city watch.',
@@ -18,7 +21,10 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                     You order the treasury to bulk buy matching sets of armour. Your soldiers look pleased in their shiny new outfits.
+                     The Guilds frown at the expense.
+                `
             }
         },
         {
@@ -34,7 +40,10 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    You decide to put the proposed investment aside for the future, winning praise for your fiscal responsiblity.
+                    Your soldiers in the meantime continue to look like a rag tag crew of vagabonds.
+                `
             }
         },
     ]
