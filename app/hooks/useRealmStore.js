@@ -75,6 +75,10 @@ export default function useRealmStore() {
     setTurnCount(previousValue => previousValue - 2);
   }
 
+  function turnCountDivisor() {
+    return turnCount % 2;
+  }
+
   return {
     turnCount,
     setTurnCount,
@@ -105,5 +109,6 @@ export default function useRealmStore() {
     crisisMode,
     setCrisisMode,
     resetAfterCrisis,
+    turnCountDivisor,
   };
 }

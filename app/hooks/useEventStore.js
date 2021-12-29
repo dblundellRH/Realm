@@ -4,7 +4,7 @@ import RESOURCES from '../definitions/resources';
 import events from '../events';
 
 
-const CONFIDENCE_MODIFIER = 10;
+const CONFIDENCE_MODIFIER = 15;
 const LAST_CHOICES_LIMIT = 3;
 
 export default function useEventStore(realm, user) {
@@ -121,12 +121,6 @@ export default function useEventStore(realm, user) {
     function handleEventChoice(choice) {
         // Store choice
         setSelectedChoice(choice);
-
-        // Resets preview event
-        realm.setPreviewEvent();
-
-        // Increase turn count by 1
-        realm.setTurnCount(prev => prev + 1);
 
         // Updates values
         updateChoiceValues(choice);

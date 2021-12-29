@@ -8,8 +8,14 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
   }
 
+  @font-face {
+    font-family: "Augusta";
+    src: url("./fonts/heading.woff2") format("woff2"),
+         url("./fonts/Augusta.ttf") format("ttf");
+  }
+
   body {
-    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Augusta', Impact, serif;
   }
 
   #app {
@@ -30,6 +36,36 @@ const GlobalStyle = createGlobalStyle`
 
   p {
     margin-top: 0;
+  }
+
+  .choice-divider {
+    margin: 3rem 0;
+  }
+
+  .event-list {
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+    padding-left: 0;
+    list-style: none;
+
+    list-style: none;
+    counter-reset: item;
+
+    .event-list-item {
+      counter-increment: item;
+
+      display: flex;
+      align-items: flex-start;
+
+      &::before {
+          content: counter(item) ". ";
+          display: inline-block;
+          font-weight: 700;
+          margin-right: 1rem;
+
+          flex-shrink: 0;
+      }
+    }
   }
 `;
 
