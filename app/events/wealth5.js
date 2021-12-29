@@ -2,11 +2,15 @@ import RESOURCES from '../definitions/resources';
 
 
 export default {
-    title: 'It\'s a sure thing I tells ya!',
-    description: 'A suspicious looking gentleman has come, promising to double our money in exchange for a little initial investment. We were going to spend the money buying cattle.',
+    title: `It's a sure thing I tells ya!`,
+    description: `
+        A suspicious looking gentleman has come to court.
+        He promising to double our money in exchange for a little upfront initial investment.
+        We happen to have a surplus we were going to spend buying cattle.
+    `,
     choices: [
         {
-            description: 'This is an obvious scam, buy the cows!',
+            description: 'This is an obvious scam, send him away.',
             effects: [
                 {
                     type: RESOURCES.WEALTH.slug,
@@ -18,11 +22,14 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    Investing in cows is always a safe bet, and many money people can be fed with this new herd.
+                    We hear rumours that others invested in his scheme and made a tidy profit.
+                `
             }
         },
         {
-            description: 'This in an obvious scam, but I just trust him',
+            description: 'This in an obvious scam, but I just trust him for some reason.',
             effects: [
                 {
                     type: RESOURCES.WEALTH.slug,
@@ -34,7 +41,10 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    Despite our misgivings, the scheme proves to be profitable.
+                    The Commons murmur that we are putting profits before people.
+                `
             }
         },
     ]

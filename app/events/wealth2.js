@@ -28,8 +28,8 @@ export default {
             ],
             outcome: {
                 message: `
-                    We are able to mine the majority of the gold seam before it is discovered.
-
+                    Thanks to the conscripted farmers, we are able to mine the majority of the gold seam before it is discovered, at the cost of a portion of the harvest.
+                    Where the Southern Kingdom is concerned, gold will have to take the place of friendship.
                 `
             }
         },
@@ -50,7 +50,10 @@ export default {
                 }
             ],
             outcome: {
-                message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.'
+                message: `
+                    Prioritising the harvest causes the opportunity for greater wealth to slip away from us.
+                    The Southern Kingdom has no qualms about taking as much as they can get, but it at least distracts them from causing us trouble.
+                `
             }
         },
     ]

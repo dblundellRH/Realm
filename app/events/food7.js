@@ -28,8 +28,8 @@ export default {
             ],
             outcome: {
                 message: `
-                    Your chosen winner, old Grandma Elrick, beams with joy as her family hug and congratulate her on her victory.
-                    The other finalists leave disappointed, and you personally receive a number of spiteful looks from some influential people.
+                    Your chosen winner is a rustic looking pie made by old Grandma Elrick, who beams with joy as her family hug and congratulate her on her victory.
+                    The other finalists leave disappointed, and you personally receive a number of spiteful looks from influential artisocrats and merchants.
                 `
             }
         },
@@ -74,6 +74,7 @@ export default {
             ],
             outcome: {
                 message: `
+                    You choose a simple, but stylishly elegant pie baked by Lady Cartworthy (or at least her cook).
                 `
             }
         },
