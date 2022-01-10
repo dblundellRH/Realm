@@ -4,13 +4,21 @@ import PropTypes from 'prop-types';
 import ButtonChoice from './ButtonChoice';
 
 
-function Choice({ children, onMouseEnter, onMouseLeave, onFocus, onBlur, onClick, factionIcon }) {
+function Choice({
+    children,
+    // onMouseEnter,
+    // onMouseLeave,
+    // onFocus,
+    // onBlur,
+    onClick,
+    factionIcon
+}) {
     return (
         <ButtonChoice
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onFocus={onFocus}
-            onBlur={onBlur}
+            // onMouseEnter={onMouseEnter}
+            // onMouseLeave={onMouseLeave}
+            // onFocus={onFocus}
+            // onBlur={onBlur}
             onClick={onClick}
             factionIcon={factionIcon}
         >
@@ -22,10 +30,10 @@ function Choice({ children, onMouseEnter, onMouseLeave, onFocus, onBlur, onClick
 
 Choice.propTypes = {
     children: PropTypes.any.isRequired,
-    onMouseEnter: PropTypes.func.isRequired,
-    onMouseLeave: PropTypes.func.isRequired,
-    onFocus: PropTypes.func.isRequired,
-    onBlur: PropTypes.func.isRequired,
+    // onMouseEnter: PropTypes.func.isRequired,
+    // onMouseLeave: PropTypes.func.isRequired,
+    // onFocus: PropTypes.func.isRequired,
+    // onBlur: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
     factionIcon: PropTypes.string.isRequired,
 }

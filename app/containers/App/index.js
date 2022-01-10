@@ -21,7 +21,7 @@ export default function App() {
   const realm = useRealmStore();
 
   return (
-    <div style={{ width: '700px', margin: 'auto', marginTop: '2rem' }}>
+    <div style={{ width: '750px', margin: 'auto' }}>
       <Helmet
         titleTemplate="%s - React.js Boilerplate"
         defaultTitle="React.js Boilerplate"

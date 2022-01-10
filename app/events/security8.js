@@ -4,8 +4,8 @@ import RESOURCES from '../definitions/resources';
 export default {
     title: 'Against the grain',
     description: `
-        A protest about increasing grain prices has turned into a riot.
-        They are demanding we lower taxes to help the cost of living.
+        A protest about increasing grain prices has turned into a riot. They are demanding we lower taxes to help the cost of living.
+
         Should we agree to their demands, or send in the guard to deal with the rioters?
     `,
     choices: [

@@ -13,7 +13,7 @@ function FactionBadge({ factionSlug }) {
             factionBadgeColour={faction.colour}
             factionFontColour={faction.fontColour}
         >
-            {faction.name.slice(0, 1).toLocaleUpperCase()}
+            <img src={faction.logo} className="logo" alt="" />
         </Badge>
     )
 }
@@ -36,7 +36,15 @@ const Badge = styled.span`
     font-weight: 700;
     position: relative;
 
-    color: ${props => props.factionFontColour};
+    .logo {
+        width: 70%;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 1px;
+    }
 `
 
 export default FactionBadge

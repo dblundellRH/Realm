@@ -5,6 +5,7 @@ export default {
     title: 'A little off the top',
     description: `
         One of your aides has discovered that money intended for the army is being siphoned off by a group of senior officers.
+
         We could stop them, but they are influential and are likely to resent our interference in army matters.
     `,
     choices: [

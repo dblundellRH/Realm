@@ -32,7 +32,7 @@ function Footer({ realm, user }) {
   }
 
   return (
-    <Container>
+    <Container className="numbers">
       <p><strong onClick={() => realm.setShowDebugMenu(!realm.showDebugMenu)}>Toggle Debug menu</strong></p>
       <If condition={realm.showDebugMenu}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>

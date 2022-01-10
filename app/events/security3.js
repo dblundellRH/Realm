@@ -5,6 +5,7 @@ export default {
     title: 'Royal raiders',
     description: `
         Not all rejoiced when the revolution was successful.
+
         The once proud Royal Army have become nothing more than common bandits, and have been raiding nearby villages, burning and looting.
     `,
     choices: [

@@ -5,6 +5,7 @@ export default {
     title: 'A sharp dressed watchman',
     description: `
         Shamefully, the city watch are so underfunded they are having to buy their own armour, which is hitting not only their pockets but their morale too.
+
         For the sake law and order, we should make sure they are properly funded.
     `,
     choices: [

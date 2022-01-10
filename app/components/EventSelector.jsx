@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import FACTIONS from '../definitions/FACTIONS';
+import FACTIONS, { FACTION_NAMES } from '../definitions/FACTIONS';
 import useEventStore from '../hooks/useEventStore';
 import scrollBgImage from '../images/scroll-bg.png';
 import Choice from './Choice';
@@ -16,6 +16,7 @@ function EventSelector({ realm, user }) {
     const userFaction = user.getFactionDetails();
 
     function onEventSelection(choice) {
+        realm.setPreviewEvent(choice);
         events.handleEventChoice(choice);
     }
 
@@ -32,24 +33,64 @@ function EventSelector({ realm, user }) {
                 />
             </If>
 
-            <FactionBannerLogo
-                faction={userFaction}
-            />
+            <header className="header">
+                <FactionBannerLogo
+                    faction={userFaction}
+                />
+            </header>
 
-            <TitleHeading><strong>To the {userFaction.factionTitle},</strong></TitleHeading>
+            <TitleHeading>To the {userFaction.factionTitle},</TitleHeading>
 
-            <p>A matter has arisen in the realm which requires your attention.</p>
+            <p>{getEventIntroductionText()}</p>
 
             <If condition={events.activeEvent}>
-                <h2 style={{textDecoration: 'underline'}}>{events.activeEvent.title}</h2>
+                <h2 className="event-title">
+                    {events.activeEvent.title}
+                </h2>
 
-                <p>{events.activeEvent.description}</p>
+                <p className="event-description">
+                    {events.activeEvent.description.trim()}
+                </p>
             </If>
 
             <p>A decision is required on this matter most urgently.</p>
 
             <p>Your faithful servant,</p>
             <p><em>Drumknott</em></p>
+
+            <If condition={anyResourceIsNearFatal(realm.securityStatus, realm.wealthStatus, realm.foodStatus)}>
+                <p className="near-fatal-status">
+                    <strong>PostScript</strong>
+                    <span>
+                        { resourceIsNearZero(realm.securityStatus)
+                            ? `${FACTIONS[FACTION_NAMES.ROYALISTS].fullname} are up in arms about the state of our military. If the situation continues they may try to overthrow you.`
+                            : resourceIsNearMax(realm.securityStatus)
+                                ? `${FACTIONS[FACTION_NAMES.ROYALISTS].fullname} are emboldened. They could be preparing to restore the Prince to the throne.`
+                                : undefined
+                        }
+                    </span>
+
+                    <span>
+                        { resourceIsNearZero(realm.wealthStatus)
+                            ? `${FACTIONS[FACTION_NAMES.GUILDS].fullname} are furious with your economic decisions. They are close to withdrawing all their support.`
+                            : resourceIsNearMax(realm.wealthStatus)
+                                ? `${FACTIONS[FACTION_NAMES.GUILDS].fullname} are extremely wealthy. There are rumours of mercenary companies being hired for a coup.`
+                                : undefined
+                        }
+                    </span>
+
+                    <span>
+                        { resourceIsNearZero(realm.foodStatus)
+                            ? `${FACTIONS[FACTION_NAMES.COMMONS].fullname} are starving. If we do not provide enough food they will overthrow you.`
+                            : resourceIsNearMax(realm.foodStatus)
+                                ? `${FACTIONS[FACTION_NAMES.COMMONS].fullname} are becoming too strong. There are whispers of a second revolution.`
+                                : undefined
+                        }
+                    </span>
+                </p>
+            </If>
+
+            <hr className="choice-divider" />
 
             <If condition={events.activeEvent}>
                 <ol
@@ -61,10 +102,10 @@ function EventSelector({ realm, user }) {
                             key={index}
                         >
                             <Choice
-                                onMouseEnter={() => realm.setPreviewEvent(choice)}
-                                onMouseLeave={() => realm.setPreviewEvent()}
-                                onFocus={() => realm.setPreviewEvent(choice)}
-                                onBlur={() => realm.setPreviewEvent()}
+                                // onMouseEnter={() => realm.setPreviewEvent(choice)}
+                                // onMouseLeave={() => realm.setPreviewEvent()}
+                                // onFocus={() => realm.setPreviewEvent(choice)}
+                                // onBlur={() => realm.setPreviewEvent()}
                                 onClick={() => onEventSelection(choice)}
                                 factionIcon={FACTIONS[user.faction].logo}
                             >
@@ -83,36 +124,54 @@ EventSelector.propTypes = {
     user: PropTypes.object.isRequired,
 }
 
+function resourceIsNearZero(value) {
+    return (parseInt(value) - 15) <= 0;
+}
+
+function resourceIsNearMax(value) {
+    return (parseInt(value) + 15) >= 100;
+}
+
+function anyResourceIsNearFatal(securityStatus, wealthStatus, foodStatus) {
+    return resourceIsNearZero(securityStatus)
+        || resourceIsNearMax(securityStatus)
+        || resourceIsNearZero(wealthStatus)
+        || resourceIsNearMax(wealthStatus)
+        || resourceIsNearZero(foodStatus)
+        || resourceIsNearMax(foodStatus)
+}
+
+function getEventIntroductionText() {
+    return Math.random() > 0.5
+        ? 'A matter has arisen in the realm which requires your attention.'
+        : 'A report arrived this morning which you may find interesting.';
+}
+
 const EventContainer = styled.section`
     margin-top: 1rem;
     padding: 7rem;
 
     background-image: url(${props => props.backgroundImage});
-    background-size: cover;
+    background-size: contain;
 
-    .event-list {
-        margin-top: 3rem;
-        padding-left: 0;
-        list-style: none;
-
-        list-style: none;
-        counter-reset: item;
+    .header {
+        position: relative;
     }
 
-    .event-list-item {
-        counter-increment: item;
-
-        display: flex;
-        align-items: flex-start;
-
-        &::before {
-            content: counter(item) ". ";
-            display: inline-block;
-            font-weight: 700;
-            margin-right: 1rem;
-
-            flex-shrink: 0;
+    .near-fatal-status {
+        span {
+            display: block;
         }
+    }
+
+    .event-title {
+        margin-top: 2rem;
+    }
+
+    .event-description {
+        white-space: pre-line;
+        margin-bottom: 1rem;
+        line-height: 1.4;
     }
 `
 

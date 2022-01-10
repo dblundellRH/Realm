@@ -5,7 +5,9 @@ export default {
     title: `Nature's bounty`,
     description: `
         Our clerks report we've had a bountiful harvest this season.
+
         We can more than adequately feed the people, leaving us with a surplus.
+
         What shall we do with this unexpected bonus?
     `,
     choices: [

@@ -5,6 +5,7 @@ export default {
     title: 'Trail of gold',
     description: `
         To promote trade with our neighbours, The Guilds want to send a trade caravan to the Northern Kingdom.
+
         Unfortunately the safety of the roads cannot be guaranteed, so they are asking if we might provide a company of soldiers as an escort.
     `,
     choices: [

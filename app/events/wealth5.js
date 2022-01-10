@@ -4,8 +4,8 @@ import RESOURCES from '../definitions/resources';
 export default {
     title: `It's a sure thing I tells ya!`,
     description: `
-        A suspicious looking gentleman has come to court.
-        He promising to double our money in exchange for a little upfront initial investment.
+        A suspicious looking gentleman has come to court. He promising to double our money in exchange for a little upfront initial investment.
+
         We happen to have a surplus we were going to spend buying cattle.
     `,
     choices: [

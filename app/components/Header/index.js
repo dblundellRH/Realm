@@ -13,25 +13,18 @@ function Header({ realm, user }) {
         <strong>{'State of the Realm'}</strong>
       </p>
 
-      <Choose>
-        <When condition={!!(realm.turnCount % 2)}>
-          <aside className="resource-container">
-            <For each="faction" of={Object.values(FACTIONS)}>
-              <ResourceDisplay
-                key={faction.slug}
-                faction={faction}
-                realm={realm}
-                user={user}
-                isSelected={user.faction === faction.slug}
-              />
-            </For>
-          </aside>
-        </When>
-
-        <Otherwise>
-          <p>A report is currently being compiled on the state of the realm and will be available next month.</p>
-        </Otherwise>
-      </Choose>
+      <aside className="resource-container">
+        <For each="faction" of={Object.values(FACTIONS)}>
+          <ResourceDisplay
+            className="resource"
+            key={faction.slug}
+            faction={faction}
+            realm={realm}
+            user={user}
+            isSelected={user.faction === faction.slug}
+          />
+        </For>
+      </aside>
     </Container>
   );
 }
@@ -42,20 +35,23 @@ Header.propTypes = {
 }
 
 const Container = styled.header`
-  padding: 2rem 0;
-  margin: 2rem 0;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-
   .title {
-    margin: 0;
+    margin-top: 0;
+    text-align: center;
   }
 
   .resource-container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: flex-end;
+
     margin-top: 10px;
     margin-bottom: 2rem;
+
+    .resource {
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
   }
 `
 

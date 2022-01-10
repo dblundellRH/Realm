@@ -4,10 +4,9 @@ import RESOURCES from '../definitions/resources';
 export default {
     title: 'Golden opportunity',
     description: `
-        We have come to learn that prospectors have found a previously undiscovered gold seam.
-        As it lies on the disputed southern border, we would have to move quickly to secure it.
-        We could conscript local farmers to help with the mining operations,
-        but the Southern Kingdom would surely be outraged if they discovered the gold.
+        We have come to learn that prospectors have found a previously undiscovered gold seam. As it lies on the disputed southern border, we would have to move quickly to secure it.
+
+        We could conscript local farmers to help with the mining operations, but the Southern Kingdom would surely be outraged if they discovered the gold.
     `,
     choices: [
         {

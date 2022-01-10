@@ -4,8 +4,8 @@ import RESOURCES from '../definitions/resources';
 export default {
     title: 'Eat the rich',
     description: `
-        Many of our soldiers are poor and are going hungry.
-        They look at the packed storehouses of the wealthier merchants with envy, and it is only a matter of time before they take matters into their own hands.
+        Many of our soldiers are poor and are going hungry. They look at the packed storehouses of the wealthier merchants with envy, and it is only a matter of time before they take matters into their own hands.
+
         We could turn a blind eye, or arrest the soldiers as an example to others.
     `,
     choices: [

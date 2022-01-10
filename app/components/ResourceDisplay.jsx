@@ -6,7 +6,7 @@ import FACTIONS from '../definitions/factions';
 import ResourceBadge from './ResourceBadge';
 
 
-function ResourceDisplay({ user, realm, faction }) {
+function ResourceDisplay({ user, realm, faction, ...otherProps }) {
     const isSelected = user.faction === faction.slug;
     const resourceSlug = FACTIONS[faction.slug].keyResource.slug;
 
@@ -29,17 +29,20 @@ function ResourceDisplay({ user, realm, faction }) {
             ? resourceToPreview.modifier + realm.getResourceValue(resourceSlug) + totalModifier
             : undefined
 
-            return newValue ? '*' : undefined;
+            // return newValue ? '*' : undefined;
 
-          // return newValue
-          //   ? `${realm[`${resourceSlug}Status`] > newValue ? ' < ' : ' > '}`
-          //   : undefined
+          const effectMessage = newValue
+            ? `${realm[`${resourceSlug}Status`] > newValue ? ' <<<- ' : ' ->>> '}`
+            : ''
+
+          return <span className={`preview-slot ${newValue ? (realm[`${resourceSlug}Status`] > newValue ? 'negative' : 'positive') : ''}`}>{effectMessage}</span>
         }
     }
 
     return (
         <Container
             isSelected={isSelected}
+            {...otherProps}
         >
             <ResourceBadge
               faction={faction.slug}
@@ -51,7 +54,7 @@ function ResourceDisplay({ user, realm, faction }) {
               {realm.getResourceValue(resourceSlug)}%
             </progress>
 
-            <span className="preview-slot">{getEventPreviewEffect(realm)}</span>
+            {getEventPreviewEffect(realm)}
         </Container>
     )
 }
@@ -63,17 +66,24 @@ const Container = styled.div`
 
   .preview-slot {
     display: inline-block;
-    width: 1.5rem;
     text-align: center;
     position: absolute;
     bottom: -1rem;
     left: 0;
     right: 0;
     margin: auto;
+
+    &.negative {
+      color: red;
+    }
+
+    &.positive {
+      color: green;
+    }
   }
 
   .progress-bar {
-    width: 7.5rem;
+    width: calc(100% - 30px);
   }
 `
 

@@ -5,6 +5,7 @@ export default {
     title: 'Captain Selfish',
     description: `
         A hero of the revolution, Captain Raynor, has been found to be stealing supplies for his own use.
+
         It is unknown what has led to such an honourable man of character to fall so low, but arresting him could prove controversial.
     `,
     choices: [

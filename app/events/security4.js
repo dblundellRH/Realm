@@ -4,8 +4,8 @@ import RESOURCES from '../definitions/resources';
 export default {
     title: 'Eye of the hawk',
     description: `
-        You may put a spear in the hands of a layman and he can thrust, however archery is a skill which requires training.
-        We have plenty of the former, but not enough of the latter.
+        You may put a spear in the hands of a layman and he can thrust, however archery is a skill which requires training. We have plenty of the former, but not enough of the latter.
+
         We should recruit local hunters to fill our ranks.
     `,
     choices: [

@@ -4,8 +4,8 @@ import RESOURCES from '../definitions/resources';
 export default {
     title: 'Foreign imports',
     description: `
-        Our soldiers are more of an untrained mob than an army,
-        but we have heard of a foreign drill instructor in the city who is available for hire.
+        Our soldiers are more of an untrained mob than an army, but we have heard of a foreign drill instructor in the city who is available for hire.
+
         Shall we make the necessary arrangements?
     `,
     choices: [

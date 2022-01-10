@@ -5,6 +5,7 @@ export default {
     title: `Guess who's coming to dinner`,
     description: `
         With the revolution came a 'reset' of relations between you and the formerly hostile Western Kingdom.
+
         A diplomat has arrived on official business, should we throw them a feast in their honour?
     `,
     choices: [

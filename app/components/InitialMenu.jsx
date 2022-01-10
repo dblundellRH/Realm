@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import FactionMenu from '../components/FactionMenu';
 
@@ -10,7 +11,10 @@ function InitialMenu({ user, realm }) {
       <Choose>
         <When condition={user.name}>
           <p>
-            Hello {user.name}{user.faction ?`, ${user.getFactionDetails().factionTitle} of the ${user.getFactionDetails().name} faction` : ''}.
+            Greetings <span style={{ fontWeight: 600 }}>{user.name}</span>{user.faction
+              ? `, ${user.getFactionDetails().factionTitle} of the ${user.getFactionDetails().name} faction`
+              : ''
+            }.
           </p>
         </When>
 
@@ -33,14 +37,13 @@ function InitialMenu({ user, realm }) {
       />
 
       <If condition={user.name && user.faction && !realm.gameStart}>
-            <button
-              style={{ 'width': '150px' }}
-              onClick={() => {
-                realm.setGameStart(true)
-                realm.setTurnCount(1)
-              }}>
-                Start game
-              </button>
+        <StartGameButton
+          onClick={() => {
+            realm.setGameStart(true)
+            realm.setTurnCount(1)
+          }}>
+            Lead the realm as {user.getFactionDetails().factionTitle} of the {user.getFactionDetails().name} faction.
+          </StartGameButton>
       </If>
     </div>
   );
@@ -50,5 +53,10 @@ InitialMenu.propTypes = {
   user: PropTypes.object.isRequired,
   realm: PropTypes.object.isRequired,
 };
+
+const StartGameButton = styled.button`
+  font-weight: 700;
+  margin-bottom: 2rem;
+`
 
 export default InitialMenu;

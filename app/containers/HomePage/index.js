@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 
 import SETTINGS from '../../definitions/settings';
@@ -13,7 +14,7 @@ import FactionBadge from '../../components/FactionBadge';
 
 function HomePage({ user, realm }) {
   return (
-    <div style={{ borderTop: '2px solid black', borderBottom: '2px solid black',  position: 'relative' }}>
+    <>
       <Helmet>
         <title>Realm</title>
         <meta
@@ -31,8 +32,15 @@ function HomePage({ user, realm }) {
         </When>
 
         <When condition={realm.gameStart && !realm.gameEnd && !realm.crisisMode}>
-          <p style={{ position: 'absolute', top: '0', left: '0'}}>It is turn {realm.turnCount} / {SETTINGS.MAX_TURN_COUNT}</p>
-          <p style={{ position: 'absolute', top: '0', right: '0'}}><FactionBadge factionSlug={user.faction} /> {user.getFactionDetails().name} confidence: {realm.factionConfidence}%</p>
+          <StatusBar>
+            <p className="confidence-metre">
+              <FactionBadge factionSlug={user.faction} /> {user.getFactionDetails().name} confidence: <span className="numbers">{realm.factionConfidence}%</span>
+            </p>
+
+            <p className="turn-metre">
+              It is turn <span className="numbers">{realm.turnCount} / {SETTINGS.MAX_TURN_COUNT}</span>
+            </p>
+          </StatusBar>
 
           <If condition={realm.activeModifiers && Array.isArray(realm.activeModifiers)}>
             <For each="modifier" of={realm.activeModifiers}>
@@ -69,7 +77,7 @@ function HomePage({ user, realm }) {
           <p>Not sure wtf this means?</p>
         </Otherwise>
       </Choose>
-    </div>
+    </>
   );
 }
 
@@ -82,5 +90,21 @@ HomePage.defaultProps = {
   user: undefined,
   realm: undefined,
 };
+
+const StatusBar = styled.header`
+  position: relative;
+
+  .confidence-metre {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .turn-metre {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+`;
 
 export default HomePage;

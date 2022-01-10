@@ -67,9 +67,7 @@ function FactionMenu({ user, realm }) {
             </ul>
 
             <If condition={!!user.faction}>
-                <p>
-                    {user.getFactionDetails().blurb}
-                </p>
+                <p>{user.getFactionDetails().blurb}</p>
 
                 <p>
                     <ResourceBadge
