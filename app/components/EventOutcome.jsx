@@ -76,7 +76,7 @@ function EventOutcome({
                                 <div className="right-col">
                                     <figure className="image-frame">
                                         <div className="inner-frame">
-                                            <img width="250" height="300" src={VILLAGE} alt="" />
+                                            <img width="250" height="300" src={events.selectedChoice.outcome.image} alt="" />
                                         </div>
                                     </figure>
                                     {/* <Choose>
@@ -153,7 +153,7 @@ const Container = styled.div`
         background-image: url(${props => props.outcomeBackground});
         background-size: contain;
 
-        width: 50vw;
+        width: 750px;
         height: auto;
 
         position: absolute;
@@ -204,6 +204,7 @@ const Container = styled.div`
                 display: block;
                 max-width: 100%;
                 border-radius: 50%;
+                margin: auto;
             }
         }
     }

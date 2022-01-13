@@ -1,4 +1,5 @@
 import RESOURCES from '../definitions/resources';
+import KNIGHT from '../images/knight.jpg';
 
 
 export default {
@@ -29,7 +30,8 @@ export default {
                 message: `
                     The stolen supplies are recovered, and Captain Raynor lies in the gaols, a broken man.
                     Truth being sometimes difficult and inconvenient, many soldiers refuse to believe his crimes and blame the government.
-                `
+                `,
+                image: KNIGHT,
             }
         },
         {
@@ -52,7 +54,8 @@ export default {
                 message: `
                     You never find out why Raynor stole the supplies, but you find he is always reliable ally to you.
                     The missing supplies do not go unnoticed, and all anyone knows is that you act cagey when they are mentioned.
-                `
+                `,
+                image: KNIGHT,
             }
         }
     ]

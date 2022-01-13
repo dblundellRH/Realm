@@ -1,4 +1,5 @@
 import RESOURCES from '../definitions/resources';
+import TOWN from '../images/town.jpg'
 
 
 export default {
@@ -25,7 +26,8 @@ export default {
                 message: `
                     The mission is a success, and the promise of further trade should enrich the realm.
                     The soldiers are missed however, and bandits take advantage by plundering several homsteads.
-                `
+                `,
+                image: TOWN,
             }
         },
         {
@@ -44,7 +46,8 @@ export default {
                 message: `
                     You decide that security cannot be risked at this time, and time passes in relative calm.
                     The Guilds curse your lack of ambition, and many start to look elsewhere to invest their money.
-                `
+                `,
+                image: TOWN,
             }
         },
     ]

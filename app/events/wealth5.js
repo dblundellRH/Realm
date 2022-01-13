@@ -1,4 +1,5 @@
 import RESOURCES from '../definitions/resources';
+import TOWN from '../images/town.jpg'
 
 
 export default {
@@ -25,7 +26,8 @@ export default {
                 message: `
                     Investing in cows is always a safe bet, and many money people can be fed with this new herd.
                     We hear rumours that others invested in his scheme and made a tidy profit.
-                `
+                `,
+                image: TOWN,
             }
         },
         {
@@ -44,7 +46,8 @@ export default {
                 message: `
                     Despite our misgivings, the scheme proves to be profitable.
                     The Commons murmur that we are putting profits before people.
-                `
+                `,
+                image: TOWN,
             }
         },
     ]

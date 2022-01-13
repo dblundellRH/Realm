@@ -1,4 +1,5 @@
 import RESOURCES from '../definitions/resources';
+import VILLAGE from '../images/village.jpg';
 
 
 export default {
@@ -27,7 +28,8 @@ export default {
                 message: `
                     You prudently decide to store the excess food away against any future disaster.
                     The Guilds mutter from behind their stacks of coin that you have missed an opportunity for profit.
-                `
+                `,
+                image: VILLAGE,
             }
         },
         {
@@ -45,7 +47,8 @@ export default {
             outcome: {
                 message: `
                     The Guilds commend your sound judgement, whilst the people watch carts laden with precious food leave the city.
-                `
+                `,
+                image: VILLAGE,
             }
         },
     ]

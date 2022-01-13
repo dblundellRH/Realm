@@ -1,4 +1,5 @@
 import RESOURCES from '../definitions/resources';
+import KNIGHT from '../images/knight.jpg';
 
 
 export default {
@@ -24,7 +25,8 @@ export default {
             outcome: {
                 message: `
                     Although an costly hire, the instructor manages to drill your army into shape.
-                `
+                `,
+                image: KNIGHT,
             }
         },
         {
@@ -42,7 +44,8 @@ export default {
             outcome: {
                 message: `
                     Your army continues to operate more on a 'martial' than 'art' basis.
-                `
+                `,
+                image: KNIGHT,
             }
         }
     ]

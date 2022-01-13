@@ -1,4 +1,5 @@
 import RESOURCES from '../definitions/resources';
+import VILLAGE from '../images/village.jpg';
 
 
 export default {
@@ -24,7 +25,8 @@ export default {
                 message: `
                     We planted more than we expected, securing food for the coming year.
                     With a distracted army however, the city became a little more unsafe.
-                `
+                `,
+                image: VILLAGE,
             }
         },
         {
@@ -43,7 +45,8 @@ export default {
                 message: `
                     Patrols have been doubled, letting your people feel safer.
                     Their hungry bellies leave them little energy to enjoy it however.
-                `
+                `,
+                image: VILLAGE,
             }
         },
     ]

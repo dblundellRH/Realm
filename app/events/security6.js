@@ -1,4 +1,5 @@
 import RESOURCES from '../definitions/resources';
+import KNIGHT from '../images/knight.jpg';
 
 
 export default {
@@ -25,7 +26,8 @@ export default {
                 message: `
                     Although the point was made with an astonishing lack of subtlety, the people got the message,
                     even though some were upset by the cost.
-                `
+                `,
+                image: KNIGHT,
             }
         },
         {
@@ -44,7 +46,8 @@ export default {
                 message: `
                     The people continued to be indifferent,
                     but at least you didn't waste money trying to convince them otherwise.
-                `
+                `,
+                image: KNIGHT,
             }
         }
     ]

@@ -1,4 +1,5 @@
 import RESOURCES from '../definitions/resources';
+import KNIGHT from '../images/knight.jpg';
 
 
 export default {
@@ -25,7 +26,8 @@ export default {
                 message: `
                      You order the treasury to bulk buy matching sets of armour. Your soldiers look pleased in their shiny new outfits.
                      The Guilds frown at the expense.
-                `
+                `,
+                image: KNIGHT,
             }
         },
         {
@@ -44,7 +46,8 @@ export default {
                 message: `
                     You decide to put the proposed investment aside for the future, winning praise for your fiscal responsiblity.
                     Your soldiers in the meantime continue to look like a rag tag crew of vagabonds.
-                `
+                `,
+                image: KNIGHT,
             }
         },
     ]

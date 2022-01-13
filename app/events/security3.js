@@ -1,4 +1,5 @@
 import RESOURCES from '../definitions/resources';
+import KNIGHT from '../images/knight.jpg';
 
 
 export default {
@@ -8,6 +9,7 @@ export default {
 
         The once proud Royal Army have become nothing more than common bandits, and have been raiding nearby villages, burning and looting.
     `,
+    outcomeImage: KNIGHT,
     choices: [
         {
             description: 'Increase patrols to safeguard the villages.',
@@ -25,7 +27,8 @@ export default {
                 message: `
                     These bandits are a long term problem, but the countryside becomes a little safer with increased patrols,
                     Your treasury ends up lighter for it.
-                `
+                `,
+                image: KNIGHT,
             }
         },
         {
@@ -43,7 +46,8 @@ export default {
             outcome: {
                 message: `
                     You have pleased the money men by reining in spending, at the cost of security in the countryside.
-                `
+                `,
+                image: KNIGHT,
             }
         }
     ]
