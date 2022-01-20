@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import RESOURCES from '../definitions/resources';
+import { useUserProvider } from '../contexts/UserProvider';
 
 
-function EndgameScreen({ realm, user }) {
+function EndgameScreen({ realm }) {
+    const user = useUserProvider();
+
     function handleResetGame() {
         realm.resetGameState();
         user.resetUserState();
@@ -38,7 +41,6 @@ function EndgameScreen({ realm, user }) {
 
 EndgameScreen.propTypes = {
     realm: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
 }
 
 function getFailedResource(realm) {

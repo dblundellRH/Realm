@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import FactionBannerLogo from './FactionBannerLogo';
+import FACTIONS from '../definitions/FACTIONS';
 
 
 function FactionChoice({
     slug,
-    name,
-    logo,
+    // name,
+    // logo,
     themeColour,
     onClick,
     isSelected,
@@ -18,7 +20,12 @@ function FactionChoice({
             data-factionslug={slug}
             isSelected={isSelected}
         >
-            <div
+            <FactionBannerLogo
+                className="faction-logo"
+                faction={FACTIONS[slug]}
+            />
+
+            {/* <div
                 className="shield"
             >
                 <img src={logo} alt=''/>
@@ -26,7 +33,7 @@ function FactionChoice({
 
             <h2>
                 {name}
-            </h2>
+            </h2> */}
         </Container>
 
     )
@@ -47,6 +54,10 @@ const Container = styled.button`
 
     &:first-child {
         border-left: 0;
+    }
+
+    .faction-logo {
+        max-width: none;
     }
 
     .shield {
@@ -86,8 +97,6 @@ const Container = styled.button`
 
         position: relative;
         z-index: 1;
-
-        margin-top: 5px;
     }
 `
 FactionChoice.propTypes = {

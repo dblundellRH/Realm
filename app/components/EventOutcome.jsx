@@ -6,18 +6,18 @@ import Header from '../components/Header';
 import FACTIONS from '../definitions/factions';
 import ButtonChoice from './ButtonChoice';
 import FactionBannerLogo from './FactionBannerLogo';
-import PAGE_BACKGROUND_IMAGE from '../images/scroll-bg.png';
-import VILLAGE from '../images/village.jpg';
-import CHURCH from '../images/church.jpg';
-import VALLEY from '../images/valley.jpg';
+import { useUserProvider } from '../contexts/UserProvider';
+import ScrollContainer from './ScrollContainer';
+import TitleHeading from './TitleHeading';
 
 
 function EventOutcome({
     userFaction,
     events,
     realm,
-    user,
+    ...otherProps
 }) {
+    const user = useUserProvider();
     // const [ showRealmStatus, setShowRealmStatus ] = useState(false);
 
     function handleProceed() {
@@ -36,15 +36,14 @@ function EventOutcome({
     }
 
     return (
-        <Container
-            outcomeBackground={PAGE_BACKGROUND_IMAGE}
+        <EventOutcomeContainer
+                {...otherProps}
         >
             {/* <Choose>
                 <When condition={showRealmStatus}>
                     <div className="realm-status">
                         <Header
                             realm={realm}
-                            user={user}
                         />
 
                         <ButtonChoice
@@ -57,60 +56,60 @@ function EventOutcome({
                 </When>
 
                 <Otherwise> */}
-                    <div className="outcome-details">
-                        <div className="inner-container">
+                    <ScrollContainer>
+                        <header className="header">
                             <FactionBannerLogo
+                                className="header-logo"
                                 faction={userFaction}
                             />
+                        </header>
 
-                            <h2><strong>My {userFaction.factionTitle},</strong></h2>
+                        <TitleHeading>My {userFaction.factionTitle},</TitleHeading>
 
-                            <p>Find below a report on the recent events.</p>
+                        <p>Find below a report on the recent events.</p>
 
-                            <div className="report-section">
-                                <div className="left-col">
-                                    <h2 style={{textDecoration: 'underline'}}>A title for the event outcome</h2>
-                                    <p className="outcome-text">{events.selectedChoice.outcome.message}</p>
-                                </div>
-
-                                <div className="right-col">
-                                    <figure className="image-frame">
-                                        <div className="inner-frame">
-                                            <img width="250" height="300" src={events.selectedChoice.outcome.image} alt="" />
-                                        </div>
-                                    </figure>
-                                    {/* <Choose>
-                                        <When condition={realm.turnCountDivisor()}>
-                                            <Header
-                                                realm={realm}
-                                                user={user}
-                                            />
-                                        </When>
-                                        <Otherwise>
-                                            <p>A state of the realm report will be available next time.</p>
-                                        </Otherwise>
-                                    </Choose> */}
-                                </div>
+                        <div className="report-section">
+                            <div className="left-col">
+                                <h2>A title for the event outcome</h2>
+                                <p className="outcome-text">{events.selectedChoice.outcome.message}</p>
                             </div>
 
-                            <hr className="choice-divider" />
-
-                            <ol className="event-list">
-                                <li className="event-list-item">
-                                    <ButtonChoice
-                                        onClick={handleProceed}
-                                        factionIcon={FACTIONS[user.faction].logo}
-                                    >
-                                        {'Proceed'}
-                                        {/* {realm.turnCountDivisor() ? 'Review the state of the realm' :  'Proceed'} */}
-                                    </ButtonChoice>
-                                </li>
-                            </ol>
+                            <div className="right-col">
+                                <figure className="image-frame">
+                                    <div className="inner-frame">
+                                        <img width="250" height="300" src={events.selectedChoice.outcome.image} alt="" />
+                                    </div>
+                                </figure>
+                                {/* <Choose>
+                                    <When condition={realm.turnCountDivisor()}>
+                                        <Header
+                                            realm={realm}
+                                        />
+                                    </When>
+                                    <Otherwise>
+                                        <p>A state of the realm report will be available next time.</p>
+                                    </Otherwise>
+                                </Choose> */}
+                            </div>
                         </div>
-                    </div>
+
+                        <hr className="choice-divider" />
+
+                        <ol className="event-list">
+                            <li className="event-list-item">
+                                <ButtonChoice
+                                    onClick={handleProceed}
+                                    factionIcon={FACTIONS[user.faction].logo}
+                                >
+                                    {'Proceed'}
+                                    {/* {realm.turnCountDivisor() ? 'Review the state of the realm' :  'Proceed'} */}
+                                </ButtonChoice>
+                            </li>
+                        </ol>
+                    </ScrollContainer>
                 {/* </Otherwise>
             </Choose> */}
-        </Container>
+        </EventOutcomeContainer>
     )
 }
 
@@ -118,10 +117,9 @@ EventOutcome.propTypes = {
     userFaction: PropTypes.object.isRequired,
     events: PropTypes.object.isRequired,
     realm: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
 }
 
-const Container = styled.div`
+const EventOutcomeContainer = styled.div`
     width: 100%;
     height: 100%;
     background: rgba(0,0,0, 0.6);
@@ -133,6 +131,16 @@ const Container = styled.div`
     bottom: 0;
 
     z-index: 100;
+
+    .header-logo {
+        max-width: 5rem;
+
+        margin-top: 2rem;
+    }
+
+    .header {
+        position: relative;
+    }
 
     .realm-status {
         padding: 1.5rem 3rem;
@@ -162,27 +170,21 @@ const Container = styled.div`
         transform: translate(-50%, -50%);
     }
 
-    .inner-container {
-        padding: 5rem;
-    }
-
     .report-section {
         display: flex;
         flex-wrap: no-wrap;
-
-        margin-top: 2.5rem;
     }
 
     .left-col {
-        flex-basis: 50%;
+        flex-basis: 60%;
         flex-grow: 1;
         flex-shrink: 0;
 
-        padding-right: 2rem;
+        padding-right: 1rem;
     }
 
     .right-col {
-        flex-basis: 50%;
+        flex-basis: 40%;
         flex-grow: 0;
         flex-shrink: 1;
     }
@@ -192,19 +194,20 @@ const Container = styled.div`
     }
 
     .image-frame {
-        border: 1px solid #524832;
+        // border: 1px solid #524832;
         margin: 0;
 
         .inner-frame {
-            margin: 8px;
-            border: 6px solid #752a1b;
-            background-color: #fbf5dd;
+            // margin: 8px;
+            // border: 6px solid #752a1b;
+            // background-color: #fbf5dd;
 
             img {
                 display: block;
                 max-width: 100%;
-                border-radius: 50%;
+                // border-radius: 50%;
                 margin: auto;
+                margin-top: 1rem;
             }
         }
     }

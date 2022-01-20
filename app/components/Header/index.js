@@ -4,9 +4,12 @@ import styled from 'styled-components';
 
 import FACTIONS from '../../definitions/factions';
 import ResourceDisplay from '../ResourceDisplay';
+import { useUserProvider } from '../../contexts/UserProvider';
 
 
-function Header({ realm, user }) {
+function Header({ realm }) {
+  const user = useUserProvider();
+
   return (
     <Container>
       <p className="title">
@@ -20,7 +23,6 @@ function Header({ realm, user }) {
             key={faction.slug}
             faction={faction}
             realm={realm}
-            user={user}
             isSelected={user.faction === faction.slug}
           />
         </For>
@@ -31,7 +33,6 @@ function Header({ realm, user }) {
 
 Header.propTypes = {
   realm: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
 }
 
 const Container = styled.header`

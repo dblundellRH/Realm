@@ -7,6 +7,7 @@ import SETTINGS from '../definitions/settings';
 import RESOURCES from '../definitions/resources';
 import FactionChoice from './FactionChoice';
 import ResourceBadge from './ResourceBadge';
+import { useUserProvider } from '../contexts/UserProvider';
 
 
 const FACTION_OPTIONS = Object.values(FACTIONS).map(faction => ({
@@ -17,7 +18,9 @@ const FACTION_OPTIONS = Object.values(FACTIONS).map(faction => ({
     logo: faction.logo,
 }));
 
-function FactionMenu({ user, realm }) {
+function FactionMenu({ realm }) {
+    const user = useUserProvider();
+
     function handleChooseFaction(e) {
         const factionSlug = e.currentTarget.dataset.factionslug;
 
@@ -46,6 +49,11 @@ function FactionMenu({ user, realm }) {
         }
     }
 
+    const unusedResources = user.getFactionDetails()
+        ? Object.values(RESOURCES)
+            .filter(resource => resource.slug !== user.getFactionDetails().keyResource.slug)
+        : [];
+
     return (
         <Container>
             <ul className="faction-list">
@@ -61,6 +69,7 @@ function FactionMenu({ user, realm }) {
                             logo={faction.logo}
                             onClick={handleChooseFaction}
                             isSelected={faction.slug === user.faction}
+                            className="choice-logo"
                         />
                     </li>
                 </For>
@@ -78,16 +87,12 @@ function FactionMenu({ user, realm }) {
                 </p>
 
                 <p>
-                    They are less interested in the
-                    {
-                    Object.values(RESOURCES)
-                        .filter(resource => resource.slug !== user.getFactionDetails().keyResource.slug)
-                        .map(resource => {
-                        return ` ${resource.name} `
-                        })
-                        .join('and')
-                    }
-                    resources.
+                    {`They are less interested in the `}
+                    <For each="resource" of={unusedResources} index="index">
+                        <strong>{resource.name}</strong>
+                        {index === 0 && index !== unusedResources.length ? ' and ' : ''}
+                    </For>
+                    {` resources.`}
                 </p>
             </If>
         </Container>
@@ -107,10 +112,13 @@ const Container = styled.div`
         flex-basis: 100%;
         margin: 0 5px;
     }
+
+    .choice-logo {
+        max-width: 5rem;
+    }
 `
 
 FactionMenu.propTypes = {
-    user: PropTypes.object.isRequired,
     realm: PropTypes.object.isRequired,
 };
 

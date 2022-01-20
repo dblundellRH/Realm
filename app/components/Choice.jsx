@@ -11,7 +11,8 @@ function Choice({
     // onFocus,
     // onBlur,
     onClick,
-    factionIcon
+    factionIcon,
+    disabled,
 }) {
     return (
         <ButtonChoice
@@ -21,6 +22,7 @@ function Choice({
             // onBlur={onBlur}
             onClick={onClick}
             factionIcon={factionIcon}
+            disabled={disabled}
         >
             {/* Removes any stray full stops that we don't want */}
             {children}
@@ -36,6 +38,11 @@ Choice.propTypes = {
     // onBlur: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
     factionIcon: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+}
+
+Choice.defaultProps = {
+    disabled: false,
 }
 
 export default Choice

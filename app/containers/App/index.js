@@ -8,20 +8,26 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
 
 import HomePage from 'containers/HomePage/index';
 import Footer from 'components/Footer';
 
 import useRealmStore from '../../hooks/useRealmStore';
-import useUserStore from '../../hooks/useUserStore';
 import GlobalStyle from '../../global-styles';
 
-export default function App() {
-  const user = useUserStore();
+import BG_MUSIC from '../../sounds/Planning.mp3';
+import BG from '../../images/pokerswell___lady_of_the_manor_by_deivcalviz_dchnbii.jpg';
+
+
+function App() {
   const realm = useRealmStore();
+  const audio = new Audio(BG_MUSIC);
 
   return (
-    <div style={{ width: '750px', margin: 'auto' }}>
+    <BackgroundElement
+      backgroundImage={BG}
+    >
       <Helmet
         titleTemplate="%s - React.js Boilerplate"
         defaultTitle="React.js Boilerplate"
@@ -31,17 +37,40 @@ export default function App() {
 
       <main>
         <HomePage
-          user={user}
           realm={realm}
         />
       </main>
 
+      <button
+        type="button"
+        onClick={() => audio.paused ? audio.play() : audio.pause()}
+      >
+        Audio
+      </button>
+
       <Footer
-        user={user}
+        className="debug-menu"
         realm={realm}
       />
 
       <GlobalStyle />
-    </div>
+    </BackgroundElement>
   );
 }
+
+const BackgroundElement = styled.div`
+  height: 100vh;
+  margin: auto;
+
+  background-image: url(${props => props.backgroundImage});
+  background-color: black;
+  background-size: cover;
+
+  .debug-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+`
+
+export default App;

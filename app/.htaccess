@@ -53,4 +53,5 @@
 
 <IfModule mod_mime.c>
   AddType application/woff2 .woff2
+  AddType audio/mpeg3
 </IfModule>

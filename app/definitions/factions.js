@@ -33,6 +33,7 @@ export default {
         banner: BANNER_GUILDS,
         colour: 'gold',
         fontColour: '#404040',
+        badgeColour: 'radial-gradient(ellipse at center, rgba(253,208,29,1) 30%,rgba(163,131,3,1) 100%);',
         keyResource: RESOURCES.WEALTH,
         blurb: 'The Guilds paid for the revolution in many ways, and now that the king has been deposed they want a return on their investment.',
         factionTitle: 'Chancellor',

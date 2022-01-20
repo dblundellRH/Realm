@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import FACTIONS from '../definitions/factions';
 import MODIFIERS from '../definitions/modifiers';
-import styled from 'styled-components';
+import { useUserProvider } from '../contexts/UserProvider';
+import anyResourceIsNearFatal, { resourceIsNearZero, resourceIsNearMax } from '../functions/anyResourceIsNearFatal';
+import factionConfidenceIsNearFatal from '../functions/factionConfidenceIsNearFatal';
+import ScrollContainer from './ScrollContainer';
+import Choice from './Choice';
+import TitleHeading from './TitleHeading';
+import FactionBannerLogo from './FactionBannerLogo';
 
 
-function CrisisModeScreen({ realm, user }) {
+function CrisisModeScreen({ realm }) {
+    const user = useUserProvider();
+    const userFaction = user.getFactionDetails();
+
     const [ isInCrisis, setIsInCrisis ] = useState(true);
 
     function handleRollTheDice() {
@@ -29,82 +39,125 @@ function CrisisModeScreen({ realm, user }) {
     }
 
     return (
-        <>
-            <Choose>
-                <When condition={isInCrisis}>
-                    <h2>COUNCIL IN CRISIS</h2>
-                    <p>{user.getFactionDetails().factionTitle},</p>
-                    <p>Your constant neglect of {user.getFactionDetails().fullname} has caused them to lose confidence in your leadership.</p>
-                    <p>Your former allies poised to overthrow you, and emergency meeting of the council has been called!</p>
+        <ScrollContainer>
+            <Crisis>
+                <Choose>
+                    <When condition={isInCrisis}>
+                        <header className="header">
+                            <FactionBannerLogo
+                                className="header-logo"
+                                faction={userFaction}
+                            />
+                        </header>
 
-                    <p>What will you do?</p>
+                        <TitleHeading>{userFaction.factionTitle},</TitleHeading>
 
-                    <ChoiceList>
-                        <For each="faction" of={Object.values(FACTIONS)}>
-                            <If condition={user.faction !== faction.slug}>
-                                <button
-                                    key={faction.fullname}
-                                    disabled={parseInt(realm[`${faction.keyResource.slug}Status`]) < 80}
+                        <If condition={factionConfidenceIsNearFatal(realm)}>
+                            <p>Your constant neglect of the interests of {userFaction.fullname} has caused them to lose confidence in your leadership.</p>
+                        </If>
+
+                        <If condition={anyResourceIsNearFatal(realm)}>
+                            <p>Blah blah</p>
+                        </If>
+
+                        <h2 className="event-title">COUNCIL IN CRISIS</h2>
+
+                        <p>Your former allies poised to overthrow you, and an emergency meeting of the council has been called!</p>
+
+                        <p>What will you do?</p>
+
+                        <hr className="choice-divider" />
+
+                        <ol className="event-list">
+                            <For each="faction" of={Object.values(FACTIONS)} index="index">
+                                <If condition={user.faction !== faction.slug}>
+                                    <li
+                                        className="event-list-item"
+                                        key={index}
+                                    >
+                                        <Choice
+                                            key={faction.fullname}
+                                            disabled={parseInt(realm[`${faction.keyResource.slug}Status`]) < 80}
+                                            className="choice-button"
+                                            onClick={() => console.log('jump to another faction')}
+                                            factionIcon={FACTIONS[user.faction].logo}
+                                        >
+                                            {`Throw your weight behind ${faction.fullname}`}
+                                        </Choice>
+                                    </li>
+                                </If>
+                            </For>
+
+                            <li
+                                className="event-list-item"
+                            >
+                                <Choice
+                                    disabled={user.items && !user.items.find(item => item.slug === MODIFIERS.ROUSING_SPEECH.slug)}
                                     className="choice-button"
+                                    onClick={() => console.log('rousing speech')}
+                                    factionIcon={FACTIONS[user.faction].logo}
                                 >
-                                    {`Throw your weight behind ${faction.fullname}`}
-                                </button>
-                            </If>
-                        </For>
+                                    {`Employ a Rousing Speech`}
+                                </Choice>
+                            </li>
+
+                            <li
+                                className="event-list-item"
+                            >
+                                <Choice
+                                    className="choice-button"
+                                    onClick={handleRollTheDice}
+                                    factionIcon={FACTIONS[user.faction].logo}
+                                >
+                                    {`Appeal to their patriotism`}
+                                </Choice>
+                            </li>
+
+                            <li
+                                className="event-list-item"
+                            >
+                                <Choice
+                                    className="choice-button"
+                                    onClick={handleRollTheDice}
+                                    factionIcon={FACTIONS[user.faction].logo}
+                                >
+                                    {`Attempt to bribe influencial councillors`}
+                                </Choice>
+                            </li>
+                        </ol>
+                    </When>
+
+                    <Otherwise>
+                        <h2>CRISIS RESOLVED</h2>
+                        <p>{user.getFactionDetails().factionTitle},</p>
+                        <p>Your crafty political maneuvering has manged to buy you a lifeline.</p>
+                        <p>Use it wisely, you may not be so fortunate next time.</p>
 
                         <button
-                            disabled={user.items && !user.items.find(item => item.slug === MODIFIERS.ROUSING_SPEECH.slug)}
-                            className="choice-button"
+                            onClick={() => realm.resetAfterCrisis()}
                         >
-                            {`Employ a Rousing Speech`}
+                            {`Let us proceed, there is work to be done.`}
                         </button>
-
-                        <button
-                            className="choice-button"
-                            onClick={handleRollTheDice}
-                        >
-                            {`Appeal to their patriotism`}
-                        </button>
-
-                        <button
-                            className="choice-button"
-                            onClick={handleRollTheDice}
-                        >
-                            {`Attempt to bribe influencial councillors`}
-                        </button>
-                    </ChoiceList>
-                </When>
-
-                <Otherwise>
-                    <h2>CRISIS RESOLVED</h2>
-                    <p>{user.getFactionDetails().factionTitle},</p>
-                    <p>Your crafty political maneuvering has manged to buy you a lifeline.</p>
-                    <p>Use it wisely, you may not be so fortunate next time.</p>
-
-                    <button
-                        onClick={() => realm.resetAfterCrisis()}
-                    >
-                        {`Let us proceed, there is work to be done.`}
-                    </button>
-                </Otherwise>
-            </Choose>
-        </>
+                    </Otherwise>
+                </Choose>
+            </Crisis>
+        </ScrollContainer>
     );
 }
 
 CrisisModeScreen.propTypes = {
     realm: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
 }
 
-const ChoiceList = styled.div`
-    display: flex;
-    flex-direction: column;
+const Crisis = styled.div`
+    .header-logo {
+        max-width: 5rem;
 
-    .choice-button {
-        text-align: left;
-        margin-bottom: 2rem;
-        padding: 1rem;
+        margin-top: 2rem;
+    }
+
+    .header {
+        position: relative;
     }
 `
 

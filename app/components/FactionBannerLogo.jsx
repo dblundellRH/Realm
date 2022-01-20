@@ -3,9 +3,11 @@ import styled from "styled-components"
 import PropTypes from 'prop-types';
 
 
-function FactionBannerLogo({ faction }) {
+function FactionBannerLogo({ faction, ...otherProps }) {
     return (
-        <Container>
+        <Container
+            {...otherProps}
+        >
             <img src={faction.logo} className="logo" alt="" />
             <img src={faction.banner} className="banner" alt="" />
         </Container>
@@ -18,7 +20,6 @@ FactionBannerLogo.propTypes = {
 
 const Container = styled.div`
     display: block;
-    max-width: 20%;
 
     margin: auto;
 
@@ -30,7 +31,7 @@ const Container = styled.div`
     }
 
     .logo {
-        width: 50%;
+        width: 34%;
 
         margin: auto;
 
@@ -39,6 +40,8 @@ const Container = styled.div`
         right: 0;
         left: 0;
         bottom: 7px;
+
+        z-index: 2;
     }
 `
 

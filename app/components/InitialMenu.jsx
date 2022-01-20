@@ -3,60 +3,116 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import FactionMenu from '../components/FactionMenu';
+import { useUserProvider } from '../contexts/UserProvider';
 
 
-function InitialMenu({ user, realm }) {
+function InitialMenu({ realm }) {
+  const user = useUserProvider();
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <Choose>
-        <When condition={user.name}>
-          <p>
-            Greetings <span style={{ fontWeight: 600 }}>{user.name}</span>{user.faction
-              ? `, ${user.getFactionDetails().factionTitle} of the ${user.getFactionDetails().name} faction`
-              : ''
-            }.
-          </p>
-        </When>
+    <Container>
+      <p className="flex-container">
+        <span>Greetings</span>
+        <span className="input-container">
+          <input
+            id="name-input"
+            name="name"
+            type="text"
+            value={user.name}
+            onChange={e => user.setName(e.target.value)}
+            style={{ width: `${user.name.length * 0.6}rem`}}
+            placeholder="State your name"
+          />
+        </span>
+        {/* <span>{user.faction
+            ? `, ${user.getFactionDetails().factionTitle} of the ${user.getFactionDetails().name} faction.`
+            : ', you must choose which faction to lead.'
+          }
+        </span> */}
+      </p>
 
-        <Otherwise>
-          <p>Please enter a name.</p>
-        </Otherwise>
-      </Choose>
+      <p>
+        {`
+          The glorious revolution has overthrown the ancient monarchy, leaving the people in charge.
+          But which people?
+          With the old King deposed, the opposition has fragmented into three main factions.
+        `}
+      </p>
 
-      <input
-        id="name-input"
-        name="name"
-        type="text"
-        value={user.name}
-        onChange={e => user.setName(e.target.value)}
-      />
+      <p>
+        {`
+          You were a renowned leader, a hero during the rebellion, and you now find yourself being courted by the new powers.
+          Your support will ensure one faction gains dominance over the others, for a time.
+          Which will you choose to lead?
+        `}
+      </p>
 
       <FactionMenu
-        user={user}
         realm={realm}
       />
 
       <If condition={user.name && user.faction && !realm.gameStart}>
-        <StartGameButton
+        <button
+          className="start-game-button"
           onClick={() => {
             realm.setGameStart(true)
             realm.setTurnCount(1)
           }}>
             Lead the realm as {user.getFactionDetails().factionTitle} of the {user.getFactionDetails().name} faction.
-          </StartGameButton>
+        </button>
       </If>
-    </div>
+    </Container>
   );
 }
 
 InitialMenu.propTypes = {
-  user: PropTypes.object.isRequired,
   realm: PropTypes.object.isRequired,
 };
 
-const StartGameButton = styled.button`
-  font-weight: 700;
-  margin-bottom: 2rem;
+const Container = styled.div`
+  display: inline-table;
+  height: auto;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5rem;
+
+  height: 50vh;
+  width: 50vw;
+  min-width: 650px;
+
+  background-color: white;
+
+  padding: 1rem 2rem;
+  margin: auto;
+
+  .flex-container {
+    display: flex;
+
+    .input-container {
+      input {
+        align-self: center;
+
+        width: 100%;
+        min-width: 9rem;
+
+        font-weight: 700;
+
+        margin-left: 0.5rem;
+        padding: 0 0.5rem;
+
+        border: 0;
+        border-bottom: 2px solid black;
+      }
+    }
+
+  }
+
+  .start-game-button {
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
 `
 
 export default InitialMenu;

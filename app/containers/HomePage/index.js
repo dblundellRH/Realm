@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 
-import SETTINGS from '../../definitions/settings';
 import InitialMenu from '../../components/InitialMenu';
 import EventSelector from '../../components/EventSelector';
 import EndgameScreen from '../../components/EndgameScreen';
 import ModifierInPlay from '../../components/ModifierInPlay';
 import CrisisModeScreen from '../../components/CrisisModeScreen';
-import FactionBadge from '../../components/FactionBadge';
+import StatusBar from '../../components/StatusBar';
+import { UserProvider } from '../../contexts/UserProvider';
 
 
-function HomePage({ user, realm }) {
+function HomePage({ realm }) {
   return (
-    <>
+    <UserProvider>
       <Helmet>
         <title>Realm</title>
         <meta
@@ -26,21 +25,14 @@ function HomePage({ user, realm }) {
       <Choose>
         <When condition={!realm.gameStart}>
           <InitialMenu
-            user={user}
             realm={realm}
           />
         </When>
 
         <When condition={realm.gameStart && !realm.gameEnd && !realm.crisisMode}>
-          <StatusBar>
-            <p className="confidence-metre">
-              <FactionBadge factionSlug={user.faction} /> {user.getFactionDetails().name} confidence: <span className="numbers">{realm.factionConfidence}%</span>
-            </p>
-
-            <p className="turn-metre">
-              It is turn <span className="numbers">{realm.turnCount} / {SETTINGS.MAX_TURN_COUNT}</span>
-            </p>
-          </StatusBar>
+          <StatusBar
+            realm={realm}
+          />
 
           <If condition={realm.activeModifiers && Array.isArray(realm.activeModifiers)}>
             <For each="modifier" of={realm.activeModifiers}>
@@ -55,21 +47,18 @@ function HomePage({ user, realm }) {
 
           <EventSelector
             realm={realm}
-            user={user}
           />
         </When>
 
         <When condition={realm.crisisMode}>
           <CrisisModeScreen
             realm={realm}
-            user={user}
           />
         </When>
 
         <When condition={realm.gameEnd}>
           <EndgameScreen
             realm={realm}
-            user={user}
           />
         </When>
 
@@ -77,12 +66,11 @@ function HomePage({ user, realm }) {
           <p>Not sure wtf this means?</p>
         </Otherwise>
       </Choose>
-    </>
+    </UserProvider>
   );
 }
 
 HomePage.propTypes = {
-  user: PropTypes.object,
   realm: PropTypes.object,
 };
 
@@ -90,21 +78,5 @@ HomePage.defaultProps = {
   user: undefined,
   realm: undefined,
 };
-
-const StatusBar = styled.header`
-  position: relative;
-
-  .confidence-metre {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .turn-metre {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-`;
 
 export default HomePage;

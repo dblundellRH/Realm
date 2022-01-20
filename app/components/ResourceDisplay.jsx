@@ -90,7 +90,6 @@ const Container = styled.div`
 ResourceDisplay.propTypes = {
     faction: PropTypes.object.isRequired,
     realm: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
 }
 
 export default ResourceDisplay;

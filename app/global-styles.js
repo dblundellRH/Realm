@@ -1,14 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 import AmikaBlackletterFreeFontWoff2 from '../app/fonts/AmikaBlackletterFreeFont.woff2';
 import AmikaBlackletterFreeFontWoff from '../app/fonts/AmikaBlackletterFreeFont.woff';
-import BodyWoff2 from '../app/fonts/ArsenicaTrial-Regular.woff2';
-import BodyWoff from '../app/fonts/ArsenicaTrial-Regular.woff';
-import BodyMediumWoff2 from '../app/fonts/ArsenicaTrial-Medium.woff2';
-import BodyMediumWoff from '../app/fonts/ArsenicaTrial-Medium.woff';
-import BodyDemiBoldWoff2 from '../app/fonts/ArsenicaTrial-DemiBold.woff2';
-import BodyDemiBoldWoff from '../app/fonts/ArsenicaTrial-DemiBold.woff';
-import BodyBoldWoff2 from '../app/fonts/ArsenicaTrial-Bold.woff2';
-import BodyBoldWoff from '../app/fonts/ArsenicaTrial-Bold.woff';
+import TimelessBoldWoff2 from '../app/fonts/Timeless-Bold.woff2';
+import TimelessBoldWoff from '../app/fonts/Timeless-Bold.woff';
+import TimelessNormalWoff2 from '../app/fonts/Timeless-Normal.woff2';
+import TimelessNormalWoff from '../app/fonts/Timeless-Normal.woff';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -16,7 +12,11 @@ const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     width: 100%;
+
     line-height: 1.5;
+
+    padding: 0;
+    margin: 0;
   }
 
   @font-face {
@@ -30,8 +30,8 @@ const GlobalStyle = createGlobalStyle`
 
   @font-face {
     font-family: 'BodyFont';
-    src: url(${BodyWoff2}) format('woff2'),
-        url(${BodyWoff}) format('woff');
+    src: url(${TimelessNormalWoff2}) format('woff2'),
+        url(${TimelessNormalWoff}) format('woff');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -39,26 +39,8 @@ const GlobalStyle = createGlobalStyle`
 
   @font-face {
     font-family: 'BodyFont';
-    src: url(${BodyMediumWoff2}) format('woff2'),
-        url(${BodyMediumWoff}) format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'BodyFont';
-    src: url(${BodyDemiBoldWoff2}) format('woff2'),
-        url(${BodyDemiBoldWoff}) format('woff');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'BodyFont';
-    src: url(${BodyBoldWoff2}) format('woff2'),
-        url(${BodyBoldWoff}) format('woff');
+    src: url(${TimelessBoldWoff2}) format('woff2'),
+        url(${TimelessBoldWoff}) format('woff');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -89,7 +71,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .choice-divider {
-    margin: 3rem 0;
+    margin: 2.5rem 0;
   }
 
   .event-list {

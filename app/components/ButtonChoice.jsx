@@ -12,6 +12,7 @@ function ButtonChoice({
     onBlur,
     onClick,
     factionIcon,
+    disabled,
     children,
 }) {
     const [ shouldShowSeal, setShouldShowSeal ] = useState(false);
@@ -36,6 +37,7 @@ function ButtonChoice({
             showSeal={shouldShowSeal}
             waxSealImage={WAX_SEAL_IMAGE}
             factionIcon={factionIcon}
+            disabled={disabled}
         >
             {/* Removes any stray full stops that we don't want */}
             {React.Children.map(children, (child) => child.replace('.', ''))}
@@ -51,6 +53,7 @@ ButtonChoice.propTypes = {
     onBlur: PropTypes.func,
     onClick: PropTypes.func.isRequired,
     factionIcon: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
 }
 
 ButtonChoice.defaultProps = {
@@ -58,6 +61,7 @@ ButtonChoice.defaultProps = {
     onMouseLeave: undefined,
     onFocus: undefined,
     onBlur: undefined,
+    disabled: false,
 }
 
 const Button = styled.button`
@@ -115,6 +119,23 @@ const Button = styled.button`
 
         margin: auto;
     }
+
+    ${props => props.disabled && `
+        &::after {
+            background: black;
+
+            width: 100%;
+            height: 2px;
+
+            top: 30%;
+            bottom: auto;
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+    `}
 
     &:hover,
     &:focus {

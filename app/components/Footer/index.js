@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import MODIFIERS from '../../definitions/modifiers';
+import { useUserProvider } from '../../contexts/UserProvider';
 
 
-function Footer({ realm, user }) {
+function Footer({ realm }) {
+  const user = useUserProvider();
+
   function handleAddBoost() {
     realm.setActiveModifiers(prev => {
       return [
@@ -93,11 +96,17 @@ function handleUpdate(value, fn) {
 }
 
 Footer.propTypes = {
-  user: PropTypes.object.isRequired,
   realm: PropTypes.object.isRequired,
 };
 
 const Container = styled.footer`
+  position: fixed;
+  bottom: 0;
+  right: 0;
+
+  background: white;
+  padding: 1rem;
+
   .resource-container {
     display: flex;
     justify-content: space-around;
