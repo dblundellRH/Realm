@@ -33,19 +33,20 @@ function InitialMenu({ realm }) {
 
       <p>
         {`
-          The glorious revolution has overthrown the ancient monarchy, leaving the people in charge.
+          The glorious revolution has overthrown the ancient monarchy, leaving the people in charge...
           But which people?
-          With the old King deposed, the opposition has fragmented into three main factions.
+          With the old King deposed, three main factions have arisen from the ashes of rebellion.
         `}
       </p>
 
       <p>
         {`
-          You were a renowned leader, a hero during the rebellion, and you now find yourself being courted by the new powers.
+          A hero during the rebellion, you now find yourself being courted by the new powers.
           Your support will ensure one faction gains dominance over the others, for a time.
-          Which will you choose to lead?
         `}
       </p>
+
+      <p>{`Which will you choose to lead?`}</p>
 
       <FactionMenu
         realm={realm}
@@ -79,7 +80,7 @@ const Container = styled.div`
   top: 5rem;
 
   height: 50vh;
-  width: 50vw;
+  width: 30vw;
   min-width: 650px;
 
   background-color: white;

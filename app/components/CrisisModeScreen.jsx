@@ -82,7 +82,7 @@ function CrisisModeScreen({ realm }) {
                                             onClick={() => console.log('jump to another faction')}
                                             factionIcon={FACTIONS[user.faction].logo}
                                         >
-                                            {`Throw your weight behind ${faction.fullname}`}
+                                            {`Throw your weight behind ${faction.fullname} [DOES NOT WORK]`}
                                         </Choice>
                                     </li>
                                 </If>

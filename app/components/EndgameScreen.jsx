@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import RESOURCES from '../definitions/resources';
 import { useUserProvider } from '../contexts/UserProvider';
@@ -23,7 +24,7 @@ function EndgameScreen({ realm }) {
     }
 
     return (
-        <>
+        <Container>
             <Choose>
                 <When condition={hasFailed}>
                     <h2>GAME OVER</h2>
@@ -35,7 +36,7 @@ function EndgameScreen({ realm }) {
                 </Otherwise>
             </Choose>
             <button onClick={handleResetGame}>Play again?</button>
-        </>
+        </Container>
     );
 }
 
@@ -75,5 +76,23 @@ function getFailedResource(realm) {
     }
 }
 
+const Container = styled.div`
+  display: inline-table;
+  height: auto;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5rem;
+
+  height: 50vh;
+  width: 30vw;
+  min-width: 650px;
+
+  background-color: white;
+
+  padding: 1rem 2rem;
+  margin: auto;
+`;
 
 export default EndgameScreen

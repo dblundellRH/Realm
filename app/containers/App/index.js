@@ -18,6 +18,14 @@ import GlobalStyle from '../../global-styles';
 
 import BG_MUSIC from '../../sounds/Planning.mp3';
 import BG from '../../images/pokerswell___lady_of_the_manor_by_deivcalviz_dchnbii.jpg';
+import LOGO_ROYALISTS from '../../images/logo_royalists.png';
+import LOGO_GUILDS from '../../images/logo_guilds.png';
+import LOGO_COMMONS from '../../images/logo_commons.png';
+import BANNER_ROYALISTS from '../../images/flag_royalists.png';
+import BANNER_GUILDS from '../../images/flag_guilds.png';
+import BANNER_COMMONS from '../../images/flag_commons.png';
+import WAX_SEAL from '../../images/wax-seal.png';
+import SCROLL_BG from '../../images/scroll-bg.png';
 
 
 function App() {
@@ -33,6 +41,17 @@ function App() {
         defaultTitle="React.js Boilerplate"
       >
         <meta name="description" content="A React.js Boilerplate application" />
+
+        {/* Preload some assets */}
+        <link rel="preload" href={LOGO_ROYALISTS} as="image" />
+        <link rel="preload" href={LOGO_GUILDS} as="image" />
+        <link rel="preload" href={LOGO_COMMONS} as="image" />
+        <link rel="preload" href={BANNER_ROYALISTS} as="image" />
+        <link rel="preload" href={BANNER_GUILDS} as="image" />
+        <link rel="preload" href={BANNER_COMMONS} as="image" />
+
+        <link rel="preload" href={WAX_SEAL} as="image" />
+        <link rel="preload" href={SCROLL_BG} as="image" />
       </Helmet>
 
       <main>

@@ -7,8 +7,6 @@ import FACTIONS from '../definitions/FACTIONS';
 
 function FactionChoice({
     slug,
-    // name,
-    // logo,
     themeColour,
     onClick,
     isSelected,
@@ -25,15 +23,7 @@ function FactionChoice({
                 faction={FACTIONS[slug]}
             />
 
-            {/* <div
-                className="shield"
-            >
-                <img src={logo} alt=''/>
-            </div>
-
-            <h2>
-                {name}
-            </h2> */}
+            <p className="faction-name">{FACTIONS[slug].fullname}</p>
         </Container>
 
     )
@@ -97,6 +87,12 @@ const Container = styled.button`
 
         position: relative;
         z-index: 1;
+    }
+
+    .faction-name {
+        font-weight: 700;
+
+        margin-bottom: 0;
     }
 `
 FactionChoice.propTypes = {

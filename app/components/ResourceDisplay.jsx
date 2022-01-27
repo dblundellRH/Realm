@@ -4,9 +4,11 @@ import styled from 'styled-components'
 
 import FACTIONS from '../definitions/factions';
 import ResourceBadge from './ResourceBadge';
+import { useUserProvider } from '../contexts/UserProvider';
 
 
-function ResourceDisplay({ user, realm, faction, ...otherProps }) {
+function ResourceDisplay({ realm, faction, ...otherProps }) {
+    const user = useUserProvider();
     const isSelected = user.faction === faction.slug;
     const resourceSlug = FACTIONS[faction.slug].keyResource.slug;
 

@@ -3,24 +3,22 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import RESOURCES from '../definitions/resources';
-import FACTIONS from '../definitions/factions';
 
 
-function ResourceBadge({ faction, resourceName, isSelected }) {
+function ResourceBadge({ resourceName, isSelected }) {
     return (
         <Badge
-            factionBadgeColour={FACTIONS[faction].badgeColour || FACTIONS[faction].colour}
-            factionFontColour={FACTIONS[faction].fontColour}
+            factionBadgeColour={RESOURCES[resourceName.toUpperCase()].badgeColour}
+            factionFontColour={RESOURCES[resourceName.toUpperCase()].fontColour}
             isSelected={isSelected}
         >
-            {resourceName.slice(0,1)}
+            {resourceName.slice(0,1).toUpperCase()}
         </Badge>
     )
 }
 
 ResourceBadge.propTypes = {
-    faction: PropTypes.oneOf(Object.values(FACTIONS).map(faction => faction.slug)).isRequired,
-    resourceName: PropTypes.oneOf(Object.values(RESOURCES).map(resource => resource.name)).isRequired,
+    resourceName: PropTypes.oneOf(Object.values(RESOURCES).map(resource => resource.slug)).isRequired,
     isSelected: PropTypes.bool,
 }
 

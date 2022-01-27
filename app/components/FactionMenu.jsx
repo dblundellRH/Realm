@@ -80,8 +80,7 @@ function FactionMenu({ realm }) {
 
                 <p>
                     <ResourceBadge
-                        faction={user.faction}
-                        resourceName={user.getFactionDetails().keyResource.name}
+                        resourceName={user.getFactionDetails().keyResource.slug}
                     />
                     They favour the <strong>{user.getFactionDetails().keyResource.name}</strong> resource.
                 </p>
@@ -89,6 +88,10 @@ function FactionMenu({ realm }) {
                 <p>
                     {`They are less interested in the `}
                     <For each="resource" of={unusedResources} index="index">
+                        <ResourceBadge
+                            resourceName={resource.slug}
+                        />
+
                         <strong>{resource.name}</strong>
                         {index === 0 && index !== unusedResources.length ? ' and ' : ''}
                     </For>
