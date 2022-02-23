@@ -5,6 +5,8 @@ import TimelessBoldWoff2 from '../app/fonts/Timeless-Bold.woff2';
 import TimelessBoldWoff from '../app/fonts/Timeless-Bold.woff';
 import TimelessNormalWoff2 from '../app/fonts/Timeless-Normal.woff2';
 import TimelessNormalWoff from '../app/fonts/Timeless-Normal.woff';
+import EnglandWoff2 from '../app/fonts/England.woff2';
+import EnglandWoff from '../app/fonts/England.woff';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -42,6 +44,15 @@ const GlobalStyle = createGlobalStyle`
     src: url(${TimelessBoldWoff2}) format('woff2'),
         url(${TimelessBoldWoff}) format('woff');
     font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'SignatureFont';
+    src: url(${EnglandWoff2}) format('woff2'),
+         url(${EnglandWoff}) format('woff');
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
   }

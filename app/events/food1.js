@@ -1,5 +1,5 @@
 import RESOURCES from '../definitions/resources';
-import VILLAGE from '../images/village.jpg';
+import SHIELD from '../images/events/shield.png'
 
 
 export default {
@@ -26,7 +26,6 @@ export default {
                     We planted more than we expected, securing food for the coming year.
                     With a distracted army however, the city became a little more unsafe.
                 `,
-                image: VILLAGE,
             }
         },
         {
@@ -46,7 +45,7 @@ export default {
                     Patrols have been doubled, letting your people feel safer.
                     Their hungry bellies leave them little energy to enjoy it however.
                 `,
-                image: VILLAGE,
+                image: SHIELD,
             }
         },
     ]

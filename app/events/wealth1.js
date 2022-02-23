@@ -1,5 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import TOWN from '../images/town.jpg'
+import SHIELD from '../images/events/shield.png';
+import CHEST from '../images/events/chest.png';
 
 
 export default {
@@ -25,9 +26,9 @@ export default {
             outcome: {
                 message: `
                     The mission is a success, and the promise of further trade should enrich the realm.
-                    The soldiers are missed however, and bandits take advantage by plundering several homsteads.
+                    The soldiers are missed however, and bandits take advantage by plundering several homesteads.
                 `,
-                image: TOWN,
+                image: CHEST,
             }
         },
         {
@@ -47,7 +48,7 @@ export default {
                     You decide that security cannot be risked at this time, and time passes in relative calm.
                     The Guilds curse your lack of ambition, and many start to look elsewhere to invest their money.
                 `,
-                image: TOWN,
+                image: SHIELD,
             }
         },
     ]

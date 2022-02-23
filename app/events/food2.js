@@ -1,5 +1,5 @@
 import RESOURCES from '../definitions/resources';
-import VILLAGE from '../images/village.jpg';
+import MONEY from '../images/events/money.png';
 
 
 export default {
@@ -26,7 +26,6 @@ export default {
                     It was a significant investment to make, and although in the end his claims were exaggerated,
                     they did lead to better yields.
                 `,
-                image: VILLAGE,
             }
         },
         {
@@ -48,7 +47,7 @@ export default {
                     The Guilds happily applaud your financial restraint,
                     while the farmers go back to their land, grumbling about their "stone age" equipment.
                 `,
-                image: VILLAGE,
+                image: MONEY,
             }
         },
     ]

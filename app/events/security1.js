@@ -1,5 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import KNIGHT from '../images/knight.jpg';
+import HELMET from '../images/events/helmet.png';
+import MONEY from '../images/events/money.png';
 
 
 export default {
@@ -27,7 +28,7 @@ export default {
                      You order the treasury to bulk buy matching sets of armour. Your soldiers look pleased in their shiny new outfits.
                      The Guilds frown at the expense.
                 `,
-                image: KNIGHT,
+                image: HELMET,
             }
         },
         {
@@ -47,7 +48,7 @@ export default {
                     You decide to put the proposed investment aside for the future, winning praise for your fiscal responsiblity.
                     Your soldiers in the meantime continue to look like a rag tag crew of vagabonds.
                 `,
-                image: KNIGHT,
+                image: MONEY,
             }
         },
     ]

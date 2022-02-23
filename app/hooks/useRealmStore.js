@@ -20,7 +20,7 @@ export default function useRealmStore() {
   const [previewEvent, setPreviewEvent]  = useState();
 
   const [gameEnd, setGameEnd] = useState(false);
-  const [gameStart, setGameStart] = useState(false);
+  const [gameStart, setGameStart] = useState(window.realm.debug ? window.realm.debug : false);
 
   const [showDebugMenu, setShowDebugMenu] = useState(false);
 
@@ -40,10 +40,10 @@ export default function useRealmStore() {
 
   function isRealmInChaos() {
     // console.log('Any resources status at 0 or +100?', securityStatus, wealthStatus, foodStatus)
-    return securityStatus === 0 || securityStatus === 100 ||
-      wealthStatus === 0 || wealthStatus === 100 ||
-      foodStatus === 0 || foodStatus === 100 ||
-      factionConfidence === 0
+    return securityStatus <= 0 || securityStatus >= 100 ||
+      wealthStatus <= 0 || wealthStatus >= 100 ||
+      foodStatus <= 0 || foodStatus >= 100 ||
+      factionConfidence <= 0
   }
 
   function isEndOfGame() {

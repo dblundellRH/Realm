@@ -1,5 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import VILLAGE from '../images/village.jpg';
+import DAGGER from '../images/events/dagger.png';
+import RAT from '../images/events/rat.png';
 
 
 export default {
@@ -26,7 +27,7 @@ export default {
                     Those that were guilty have been punished, and the rest made clear what is expected from them.
                     Some sections of the army grumble, feeling you are not on their side.
                 `,
-                image: VILLAGE,
+                image: DAGGER,
             }
         },
         {
@@ -46,7 +47,7 @@ export default {
                     Emboldened by your tacit approval, this 'requisitioning' becomes common practice amongst the men, who toast your name while they feast.
                     The Commons look on whilst their food is stolen, having lost a little faith in your leadership.
                 `,
-                image: VILLAGE,
+                image: RAT,
             }
         },
     ]

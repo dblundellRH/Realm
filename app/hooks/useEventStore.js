@@ -104,31 +104,37 @@ export default function useEventStore(realm, user) {
         // If it's a negative change and you've made lots of positive ones lately, return zero
         const balanceOfRecentChoices = lastChoices[factionResourceSlug];
 
-        console.log('faction confidence', realm.factionConfidence)
-        console.log('netural choice', isNeutralChoice);
-        console.log('isPositiveChange', isPositiveChange);
-        console.log('total changes for ' + factionResourceSlug, lastChoices[factionResourceSlug])
-        console.log('balanceOfRecentChoices', balanceOfRecentChoices)
+        // console.log('faction confidence', parseInt(realm.factionConfidence))
+        // console.log('netural choice', isNeutralChoice);
+        // console.log('isPositiveChange', isPositiveChange);
+        // console.log('total changes for ' + factionResourceSlug, lastChoices[factionResourceSlug])
+        // console.log('balanceOfRecentChoices', balanceOfRecentChoices)
 
         // Return a non-zero modifier
-        const confidenceModifier = balanceOfRecentChoices === 0
-            ? CONFIDENCE_MODIFIER * 0.5
+        let confidenceModifier = balanceOfRecentChoices === 0
+            ? CONFIDENCE_MODIFIER * 0.5 * (isPositiveChange ? 1 : -1)
             : CONFIDENCE_MODIFIER * balanceOfRecentChoices;
 
-        console.log('confidenceModifier', confidenceModifier)
+        // console.log('confidenceModifier 1', confidenceModifier);
+
+        // confidenceModifier = isPositiveChange
+        //     ? confidenceModifier
+        //     : confidenceModifier * -1;
+
+        // console.log('confidenceModifier 2', confidenceModifier)
 
         // Calculate new confidence value
         // If a neutral choice has been made, reset things.
         const updatedConfidence = parseInt(realm.factionConfidence) + confidenceModifier
 
-        console.log('updated confidence',
-            updatedConfidence,
-            updatedConfidence < 0
-                ? 0
-                : updatedConfidence > 100
-                    ? 100
-                    : updatedConfidence
-        )
+        // console.log('updated confidence',
+        //     updatedConfidence,
+        //     updatedConfidence < 0
+        //         ? 0
+        //         : updatedConfidence > 100
+        //             ? 100
+        //             : updatedConfidence
+        // )
 
         return updatedConfidence < 0
             ? 0
@@ -190,9 +196,18 @@ export default function useEventStore(realm, user) {
     }, [ activeEvent ])
 
     useEffect(() => {
-        if (activeEvent && window.realm.debug !== true) {
+        if (!selectedChoice) {
+            return;
+        }
+
+        if (activeEvent) {
             // console.log('check realm not buggered')
             const isValid = validateChoice(selectedChoice);
+            // console.log('choice is valid', isValid)
+
+            if (!selectedChoice) {
+                return;
+            }
 
             if (isValid) {
                 setShowOutcome(true);
@@ -208,9 +223,6 @@ export default function useEventStore(realm, user) {
                 // setShowOutcome(false);
                 // console.log('You lost :(')
             }
-        }
-        else {
-            window.realm.debug = false
         }
     }, [ realm.securityStatus, realm.wealthStatus, realm.foodStatus, realm.factionConfidence ])
 

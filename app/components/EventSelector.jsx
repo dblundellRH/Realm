@@ -59,7 +59,7 @@ function EventSelector({ realm }) {
                 <p>A decision is required on this matter most urgently.</p>
 
                 <p>Your faithful servant,</p>
-                <p><em>Drumknott</em></p>
+                <p className="signature">Drumknott</p>
 
                 <PostScriptEvent
                     realm={realm}
@@ -124,6 +124,11 @@ const EventSelectorContainer = styled.div`
         white-space: pre-line;
         margin-bottom: 1rem;
         line-height: 1.4;
+    }
+
+    .signature {
+        font-family: 'SignatureFont';
+        font-size: 1.8rem;
     }
 `
 

@@ -1,5 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import TOWN from '../images/town.jpg'
+import SWORD from '../images/events/sword.png';
+import RING from '../images/events/ring.png';
 
 
 export default {
@@ -27,7 +28,7 @@ export default {
                     Our soldiers now patrol with a bit more vigor, their bellies full for the time being.
                     The Guilds are outraged and many complain loudly about the lack of protection they receive.
                 `,
-                image: TOWN,
+                image: SWORD,
             }
         },
         {
@@ -47,7 +48,7 @@ export default {
                     Their stores safe, The Guild show their generosity to us in coin.
                     The morale of the army continues to decline, however.
                 `,
-                image: TOWN,
+                image: RING,
             }
         },
     ]

@@ -1,5 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import TOWN from '../images/town.jpg'
+import MINE from '../images/events/mine.png';
+import BREAD from '../images/events/bread.png';
 
 
 export default {
@@ -31,7 +32,7 @@ export default {
                     Thanks to the conscripted farmers, we are able to mine the majority of the gold seam before it is discovered, at the cost of a portion of the harvest.
                     Where the Southern Kingdom is concerned, gold will have to take the place of friendship.
                 `,
-                image: TOWN,
+                image: MINE,
             }
         },
         {
@@ -55,7 +56,7 @@ export default {
                     Prioritising the harvest causes the opportunity for greater wealth to slip away from us.
                     The Southern Kingdom has no qualms about taking as much as they can get, but it at least distracts them from causing us trouble.
                 `,
-                image: TOWN,
+                image: BREAD,
             }
         },
     ]

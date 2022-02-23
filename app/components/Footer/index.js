@@ -91,7 +91,6 @@ function Footer({ realm }) {
 }
 
 function handleUpdate(value, fn) {
-  window.realm.debug = true;
   fn(value);
 }
 

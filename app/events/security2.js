@@ -1,5 +1,4 @@
 import RESOURCES from '../definitions/resources';
-import KNIGHT from '../images/knight.jpg';
 
 
 export default {
@@ -27,7 +26,6 @@ export default {
                     The diplomat, suitably dazzled by your feast, promised a new era of cooperation between your two nations.
                     The servants were less impressed by the opulence on display.
                 `,
-                image: KNIGHT,
             }
         },
         {
@@ -47,7 +45,6 @@ export default {
                     You decide it is better to save your food for your people, than a visiting foreigner.
                     Relations between your two nations remain frosty after the diplomat leaves feeling insulted by your inadequate welcome.
                 `,
-                image: KNIGHT,
             }
         }
     ]

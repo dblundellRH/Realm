@@ -1,6 +1,5 @@
 import RESOURCES from '../definitions/resources';
-import VILLAGE from '../images/village.jpg';
-
+import BIRD from '../images/events/bird.png';
 
 export default {
     title: 'Eastern roots',
@@ -26,7 +25,6 @@ export default {
                     The vegetable proves to be popular, and already people are finding new ways to use it.
                     The trader leaves our lands, their pockets much heavier than when they entered.
                 `,
-                image: VILLAGE,
             }
         },
         {
@@ -47,7 +45,7 @@ export default {
                     Although you have saved your coin, the following day an unexpected fire destroys part of your food stocks.
                     The people do not rejoice.
                 `,
-                image: VILLAGE,
+                image: BIRD,
             }
         },
     ]

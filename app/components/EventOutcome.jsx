@@ -9,7 +9,12 @@ import FactionBannerLogo from './FactionBannerLogo';
 import { useUserProvider } from '../contexts/UserProvider';
 import ScrollContainer from './ScrollContainer';
 import TitleHeading from './TitleHeading';
+import resources from '../definitions/resources';
+import ResourceBadge from './ResourceBadge';
+import SCROLL from '../images/events/scroll.png'
 
+
+const DEFAULT_OUTCOME_IMAGE = SCROLL;
 
 function EventOutcome({
     userFaction,
@@ -72,12 +77,27 @@ function EventOutcome({
                             <div className="left-col">
                                 <h2>A title for the event outcome</h2>
                                 <p className="outcome-text">{events.selectedChoice.outcome.message}</p>
+
+                                <ul style={{ display: 'flex', flexDirection: 'column', listStyle: 'none', paddingLeft: 0 }}>
+                                    <For each="resource" of={events.selectedChoice.effects}>
+                                        <li style={{ marginBottom: '1rem' }} key={resource.type}>
+                                            <ResourceBadge
+                                                resourceName={resource.type}
+                                            />
+                                            {
+                                                resource.modifier < 0
+                                                    ? `${resources[resource.type.toUpperCase()].name} has decreased.`
+                                                    : `${resources[resource.type.toUpperCase()].name} has increased.`
+                                            }
+                                        </li>
+                                    </For>
+                                </ul>
                             </div>
 
                             <div className="right-col">
                                 <figure className="image-frame">
                                     <div className="inner-frame">
-                                        <img width="250" height="300" src={events.selectedChoice.outcome.image} alt="" />
+                                        <img width="250" height="300" src={getEventOutcomeImage(events.selectedChoice)} alt="" />
                                     </div>
                                 </figure>
                                 {/* <Choose>
@@ -212,5 +232,11 @@ const EventOutcomeContainer = styled.div`
         }
     }
 `
+
+function getEventOutcomeImage(choice) {
+    return choice.outcome.image
+        ? choice.outcome.image
+        : DEFAULT_OUTCOME_IMAGE
+}
 
 export default EventOutcome;

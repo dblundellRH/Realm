@@ -12,12 +12,16 @@ import App from 'containers/App';
 // Load the favicon and the .htaccess file
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
+import FACTIONS from './definitions/factions';
+import SETTINGS from './definitions/settings';
 
 const MOUNT_NODE = document.getElementById('app');
 
 // Game debug mode
 window.realm = {
-  debug: false
+  debug: true,
+  name: SETTINGS.DEFAULT_PLAYER_NAME,
+  faction: FACTIONS.royalists,
 }
 
 const render = () => {

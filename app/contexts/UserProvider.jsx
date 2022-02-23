@@ -11,8 +11,8 @@ const UserContext = createContext({
 });
 
 function UserProvider({ children }) {
-    const [name, setName] = useState(SETTINGS.DEFAULT_PLAYER_NAME);
-    const [faction, setFaction] = useState('');
+    const [name, setName] = useState(window.realm.debug ? window.realm.name : '');
+    const [faction, setFaction] = useState(window.realm.debug ? window.realm.faction.slug : '');
     const [survivedNoConfidence, setSurvivedNoConfidence] = useState(0);
     const [items, setItems] = useState([]);
 

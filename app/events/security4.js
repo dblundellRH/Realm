@@ -1,5 +1,4 @@
 import RESOURCES from '../definitions/resources';
-import KNIGHT from '../images/knight.jpg';
 
 
 export default {
@@ -27,7 +26,6 @@ export default {
                     You manage to lure a number of hunters to the city with promises of coin and glory.
                     The missing spoils from their hunting noticed by the people.
                 `,
-                image: KNIGHT,
             }
         },
         {
@@ -47,7 +45,6 @@ export default {
                     Hunting continues at its previous rate, ensuring that dining tables are filled with small to medium sized creatures.
                     The army continues to lack proper long range support.
                 `,
-                image: KNIGHT,
             }
         },
     ]

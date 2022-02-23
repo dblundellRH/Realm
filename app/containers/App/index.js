@@ -32,6 +32,13 @@ function App() {
   const realm = useRealmStore();
   const audio = new Audio(BG_MUSIC);
 
+  audio.addEventListener("canplaythrough", () => {
+    /* the audio is now playable; play it if permissions allow */
+    if (!window.realm.debug) {
+      audio.play();
+    }
+  });
+
   return (
     <BackgroundElement
       backgroundImage={BG}
@@ -62,9 +69,12 @@ function App() {
 
       <button
         type="button"
-        onClick={() => audio.paused ? audio.play() : audio.pause()}
+        className="audio-player"
+        onClick={() => {
+          audio.paused ? audio.play() : audio.pause()
+        }}
       >
-        Audio
+        Toggle audio
       </button>
 
       <Footer
@@ -89,6 +99,10 @@ const BackgroundElement = styled.div`
     position: fixed;
     bottom: 0;
     left: 0;
+  }
+
+  .audio-player {
+    position: relative;
   }
 `
 

@@ -18,6 +18,7 @@ function CrisisModeScreen({ realm }) {
     const userFaction = user.getFactionDetails();
 
     const [ isInCrisis, setIsInCrisis ] = useState(true);
+    const [ switchedFaction, setSwitchedFaction ] = useState(false);
 
     function handleRollTheDice() {
         const diceRoll = Math.random();
@@ -36,6 +37,13 @@ function CrisisModeScreen({ realm }) {
             setIsInCrisis(false)
             user.setSurvivedNoConfidence(0);
         }
+    }
+
+    function switchFaction(factionSlug) {
+        user.setFaction(factionSlug);
+        setIsInCrisis(false)
+        user.setSurvivedNoConfidence(previousValue => previousValue + 1);
+        setSwitchedFaction(true);
     }
 
     return (
@@ -57,7 +65,7 @@ function CrisisModeScreen({ realm }) {
                         </If>
 
                         <If condition={anyResourceIsNearFatal(realm)}>
-                            <p>Blah blah</p>
+                            <p>Some resource is either near minimum or maximum threshold, which means you'll lose.</p>
                         </If>
 
                         <h2 className="event-title">COUNCIL IN CRISIS</h2>
@@ -79,10 +87,10 @@ function CrisisModeScreen({ realm }) {
                                             key={faction.fullname}
                                             disabled={parseInt(realm[`${faction.keyResource.slug}Status`]) < 80}
                                             className="choice-button"
-                                            onClick={() => console.log('jump to another faction')}
+                                            onClick={() => switchFaction(faction.slug)}
                                             factionIcon={FACTIONS[user.faction].logo}
                                         >
-                                            {`Throw your weight behind ${faction.fullname} [DOES NOT WORK]`}
+                                            {`Throw your weight behind ${faction.fullname}`}
                                         </Choice>
                                     </li>
                                 </If>
@@ -128,16 +136,56 @@ function CrisisModeScreen({ realm }) {
                     </When>
 
                     <Otherwise>
-                        <h2>CRISIS RESOLVED</h2>
-                        <p>{user.getFactionDetails().factionTitle},</p>
-                        <p>Your crafty political maneuvering has manged to buy you a lifeline.</p>
+                        <header className="header">
+                            <FactionBannerLogo
+                                className="header-logo"
+                                faction={userFaction}
+                            />
+                        </header>
+
+                        <TitleHeading>{userFaction.factionTitle},</TitleHeading>
+
+                        <p>Somehow, the crisis has been resolved.</p>
+
+                        <Choose>
+                            <When condition={switchedFaction}>
+                                <h2>A new chapter begins</h2>
+                                <p>Your new allies, {userFaction.fullname}, welcome you warmly, whilst your old faction curses your name.</p>
+                            </When>
+                            <Otherwise>
+                                <h2>Successful maneuvers</h2>
+                                <p>By hook or by crook, you have swayed enough of the council to remain loyal to you.</p>
+                            </Otherwise>
+                        </Choose>
+
+                        <Choose>
+                            <When condition={user.survivedNoConfidence > 1}>
+                                <p>
+                                    {user.survivedNoConfidence} times now you have managed to pull things back from the brink of disaster.
+                                    Politics has grown on you.
+                                </p>
+                            </When>
+                            <Otherwise>
+                                <p>Your crafty political maneuvering has somehow manged to buy you a lifeline.</p>
+                            </Otherwise>
+                        </Choose>
+
                         <p>Use it wisely, you may not be so fortunate next time.</p>
 
-                        <button
-                            onClick={() => realm.resetAfterCrisis()}
-                        >
-                            {`Let us proceed, there is work to be done.`}
-                        </button>
+                        <hr className="choice-divider" />
+
+                        <ol className="event-list">
+                            <li
+                                className="event-list-item"
+                            >
+                                <Choice
+                                    className="choice-button"
+                                    onClick={() => realm.resetAfterCrisis()}
+                                >
+                                    {`Let us proceed, there is work to be done.`}
+                                </Choice>
+                            </li>
+                        </ol>
                     </Otherwise>
                 </Choose>
             </Crisis>

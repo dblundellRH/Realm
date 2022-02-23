@@ -1,5 +1,4 @@
 import RESOURCES from '../definitions/resources';
-import VILLAGE from '../images/village.jpg';
 
 
 export default {
@@ -31,7 +30,6 @@ export default {
                     Your chosen winner is a rustic looking pie made by old Grandma Elrick, who beams with joy as her family hug and congratulate her on her victory.
                     The other finalists leave disappointed, and you personally receive a number of spiteful looks from influential artisocrats and merchants.
                 `,
-                image: VILLAGE,
             }
         },
         {
@@ -55,7 +53,6 @@ export default {
                     You pick the most opulent of the pies, which happens to belong to the prominent merchant, Raynard Glanville.
                     The common folks are unsurprised someone has been chosen over them, and the aristocracy are offended.
                 `,
-                image: VILLAGE,
             }
         },
         {
@@ -78,7 +75,6 @@ export default {
                 message: `
                     You choose a simple, but stylishly elegant pie baked by Lady Cartworthy (or at least her cook).
                 `,
-                image: VILLAGE,
             }
         },
     ]

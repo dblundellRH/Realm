@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -9,59 +9,83 @@ import { useUserProvider } from '../contexts/UserProvider';
 function InitialMenu({ realm }) {
   const user = useUserProvider();
 
+  const [ temporaryName, setTemporaryName ] = useState('');
+
   return (
-    <Container>
-      <p className="flex-container">
-        <span>Greetings</span>
-        <span className="input-container">
-          <input
-            id="name-input"
-            name="name"
-            type="text"
-            value={user.name}
-            onChange={e => user.setName(e.target.value)}
-            style={{ width: `${user.name.length * 0.6}rem`}}
-            placeholder="State your name"
+    <Container
+      isCentred={!!user.name}
+    >
+      <Choose>
+        <When condition={user.name}>
+          <h2 className="event-title">
+            {`Greetings ${user.name},`}
+          </h2>
+
+          <p>
+            {`A hero during the rebellion, your leadership helped overthrow the corrupt monarchy, leaving the people in charge.`}
+          </p>
+
+          <p>
+            {`But `}
+            <em>{`which`}</em>
+            {` which people?`}
+          </p>
+
+          <p>
+            {`With the old King deposed, `}
+            <u>{`three main factions`}</u>
+            {` have arisen from the ashes of rebellion.`}
+          </p>
+
+          <p>
+            {`Your support will ensure one faction gains dominance over the others, for a time.`}
+          </p>
+
+          <p>{`Whom will you choose to lead?`}</p>
+
+          <FactionMenu
+            realm={realm}
           />
-        </span>
-        {/* <span>{user.faction
-            ? `, ${user.getFactionDetails().factionTitle} of the ${user.getFactionDetails().name} faction.`
-            : ', you must choose which faction to lead.'
-          }
-        </span> */}
-      </p>
 
-      <p>
-        {`
-          The glorious revolution has overthrown the ancient monarchy, leaving the people in charge...
-          But which people?
-          With the old King deposed, three main factions have arisen from the ashes of rebellion.
-        `}
-      </p>
+          <If condition={user.name && user.faction && !realm.gameStart}>
+            <button
+              className="start-game-button"
+              onClick={() => {
+                realm.setGameStart(true)
+                realm.setTurnCount(1)
+              }}>
+                Lead the realm as {user.getFactionDetails().factionTitle} of the {user.getFactionDetails().name} faction.
+            </button>
+          </If>
+        </When>
+        <Otherwise>
+          <h1 className="title heading">Realm</h1>
+          <p className="subtitle">A game of vested interests.</p>
 
-      <p>
-        {`
-          A hero during the rebellion, you now find yourself being courted by the new powers.
-          Your support will ensure one faction gains dominance over the others, for a time.
-        `}
-      </p>
+          <hr className="divider" />
 
-      <p>{`Which will you choose to lead?`}</p>
+          <p className="introducing-text">By what name shall we call you, noble one?</p>
 
-      <FactionMenu
-        realm={realm}
-      />
+          <p className="input-container">
+            <input
+              id="name-input"
+              name="name"
+              type="text"
+              value={temporaryName}
+              onChange={e => setTemporaryName(e.target.value)}
+              style={{ width: `${temporaryName ? temporaryName.length * 0.6 : 1}rem`}}
+              placeholder={"State your name"}
+            />
+          </p>
 
-      <If condition={user.name && user.faction && !realm.gameStart}>
-        <button
-          className="start-game-button"
-          onClick={() => {
-            realm.setGameStart(true)
-            realm.setTurnCount(1)
-          }}>
-            Lead the realm as {user.getFactionDetails().factionTitle} of the {user.getFactionDetails().name} faction.
-        </button>
-      </If>
+          <button
+            disabled={!temporaryName}
+            className="start-game-button"
+            onClick={() => user.setName(temporaryName)}>
+              Proceed
+          </button>
+        </Otherwise>
+      </Choose>
     </Container>
   );
 }
@@ -88,26 +112,44 @@ const Container = styled.div`
   padding: 1rem 2rem;
   margin: auto;
 
-  .flex-container {
-    display: flex;
+  text-align: ${props => props.isCentred ? 'left' : 'center'};
 
-    .input-container {
-      input {
-        align-self: center;
+  .title {
+    font-size: 5rem;
 
-        width: 100%;
-        min-width: 9rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 
-        font-weight: 700;
+  .subtitle {
+    margin-top: -1rem;
+  }
 
-        margin-left: 0.5rem;
-        padding: 0 0.5rem;
+  .divider {
+    border: 0;
 
-        border: 0;
-        border-bottom: 2px solid black;
-      }
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+  }
+
+  .introducing-text {
+  }
+
+  .input-container {
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+
+    input {
+      align-self: center;
+
+      width: 100%;
+      min-width: 8rem;
+
+      font-weight: 700;
+
+      border: 0;
+      border-bottom: 2px solid black;
     }
-
   }
 
   .start-game-button {

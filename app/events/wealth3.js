@@ -1,5 +1,4 @@
 import RESOURCES from '../definitions/resources';
-import TOWN from '../images/town.jpg'
 
 
 export default {
@@ -26,7 +25,6 @@ export default {
                 message: `
                     The
                 `,
-                image: TOWN,
             }
         },
         {
@@ -43,7 +41,6 @@ export default {
             ],
             outcome: {
                 message: 'There were some winners from your decision, but also some losers. Please take a short moment to reflect on this.',
-                image: TOWN,
             }
         },
     ]
