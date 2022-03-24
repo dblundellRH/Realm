@@ -71,7 +71,7 @@ function Footer({ realm }) {
             <input
               type="number"
               value={realm.factionConfidence}
-              onChange={e => handleUpdate(e.target.value, realm.setFactionConfidence)}
+              onChange={e => handleUpdate(parseInt(e.target.value), realm.setFactionConfidence)}
             />
           </label>
 

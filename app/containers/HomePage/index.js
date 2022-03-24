@@ -34,6 +34,11 @@ function HomePage({ realm }) {
             realm={realm}
           />
 
+          {/* <FactionBannerLogo
+              className="header-logo"
+              faction={user.getFactionDetails()}
+          /> */}
+
           <If condition={realm.activeModifiers && Array.isArray(realm.activeModifiers)}>
             <For each="modifier" of={realm.activeModifiers}>
               <ModifierInPlay

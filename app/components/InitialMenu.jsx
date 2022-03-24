@@ -22,13 +22,13 @@ function InitialMenu({ realm }) {
           </h2>
 
           <p>
-            {`A hero during the rebellion, your leadership helped overthrow the corrupt monarchy, leaving the people in charge.`}
+            {`A leader during the rebellion, you helped overthrow the decaying, corrupt monarchy, leaving the people in charge.`}
           </p>
 
           <p>
             {`But `}
             <em>{`which`}</em>
-            {` which people?`}
+            {` people?`}
           </p>
 
           <p>
@@ -64,7 +64,7 @@ function InitialMenu({ realm }) {
 
           <hr className="divider" />
 
-          <p className="introducing-text">By what name shall we call you, noble one?</p>
+          <p className="introducing-text">By what name are you known, noble one?</p>
 
           <p className="input-container">
             <input
@@ -136,10 +136,13 @@ const Container = styled.div`
   }
 
   .input-container {
+
     margin-top: 1rem;
     margin-bottom: 4rem;
 
     input {
+      text-align: center;
+
       align-self: center;
 
       width: 100%;

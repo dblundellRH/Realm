@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import FACTIONS, { FACTION_NAMES } from '../definitions/factions';
 import anyResourceIsNearFatal, { resourceIsNearZero, resourceIsNearMax } from '../functions/anyResourceIsNearFatal';
-import factionConfidenceIsNearFatal from '../functions/factionConfidenceIsNearFatal';
 import WARNING_SIGN from '../images/warning-sign.png';
 import { useUserProvider } from '../contexts/UserProvider';
 
@@ -20,7 +19,7 @@ function PostScriptEvent({ realm }) {
     const FoodNearMax = resourceIsNearMax(realm.foodStatus);
 
     return (
-        <If condition={anyResourceIsNearFatal(realm) || factionConfidenceIsNearFatal(realm)}>
+        <If condition={anyResourceIsNearFatal(realm) || realm.isFactionConfidenceNearFatal()}>
             <Container>
                 <strong>PostScript</strong>
                 <If condition={anyResourceIsNearFatal(realm)}>
@@ -64,11 +63,11 @@ function PostScriptEvent({ realm }) {
                     </If>
                 </If>
 
-                <If condition={factionConfidenceIsNearFatal(realm)}>
+                <If condition={realm.isFactionConfidenceNearFatal()}>
                     <span>
                         <WarningSign />
                         <strong>{user.getFactionDetails().fullname}</strong>
-                        { factionConfidenceIsNearFatal(realm.factionConfidence)
+                        { realm.isFactionConfidenceNearFatal()
                             ? `  are losing patience with your decisions. You need to show them some support, and soon.`
                             : resourceIsNearMax(realm.foodStatus)
                                 ? ` are nearly in complete control of the realm. In the corridors of power, plotters seek your downfall.`

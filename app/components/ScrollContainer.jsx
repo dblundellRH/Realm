@@ -2,18 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import scrollBgImage from '../images/scroll-bg.png';
+import ScrollBackground from './ScrollBackground';
 
 
 function ScrollContainer({ children, ...otherProps }) {
-
     return (
         <Container
-            backgroundImage={scrollBgImage}
             {...otherProps}
         >
             <div className="inner-container">
-                {children}
+                <ScrollBackground />
+
+                <div className="message-content">
+                    {children}
+                </div>
             </div>
         </Container>
     )
@@ -27,19 +29,31 @@ const Container = styled.section`
     position: absolute;
     left: 0;
     right: 0;
-    top: 2rem;
+    top: 0;
 
     margin: auto;
-    padding: 6rem 0;
 
-    background-image: url(${props => props.backgroundImage});
-    background-size: contain;
-    background-position: center;
+    .header-logo {
+        width: 5rem;
+        height: auto;
+    }
 
     .inner-container {
-        width: 540px;
+        position: relative;
+        top: 2rem;
+
+        width: 640px;
 
         margin: auto;
+    }
+
+    .message-content {
+        position: relative;
+        z-index: 2;
+
+        padding-top: 8rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
     }
 `
 

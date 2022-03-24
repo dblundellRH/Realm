@@ -75,6 +75,10 @@ export default function useRealmStore() {
     setTurnCount(previousValue => previousValue - 2);
   }
 
+  function isFactionConfidenceNearFatal() {
+    return (factionConfidence) - 15 <= 0
+  }
+
   function turnCountDivisor() {
     return turnCount % 2;
   }
@@ -110,5 +114,6 @@ export default function useRealmStore() {
     setCrisisMode,
     resetAfterCrisis,
     turnCountDivisor,
+    isFactionConfidenceNearFatal,
   };
 }

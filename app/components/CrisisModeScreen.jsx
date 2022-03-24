@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import FACTIONS from '../definitions/factions';
 import MODIFIERS from '../definitions/modifiers';
 import { useUserProvider } from '../contexts/UserProvider';
-import anyResourceIsNearFatal, { resourceIsNearZero, resourceIsNearMax } from '../functions/anyResourceIsNearFatal';
-import factionConfidenceIsNearFatal from '../functions/factionConfidenceIsNearFatal';
+import anyResourceIsNearFatal from '../functions/anyResourceIsNearFatal';
 import ScrollContainer from './ScrollContainer';
 import Choice from './Choice';
 import TitleHeading from './TitleHeading';
@@ -46,6 +45,8 @@ function CrisisModeScreen({ realm }) {
         setSwitchedFaction(true);
     }
 
+    console.log(user.faction, FACTIONS[user.faction], FACTIONS[user.faction].logo)
+
     return (
         <ScrollContainer>
             <Crisis>
@@ -60,12 +61,14 @@ function CrisisModeScreen({ realm }) {
 
                         <TitleHeading>{userFaction.factionTitle},</TitleHeading>
 
-                        <If condition={factionConfidenceIsNearFatal(realm)}>
+                        <If condition={realm.isFactionConfidenceNearFatal()}>
                             <p>Your constant neglect of the interests of {userFaction.fullname} has caused them to lose confidence in your leadership.</p>
                         </If>
 
                         <If condition={anyResourceIsNearFatal(realm)}>
-                            <p>Some resource is either near minimum or maximum threshold, which means you'll lose.</p>
+                            <p>
+                                {`Some resource is either near minimum or maximum threshold, which means you'll lose.`}
+                            </p>
                         </If>
 
                         <h2 className="event-title">COUNCIL IN CRISIS</h2>
@@ -145,7 +148,9 @@ function CrisisModeScreen({ realm }) {
 
                         <TitleHeading>{userFaction.factionTitle},</TitleHeading>
 
-                        <p>Somehow, the crisis has been resolved.</p>
+                        <p>
+                            {`Somehow, the crisis has been resolved.`}
+                        </p>
 
                         <Choose>
                             <When condition={switchedFaction}>
@@ -181,6 +186,7 @@ function CrisisModeScreen({ realm }) {
                                 <Choice
                                     className="choice-button"
                                     onClick={() => realm.resetAfterCrisis()}
+                                    factionIcon={FACTIONS[user.faction].logo}
                                 >
                                     {`Let us proceed, there is work to be done.`}
                                 </Choice>
@@ -199,9 +205,7 @@ CrisisModeScreen.propTypes = {
 
 const Crisis = styled.div`
     .header-logo {
-        max-width: 5rem;
-
-        margin-top: 2rem;
+        width: 5rem;
     }
 
     .header {

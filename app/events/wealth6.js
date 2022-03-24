@@ -1,6 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import TOWN from '../images/town.jpg'
-
+import SHIELD from '../images/shiel.png'
+import CHEST from '../images/chest.png';
 
 export default {
     title: 'A little off the top',
@@ -27,7 +27,7 @@ export default {
                     The officers appreciate our restraint, and they show a willingness to cooperate on other security matters.
                     The missing money continues to puzzle the clerks who tally our accounts, but they are always told not to look into it too closely.
                 `,
-                image: TOWN,
+                image: SHIELD,
             }
         },
         {
@@ -47,7 +47,7 @@ export default {
                     We recover the stolen money, and arrest the officers responsible.
                     Their experience is missed however, and there is a noted decline in military efficiency.
                 `,
-                image: TOWN,
+                image: CHEST,
             }
         },
     ]

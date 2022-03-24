@@ -16,7 +16,6 @@ import Footer from 'components/Footer';
 import useRealmStore from '../../hooks/useRealmStore';
 import GlobalStyle from '../../global-styles';
 
-import BG_MUSIC from '../../sounds/Planning.mp3';
 import BG from '../../images/pokerswell___lady_of_the_manor_by_deivcalviz_dchnbii.jpg';
 import LOGO_ROYALISTS from '../../images/logo_royalists.png';
 import LOGO_GUILDS from '../../images/logo_guilds.png';
@@ -30,14 +29,6 @@ import SCROLL_BG from '../../images/scroll-bg.png';
 
 function App() {
   const realm = useRealmStore();
-  const audio = new Audio(BG_MUSIC);
-
-  audio.addEventListener("canplaythrough", () => {
-    /* the audio is now playable; play it if permissions allow */
-    if (!window.realm.debug) {
-      audio.play();
-    }
-  });
 
   return (
     <BackgroundElement
@@ -71,7 +62,9 @@ function App() {
         type="button"
         className="audio-player"
         onClick={() => {
-          audio.paused ? audio.play() : audio.pause()
+          window.realm.audioPlaying.paused
+            ? window.realm.audioPlaying.play()
+            : window.realm.audioPlaying.pause()
         }}
       >
         Toggle audio
@@ -88,7 +81,7 @@ function App() {
 }
 
 const BackgroundElement = styled.div`
-  height: 100vh;
+  height: calc(100vh + 9rem);
   margin: auto;
 
   background-image: url(${props => props.backgroundImage});

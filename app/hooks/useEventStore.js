@@ -193,6 +193,8 @@ export default function useEventStore(realm, user) {
         if (realm.isEndOfGame()) {
             realm.setGameEnd(true);
         }
+
+        return () => realm.setGameEnd(false);
     }, [ activeEvent ])
 
     useEffect(() => {
@@ -204,10 +206,6 @@ export default function useEventStore(realm, user) {
             // console.log('check realm not buggered')
             const isValid = validateChoice(selectedChoice);
             // console.log('choice is valid', isValid)
-
-            if (!selectedChoice) {
-                return;
-            }
 
             if (isValid) {
                 setShowOutcome(true);

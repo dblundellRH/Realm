@@ -6,7 +6,6 @@ import FACTIONS from '../definitions/FACTIONS';
 import useEventStore from '../hooks/useEventStore';
 import Choice from './Choice';
 import EventOutcome from './EventOutcome';
-import FactionBannerLogo from './FactionBannerLogo';
 import TitleHeading from './TitleHeading';
 import { useUserProvider } from '../contexts/UserProvider';
 import ScrollContainer from './ScrollContainer';
@@ -36,13 +35,8 @@ function EventSelector({ realm }) {
 
             <EventSelectorContainer>
                 <header className="header">
-                    <FactionBannerLogo
-                        className="header-logo"
-                        faction={userFaction}
-                    />
+                    <TitleHeading>To the {userFaction.factionTitle},</TitleHeading>
                 </header>
-
-                <TitleHeading>To the {userFaction.factionTitle},</TitleHeading>
 
                 <p>{getEventIntroductionText()}</p>
 
@@ -100,21 +94,21 @@ EventSelector.propTypes = {
 }
 
 function getEventIntroductionText() {
-    return Math.random() > 0.5
-        ? 'A matter has arisen in the realm which requires your attention.'
-        : 'A report arrived this morning which you may find interesting.';
+    const roll = Math.random();
+
+    if (roll > 0.75) {
+        return 'A matter has arisen in the realm which requires your attention.'
+    }
+
+    if (roll < 0.25) {
+        return 'A report arrived this morning which you may find interesting.';
+    }
+
+    return 'Aside from the usual correspondence, this note caught my eye.';
 }
 
 const EventSelectorContainer = styled.div`
-    .header-logo {
-        max-width: 5rem;
-
-        margin-top: 2rem;
-    }
-
-    .header {
-        position: relative;
-    }
+    position: relative;
 
     .event-title {
         margin-top: 2rem;
@@ -127,7 +121,7 @@ const EventSelectorContainer = styled.div`
     }
 
     .signature {
-        font-family: 'SignatureFont';
+        font-family: 'SignatureFont', cursive;
         font-size: 1.8rem;
     }
 `

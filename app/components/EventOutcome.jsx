@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Header from '../components/Header';
 import FACTIONS from '../definitions/factions';
 import ButtonChoice from './ButtonChoice';
-import FactionBannerLogo from './FactionBannerLogo';
 import { useUserProvider } from '../contexts/UserProvider';
 import ScrollContainer from './ScrollContainer';
 import TitleHeading from './TitleHeading';
@@ -23,112 +21,69 @@ function EventOutcome({
     ...otherProps
 }) {
     const user = useUserProvider();
-    // const [ showRealmStatus, setShowRealmStatus ] = useState(false);
 
     function handleProceed() {
-        // if (!realm.turnCountDivisor() || skip) {
-            // setShowRealmStatus(false);
+        realm.setTurnCount(prev => prev + 1);
 
-            // Increase turn count by 1
-            realm.setTurnCount(prev => prev + 1);
-
-            events.updateEventStore(prev => prev.filter(event => event.title !== events.activeEvent.title));
-            events.setShowOutcome(false);
-        // }
-        // else {
-        //     setShowRealmStatus(true);
-        // }
+        events.updateEventStore(prev => prev.filter(event => event.title !== events.activeEvent.title));
+        events.setShowOutcome(false);
     }
 
     return (
         <EventOutcomeContainer
-                {...otherProps}
+            {...otherProps}
         >
-            {/* <Choose>
-                <When condition={showRealmStatus}>
-                    <div className="realm-status">
-                        <Header
-                            realm={realm}
-                        />
 
+            <ScrollContainer>
+                <header className="header">
+                    <TitleHeading>My {userFaction.factionTitle},</TitleHeading>
+                </header>
+
+                <p>Find below a report on the recent events.</p>
+
+                <div className="report-section">
+                    <div className="left-col">
+                        <h2>{events.activeEvent.title}</h2>
+                        <p className="outcome-text">{events.selectedChoice.outcome.message}</p>
+
+                        <ul style={{ display: 'flex', flexDirection: 'column', listStyle: 'none', paddingLeft: 0 }}>
+                            <For each="resource" of={events.selectedChoice.effects}>
+                                <li style={{ marginBottom: '1rem' }} key={resource.type}>
+                                    <ResourceBadge
+                                        resourceName={resource.type}
+                                    />
+                                    {
+                                        resource.modifier < 0
+                                            ? `${resources[resource.type.toUpperCase()].name} has decreased.`
+                                            : `${resources[resource.type.toUpperCase()].name} has increased.`
+                                    }
+                                </li>
+                            </For>
+                        </ul>
+                    </div>
+
+                    <div className="right-col">
+                        <figure className="image-frame">
+                            <div className="inner-frame">
+                                <img width="250" height="300" src={getEventOutcomeImage(events.selectedChoice)} alt="" />
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+
+                <hr className="choice-divider" />
+
+                <ol className="event-list">
+                    <li className="event-list-item">
                         <ButtonChoice
-                            onClick={() => handleProceed(true)}
+                            onClick={handleProceed}
                             factionIcon={FACTIONS[user.faction].logo}
                         >
-                            Proceed
+                            {'Proceed'}
                         </ButtonChoice>
-                    </div>
-                </When>
-
-                <Otherwise> */}
-                    <ScrollContainer>
-                        <header className="header">
-                            <FactionBannerLogo
-                                className="header-logo"
-                                faction={userFaction}
-                            />
-                        </header>
-
-                        <TitleHeading>My {userFaction.factionTitle},</TitleHeading>
-
-                        <p>Find below a report on the recent events.</p>
-
-                        <div className="report-section">
-                            <div className="left-col">
-                                <h2>A title for the event outcome</h2>
-                                <p className="outcome-text">{events.selectedChoice.outcome.message}</p>
-
-                                <ul style={{ display: 'flex', flexDirection: 'column', listStyle: 'none', paddingLeft: 0 }}>
-                                    <For each="resource" of={events.selectedChoice.effects}>
-                                        <li style={{ marginBottom: '1rem' }} key={resource.type}>
-                                            <ResourceBadge
-                                                resourceName={resource.type}
-                                            />
-                                            {
-                                                resource.modifier < 0
-                                                    ? `${resources[resource.type.toUpperCase()].name} has decreased.`
-                                                    : `${resources[resource.type.toUpperCase()].name} has increased.`
-                                            }
-                                        </li>
-                                    </For>
-                                </ul>
-                            </div>
-
-                            <div className="right-col">
-                                <figure className="image-frame">
-                                    <div className="inner-frame">
-                                        <img width="250" height="300" src={getEventOutcomeImage(events.selectedChoice)} alt="" />
-                                    </div>
-                                </figure>
-                                {/* <Choose>
-                                    <When condition={realm.turnCountDivisor()}>
-                                        <Header
-                                            realm={realm}
-                                        />
-                                    </When>
-                                    <Otherwise>
-                                        <p>A state of the realm report will be available next time.</p>
-                                    </Otherwise>
-                                </Choose> */}
-                            </div>
-                        </div>
-
-                        <hr className="choice-divider" />
-
-                        <ol className="event-list">
-                            <li className="event-list-item">
-                                <ButtonChoice
-                                    onClick={handleProceed}
-                                    factionIcon={FACTIONS[user.faction].logo}
-                                >
-                                    {'Proceed'}
-                                    {/* {realm.turnCountDivisor() ? 'Review the state of the realm' :  'Proceed'} */}
-                                </ButtonChoice>
-                            </li>
-                        </ol>
-                    </ScrollContainer>
-                {/* </Otherwise>
-            </Choose> */}
+                    </li>
+                </ol>
+            </ScrollContainer>
         </EventOutcomeContainer>
     )
 }

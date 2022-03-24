@@ -14,14 +14,17 @@ import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
 import FACTIONS from './definitions/factions';
 import SETTINGS from './definitions/settings';
+import BG_MUSIC from './sounds/Planning.mp3';
+
 
 const MOUNT_NODE = document.getElementById('app');
 
 // Game debug mode
 window.realm = {
-  debug: true,
+  debug: false,
   name: SETTINGS.DEFAULT_PLAYER_NAME,
   faction: FACTIONS.royalists,
+  audioPlaying: null,
 }
 
 const render = () => {
@@ -30,6 +33,17 @@ const render = () => {
     MOUNT_NODE,
   );
 };
+
+const audio = new Audio(BG_MUSIC);
+const startGameAudio = () => {
+  /* the audio is now playable; play it if permissions allow */
+  if (!window.realm.debug) {
+    audio.play();
+    window.realm.audioPlaying = audio;
+  }
+}
+
+audio.addEventListener('canplaythrough', startGameAudio);
 
 render();
 

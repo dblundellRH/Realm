@@ -1,5 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import KNIGHT from '../images/knight.jpg';
+import MONEY from '../images/money.png';
+import CLUB from '../images/club.png';
 
 
 export default {
@@ -27,7 +28,7 @@ export default {
                     The protesters are brutally crushed by your soldiers.
                     Grain prices remain unaffected.
                 `,
-                image: KNIGHT,
+                image: CLUB,
             }
         },
         {
@@ -47,7 +48,7 @@ export default {
                     Acknowledging the plight of the commoners, you reduce their tax burden to offset the increased cost of food.
                     Some of the more hawkish elements of your government being to complain that you're too soft.
                 `,
-                image: KNIGHT,
+                image: MONEY,
             }
         }
     ]

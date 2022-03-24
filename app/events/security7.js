@@ -1,6 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import KNIGHT from '../images/knight.jpg';
-
+import WARRIOR from '../images/warrior.png';
+import MONEY from '../images/money.png';
 
 export default {
     title: 'Foreign imports',
@@ -26,7 +26,7 @@ export default {
                 message: `
                     Although an costly hire, the instructor manages to drill your army into shape.
                 `,
-                image: KNIGHT,
+                image: MONEY,
             }
         },
         {
@@ -45,7 +45,7 @@ export default {
                 message: `
                     Your army continues to operate more on a 'martial' than 'art' basis.
                 `,
-                image: KNIGHT,
+                image: WARRIOR,
             }
         }
     ]
