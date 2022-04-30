@@ -1,6 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import SHIELD from '../images/shiel.png'
-import CHEST from '../images/chest.png';
+import SHIELD from '../images/events/shield.png'
+import CHEST from '../images/events/chest.png';
 
 export default {
     title: 'A little off the top',

@@ -1,6 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import MONEY from '../images/money.png';
-import CLUB from '../images/club.png';
+import MONEY from '../images/events/money.png';
+import CLUB from '../images/events/club.png';
 
 
 export default {

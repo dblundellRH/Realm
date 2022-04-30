@@ -1,6 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import WARRIOR from '../images/warrior.png';
-import BIRD from '../images/bird.png';
+import WARRIOR from '../images/events/warrior.png';
+import BIRD from '../images/events/bird.png';
 
 
 export default {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import FACTIONS from '../definitions/FACTIONS';
+import FACTIONS from '../definitions/factions';
 import useEventStore from '../hooks/useEventStore';
 import Choice from './Choice';
 import EventOutcome from './EventOutcome';

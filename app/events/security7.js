@@ -1,6 +1,6 @@
 import RESOURCES from '../definitions/resources';
-import WARRIOR from '../images/warrior.png';
-import MONEY from '../images/money.png';
+import WARRIOR from '../images/events/warrior.png';
+import MONEY from '../images/events/money.png';
 
 export default {
     title: 'Foreign imports',
