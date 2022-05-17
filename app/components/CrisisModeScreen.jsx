@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -10,6 +10,7 @@ import ScrollContainer from './ScrollContainer';
 import Choice from './Choice';
 import TitleHeading from './TitleHeading';
 import FactionBannerLogo from './FactionBannerLogo';
+import CRISIS_BG_MUSIC from '../sounds/Vetur-Frosti.mp3';
 
 
 function CrisisModeScreen({ realm }) {
@@ -18,6 +19,22 @@ function CrisisModeScreen({ realm }) {
 
     const [ isInCrisis, setIsInCrisis ] = useState(true);
     const [ switchedFaction, setSwitchedFaction ] = useState(false);
+
+    useEffect(() => {
+        if (isInCrisis) {
+            // Pause current track
+            window.realm.audioPlaying.pause();
+
+            // Setup new audio stream
+            const audio = new Audio(CRISIS_BG_MUSIC);
+            audio.loop = true;
+            audio.currentTime = 2.5;
+            audio.play();
+
+            // Mount new track
+            window.realm.audioPlaying = audio;
+        }
+    }, [ isInCrisis ] )
 
     function handleRollTheDice() {
         const diceRoll = Math.random();

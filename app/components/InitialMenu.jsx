@@ -22,7 +22,7 @@ function InitialMenu({ realm }) {
           </h2>
 
           <p>
-            {`A leader during the rebellion, you helped overthrow the decaying, corrupt monarchy, leaving the people in charge.`}
+            {`As one of the key leaders during the rebellion, you helped overthrow the corrupt, decaying monarchy, leaving the people in charge.`}
           </p>
 
           <p>

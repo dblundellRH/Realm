@@ -35,6 +35,8 @@ const render = () => {
 };
 
 const audio = new Audio(BG_MUSIC);
+audio.loop = true;
+
 const startGameAudio = () => {
   /* the audio is now playable; play it if permissions allow */
   if (!window.realm.debug) {

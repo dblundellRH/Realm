@@ -31,6 +31,9 @@ module.exports = {
     "react/jsx-no-undef": [2, { "allowGlobals": true }]
   },
   settings: {
+    'react': {
+        "version": "16",
+    },
     'import/resolver': {
       webpack: {
         config: './internals/webpack/webpack.prod.babel.js',

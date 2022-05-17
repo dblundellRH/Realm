@@ -22,7 +22,7 @@ export default {
         colour: 'blue',
         fontColour: 'white',
         keyResource: RESOURCES.SECURITY,
-        blurb: 'The Royalists are the old guard, who believe in tradition, and still support the remnants of the royal family, the young Prince in particular.',
+        blurb: 'The Royalists are the old guard, who believe in birth rights and tradition. They still support the remnants of the royal family, the young Prince in particular.',
         factionTitle: 'Lord Protector',
     },
     [FACTION_NAMES.GUILDS]: {
@@ -35,7 +35,7 @@ export default {
         fontColour: '#404040',
         badgeColour: 'radial-gradient(ellipse at center, rgba(253,208,29,1) 30%,rgba(163,131,3,1) 100%);',
         keyResource: RESOURCES.WEALTH,
-        blurb: 'The Guilds paid for the revolution in many ways, and now that the king has been deposed they want a return on their investment.',
+        blurb: 'The Guilds helped finance the revolution, and now that the king has been deposed they want a return on their investment. The believe in wealth creation, mostly for themselves.',
         factionTitle: 'Chancellor',
     },
     [FACTION_NAMES.COMMONS]: {
@@ -47,7 +47,7 @@ export default {
         colour: 'red',
         fontColour: 'white',
         keyResource: RESOURCES.FOOD,
-        blurb: 'The common people, who did most of the fighting and were promised a better life. Now they have a voice of their own.',
+        blurb: 'The common people, who did most of the fighting and were promised a better life. Now they have a voice of their own, and a few grudges to settle against what remains of the old order.',
         factionTitle: 'General Secretary',
     },
 };
