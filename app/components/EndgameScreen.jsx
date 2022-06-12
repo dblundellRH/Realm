@@ -4,12 +4,16 @@ import styled from 'styled-components';
 
 import RESOURCES from '../definitions/resources';
 import { useUserProvider } from '../contexts/UserProvider';
+import BG_GAME_OVER from '../images/bgs/civil_wars_by_arkagandhi_deh6lx1-fullview.jpg';
+import BG_NORMAL from '../images/bgs/pokerswell___lady_of_the_manor_by_deivcalviz_dchnbii.jpg';
+import GAME_OVER_BG_MUSIC from '../sounds/Winter.mp3';
 
 
 function EndgameScreen({ realm }) {
     const user = useUserProvider();
 
     function handleResetGame() {
+        realm.setActiveBackground(BG_NORMAL);
         realm.resetGameState();
         user.resetUserState();
     }
@@ -18,6 +22,9 @@ function EndgameScreen({ realm }) {
     let failReason;
 
     if (hasFailed) {
+        realm.setActiveBackground(BG_GAME_OVER);
+        realm.replaceAudioTrack(GAME_OVER_BG_MUSIC, 2);
+
         failReason = realm.factionConfidence <= 0
             ? `The problem was: <strong>${user.getFactionDetails().fullname}</strong> have thrown you in a dungeon.`
             : `The problem was: <strong>${getFailedResource(realm).name}</strong> has a value of ${getFailedResource(realm).value}`

@@ -84,6 +84,11 @@ function Footer({ realm }) {
 
           <button onClick={() => realm.setCrisisMode(true)}>Enable Crisis</button>
           <button onClick={() => realm.setCrisisMode(false)}>Disable Crisis</button>
+
+          <button onClick={() => {
+              realm.setFactionConfidence(0)
+              realm.setGameEnd(true)
+          }}>Game over?</button>
         </div>
       </If>
     </Container>

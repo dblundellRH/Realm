@@ -15,6 +15,7 @@ import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/e
 import FACTIONS from './definitions/factions';
 import SETTINGS from './definitions/settings';
 import BG_MUSIC from './sounds/Planning.mp3';
+import BG_NORMAL from './images/bgs/pokerswell___lady_of_the_manor_by_deivcalviz_dchnbii.jpg';
 
 
 const MOUNT_NODE = document.getElementById('app');
@@ -25,6 +26,7 @@ window.realm = {
   name: SETTINGS.DEFAULT_PLAYER_NAME,
   faction: FACTIONS.royalists,
   audioPlaying: null,
+  currentBackground: BG_NORMAL,
 }
 
 const render = () => {

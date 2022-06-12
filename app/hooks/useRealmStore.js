@@ -3,6 +3,9 @@ import { useState } from 'react';
 import RESOURCES from '../definitions/resources';
 import SETTINGS from '../definitions/settings';
 
+import BG_MUSIC from '../sounds/Planning.mp3';
+import BG_NORMAL from '../images/bgs/pokerswell___lady_of_the_manor_by_deivcalviz_dchnbii.jpg';
+
 
 export default function useRealmStore() {
   const [turnCount, setTurnCount] = useState(0);
@@ -22,6 +25,8 @@ export default function useRealmStore() {
   const [gameEnd, setGameEnd] = useState(false);
   const [gameStart, setGameStart] = useState(window.realm.debug ? window.realm.debug : false);
 
+  const [activeBackground, setActiveBackground] = useState(window.realm.currentBackground);
+
   const [showDebugMenu, setShowDebugMenu] = useState(false);
 
   function getResourceValue(resource) {
@@ -38,6 +43,10 @@ export default function useRealmStore() {
     }
   }
 
+  function setBackground(background) {
+    setActiveBackground(background);
+  }
+
   function isRealmInChaos() {
     // console.log('Any resources status at 0 or +100?', securityStatus, wealthStatus, foodStatus)
     return securityStatus <= 0 || securityStatus >= 100 ||
@@ -51,7 +60,25 @@ export default function useRealmStore() {
     return turnCount > SETTINGS.MAX_TURN_COUNT;
   }
 
+  function replaceAudioTrack(newAudio, time = 0) {
+      // Pause current track
+    window.realm.audioPlaying.pause();
+
+    // Setup new audio stream
+    const audio = new Audio(newAudio);
+    audio.loop = true;
+    audio.currentTime = time;
+    audio.play();
+
+    // Mount new track
+    window.realm.audioPlaying = audio;
+  }
+
+
   function resetGameState() {
+    replaceAudioTrack(BG_MUSIC);
+    setBackground(BG_NORMAL);
+
     setTurnCount(0);
     setSecurityStatus(50);
     setWealthStatus(50);
@@ -63,6 +90,8 @@ export default function useRealmStore() {
   }
 
   function resetAfterCrisis() {
+    replaceAudioTrack(BG_MUSIC);
+    setBackground(BG_NORMAL);
     setSecurityStatus(50);
     setWealthStatus(50);
     setFoodStatus(50);
@@ -115,5 +144,8 @@ export default function useRealmStore() {
     resetAfterCrisis,
     turnCountDivisor,
     isFactionConfidenceNearFatal,
+    replaceAudioTrack,
+    activeBackground,
+    setActiveBackground,
   };
 }

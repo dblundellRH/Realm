@@ -10,8 +10,10 @@ import ScrollContainer from './ScrollContainer';
 import Choice from './Choice';
 import TitleHeading from './TitleHeading';
 import FactionBannerLogo from './FactionBannerLogo';
-import CRISIS_BG_MUSIC from '../sounds/Vetur-Frosti.mp3';
-
+import CRISIS_BG_MUSIC from '../sounds/alexander-nakarada-the-great-battle.mp3';
+import CRISIS_RESOLVED_BG_MUSIC from '../sounds/Vetur-Frosti.mp3';
+import BG_CRISIS from '../images/bgs/dizzy-hearts-government-room.jpg';
+import BG_CRISIS_RESOLVED from '../images/bgs/pokerswell_town___motte_bailey_castle_by_deivcalviz_dccgq70-fullview.jpg';
 
 function CrisisModeScreen({ realm }) {
     const user = useUserProvider();
@@ -22,17 +24,9 @@ function CrisisModeScreen({ realm }) {
 
     useEffect(() => {
         if (isInCrisis) {
-            // Pause current track
-            window.realm.audioPlaying.pause();
+            realm.setActiveBackground(BG_CRISIS)
 
-            // Setup new audio stream
-            const audio = new Audio(CRISIS_BG_MUSIC);
-            audio.loop = true;
-            audio.currentTime = 2.5;
-            audio.play();
-
-            // Mount new track
-            window.realm.audioPlaying = audio;
+            realm.replaceAudioTrack(CRISIS_BG_MUSIC, 1);
         }
     }, [ isInCrisis ] )
 
@@ -42,6 +36,9 @@ function CrisisModeScreen({ realm }) {
 
         if (diceRoll < (0.5 - modifier)) {
             console.log('rollTheDice check passed!', diceRoll)
+            realm.setActiveBackground(BG_CRISIS_RESOLVED);
+            realm.replaceAudioTrack(CRISIS_RESOLVED_BG_MUSIC, 2.5);
+
             setIsInCrisis(false)
             user.setSurvivedNoConfidence(previousValue => previousValue + 1);
         }
@@ -61,8 +58,6 @@ function CrisisModeScreen({ realm }) {
         user.setSurvivedNoConfidence(previousValue => previousValue + 1);
         setSwitchedFaction(true);
     }
-
-    console.log(user.faction, FACTIONS[user.faction], FACTIONS[user.faction].logo)
 
     return (
         <ScrollContainer>

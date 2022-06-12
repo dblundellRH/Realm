@@ -16,7 +16,6 @@ import Footer from 'components/Footer';
 import useRealmStore from '../../hooks/useRealmStore';
 import GlobalStyle from '../../global-styles';
 
-import BG from '../../images/pokerswell___lady_of_the_manor_by_deivcalviz_dchnbii.jpg';
 import LOGO_ROYALISTS from '../../images/logo_royalists.png';
 import LOGO_GUILDS from '../../images/logo_guilds.png';
 import LOGO_COMMONS from '../../images/logo_commons.png';
@@ -26,13 +25,12 @@ import BANNER_COMMONS from '../../images/flag_commons.png';
 import WAX_SEAL from '../../images/wax-seal.png';
 import SCROLL_BG from '../../images/scroll-bg.png';
 
-
 function App() {
   const realm = useRealmStore();
 
   return (
     <BackgroundElement
-      backgroundImage={BG}
+      backgroundImage={realm.activeBackground}
     >
       <Helmet
         titleTemplate="%s - React.js Boilerplate"
