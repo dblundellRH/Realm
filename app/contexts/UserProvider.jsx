@@ -26,20 +26,16 @@ function UserProvider({ children }) {
     }
 
     const value = {
-        // state: {
-            name,
-            faction,
-            survivedNoConfidence,
-            items,
-        // },
-        // actions: {
-            setName,
-            setFaction,
-            setSurvivedNoConfidence,
-            setItems,
-            getFactionDetails,
-            resetUserState,
-        // }
+        name,
+        faction,
+        survivedNoConfidence,
+        items,
+        setName,
+        setFaction,
+        setSurvivedNoConfidence,
+        setItems,
+        getFactionDetails,
+        resetUserState,
     }
 
     return (

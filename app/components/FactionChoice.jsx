@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import FactionBannerLogo from './FactionBannerLogo';
 import FACTIONS from '../definitions/factions';
+import INK_UNDERLINE from '../images/ink-underline.png';
 
 
 function FactionChoice({
@@ -40,10 +41,28 @@ const Container = styled.button`
     border-left: 2px solid black;
     padding: 20px 10px;
 
-    background-color: ${props => props.isSelected ? 'rgb(140, 140, 140)' : 'rgb(240, 240, 240)'};
+    background-color: transparent;
+    border: none;
+
+    opacity: 0.5;
 
     &:first-child {
         border-left: 0;
+    }
+
+    ${props => props.isSelected && `
+        opacity: 1;
+
+        .faction-name {
+            background-image: url(${INK_UNDERLINE});
+            background-position: center -6px
+        }
+    `}
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+        transform: scale(1.1);
     }
 
     .faction-logo {

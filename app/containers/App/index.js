@@ -6,7 +6,7 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
@@ -24,13 +24,18 @@ import BANNER_GUILDS from '../../images/flag_guilds.png';
 import BANNER_COMMONS from '../../images/flag_commons.png';
 import WAX_SEAL from '../../images/wax-seal.png';
 import SCROLL_BG from '../../images/scroll-bg.png';
+import MUTE from '../../images/audio_volume_mute.png';
+import VOLUME from '../../images/audio_volume_medium.png';
 
 function App() {
   const realm = useRealmStore();
 
+  const [ isMuted, setIsMuted ] = useState(false);
+
   return (
     <BackgroundElement
       backgroundImage={realm.activeBackground}
+      isMuted={isMuted}
     >
       <Helmet
         titleTemplate="%s - React.js Boilerplate"
@@ -60,12 +65,16 @@ function App() {
         type="button"
         className="audio-player"
         onClick={() => {
+          setIsMuted(previousValue => !previousValue);
+
           window.realm.audioPlaying.paused
             ? window.realm.audioPlaying.play()
             : window.realm.audioPlaying.pause()
         }}
       >
-        Toggle audio
+        <span className="offscreen-label">
+            Toggle audio
+        </span>
       </button>
 
       <Footer
@@ -93,7 +102,34 @@ const BackgroundElement = styled.div`
   }
 
   .audio-player {
-    position: relative;
+    height: 50px;
+    width: 50px;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    border: 0;
+    border-radius: 50%;
+
+    background-color: white;
+    background-image: url(${VOLUME});
+    background-size: cover;
+
+    ${props => props.isMuted && `
+        background-image: url(${MUTE});
+    `}
+  }
+
+  .offscreen-label {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
   }
 `
 

@@ -19,30 +19,37 @@ function EndgameScreen({ realm }) {
     }
 
     const hasFailed = realm.isRealmInChaos();
-    let failReason;
 
     if (hasFailed) {
         realm.setActiveBackground(BG_GAME_OVER);
         realm.replaceAudioTrack(GAME_OVER_BG_MUSIC, 2);
-
-        failReason = realm.factionConfidence <= 0
-            ? `The problem was: <strong>${user.getFactionDetails().fullname}</strong> have thrown you in a dungeon.`
-            : `The problem was: <strong>${getFailedResource(realm).name}</strong> has a value of ${getFailedResource(realm).value}`
     }
 
     return (
         <Container>
             <Choose>
                 <When condition={hasFailed}>
-                    <h2>GAME OVER</h2>
-                    <p dangerouslySetInnerHTML={{ __html: failReason }} />
+                    <h2 className="heading">Conclusion</h2>
+
+                    <Choose>
+                        <When condition={realm.factionConfidence <= 0}>
+                            <p>You have failed to keep the support of <strong>{user.getFactionDetails().fullname}</strong>. They have lost patience with your mismanagement of the realm and have had you arrested.</p>
+                            <p>{`Thrown into a damp cell, you are quickly forgotten about and soon lose touch with developments. You aren't sure if the realm is better or worse off, but it has ceased to be your problem.`}</p>
+                        </When>
+                        <Otherwise>
+                            <p>The people are livid that <strong>${getFailedResource(realm).name}</strong> has not been maintained. Soon a riot breaks out, which turns into rebellion, which leads to your downfall.</p>
+                            <p>In the panic and confusion, no one quite knows what happens to you. Some members of <strong>{user.getFactionDetails().fullname}</strong> swear they saw you killed in the fighting. Others, that you managed to escape. Whatever the truth, the Realm is someone {`else's`} responsibility now.</p>
+                        </Otherwise>
+                    </Choose>
                 </When>
                 <Otherwise>
-                    <h2>You win!</h2>
+                    <h2 className="heading">Conclusion</h2>
+                    <p></p>
                     <p>Well done I guess.</p>
                 </Otherwise>
             </Choose>
-            <button onClick={handleResetGame}>Play again?</button>
+
+            <button className="reset-button" onClick={handleResetGame}>Lead the realm once again?</button>
         </Container>
     );
 }
@@ -100,6 +107,11 @@ const Container = styled.div`
 
   padding: 1rem 2rem;
   margin: auto;
+
+  .reset-button {
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
 `;
 
 export default EndgameScreen

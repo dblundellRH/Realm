@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 import FactionMenu from '../components/FactionMenu';
 import { useUserProvider } from '../contexts/UserProvider';
-
+import BOOK_BG from '../images/book-bg.png'
+import SCROLL_BG from '../images/scroll-bg.png'
 
 function InitialMenu({ realm }) {
   const user = useUserProvider();
@@ -13,32 +14,25 @@ function InitialMenu({ realm }) {
 
   return (
     <Container
+      hasUserName={user.name}
       isCentred={!!user.name}
     >
       <Choose>
         <When condition={user.name}>
-          <h2 className="event-title">
-            {`Greetings ${user.name},`}
-          </h2>
+          <header>
+            <h2 className="heading">
+                {`Greetings ${user.name},`}
+            </h2>
+          </header>
 
           <p>
-            {`As one of the key leaders during the rebellion, you helped overthrow the corrupt, decaying monarchy, leaving the people in charge.`}
-          </p>
-
-          <p>
-            {`But `}
-            <em>{`which`}</em>
-            {` people?`}
+            {`As one of the key leaders during the rebellion, you helped overthrow the corrupt, decaying monarchy, leaving the people in charge. But `}<em>{`which`}</em>{` people?`}
           </p>
 
           <p>
             {`With the old King deposed, `}
             <u>{`three main factions`}</u>
-            {` have arisen from the ashes of rebellion.`}
-          </p>
-
-          <p>
-            {`Your support will ensure one faction gains dominance over the others, for a time.`}
+            {` have arisen from the ashes of rebellion. Your support will ensure one faction gains dominance over the others, for a time.`}
           </p>
 
           <p>{`Whom will you choose to lead?`}</p>
@@ -103,13 +97,27 @@ const Container = styled.div`
   right: 0;
   top: 5rem;
 
-  height: 50vh;
-  width: 30vw;
-  min-width: 650px;
+  height: 660px;
+  width: 880px;
 
-  background-color: white;
+  background-image: url(${props => !props.isCentred ? BOOK_BG : SCROLL_BG});
+  background-size: cover;
 
   padding: 1rem 2rem;
+
+  ${props => props.isCentred && `
+    padding-top: 8rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+
+    min-height: 800px;
+  `}
+
+  ${props => props.hasUserName && `
+    height: 900px;
+    width: 740px;
+  `}
+
   margin: auto;
 
   text-align: ${props => props.isCentred ? 'left' : 'center'};
@@ -117,7 +125,7 @@ const Container = styled.div`
   .title {
     font-size: 5rem;
 
-    margin-top: 0;
+    margin-top: 2rem;
     margin-bottom: 0;
   }
 

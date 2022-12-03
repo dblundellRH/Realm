@@ -6,6 +6,7 @@ import FACTIONS from '../definitions/factions';
 import MODIFIERS from '../definitions/modifiers';
 import { useUserProvider } from '../contexts/UserProvider';
 import anyResourceIsNearFatal from '../functions/anyResourceIsNearFatal';
+import whatResourceIsNearFatal from '../functions/whatResourceIsNearFatal';
 import ScrollContainer from './ScrollContainer';
 import Choice from './Choice';
 import TitleHeading from './TitleHeading';
@@ -14,6 +15,7 @@ import CRISIS_BG_MUSIC from '../sounds/alexander-nakarada-the-great-battle.mp3';
 import CRISIS_RESOLVED_BG_MUSIC from '../sounds/Vetur-Frosti.mp3';
 import BG_CRISIS from '../images/bgs/dizzy-hearts-government-room.jpg';
 import BG_CRISIS_RESOLVED from '../images/bgs/pokerswell_town___motte_bailey_castle_by_deivcalviz_dccgq70-fullview.jpg';
+import resources from '../definitions/resources';
 
 function CrisisModeScreen({ realm }) {
     const user = useUserProvider();
@@ -59,6 +61,8 @@ function CrisisModeScreen({ realm }) {
         setSwitchedFaction(true);
     }
 
+    const fatalResource = whatResourceIsNearFatal(realm);
+
     return (
         <ScrollContainer>
             <Crisis>
@@ -73,19 +77,19 @@ function CrisisModeScreen({ realm }) {
 
                         <TitleHeading>{userFaction.factionTitle},</TitleHeading>
 
+                        <p>
+                            Disturbing news; <strong>the council is in crisis</strong>.
+                        </p>
+
                         <If condition={realm.isFactionConfidenceNearFatal()}>
-                            <p>Your constant neglect of the interests of {userFaction.fullname} has caused them to lose confidence in your leadership.</p>
+                            <p>Your constant neglect of the interests of <strong>{userFaction.fullname}</strong> has caused them to lose confidence in your leadership.</p>
                         </If>
 
-                        <If condition={anyResourceIsNearFatal(realm)}>
-                            <p>
-                                {`Some resource is either near minimum or maximum threshold, which means you'll lose.`}
-                            </p>
+                        <If condition={anyResourceIsNearFatal(realm) && !!fatalResource}>
+                            <p>We are experiencing a {fatalResource.how === 'near-zero' ? 'serious shortfall' : 'major surplus'} of <strong>{Object.values(resources).find(resource => resource.slug === fatalResource.slug).name.toLocaleLowerCase()}</strong> which has emboldened <strong>{Object.values(FACTIONS).find(faction => faction.keyResource.slug === fatalResource.slug).fullname}</strong> to begin to move against you.</p>
                         </If>
 
-                        <h2 className="event-title">COUNCIL IN CRISIS</h2>
-
-                        <p>Your former allies poised to overthrow you, and an emergency meeting of the council has been called!</p>
+                        <p>With your former allies poised to overthrow you, an emergency meeting of the council has been called!</p>
 
                         <p>What will you do?</p>
 
@@ -166,8 +170,8 @@ function CrisisModeScreen({ realm }) {
 
                         <Choose>
                             <When condition={switchedFaction}>
-                                <h2>A new chapter begins</h2>
-                                <p>Your new allies, {userFaction.fullname}, welcome you warmly, whilst your old faction curses your name.</p>
+                                <h2>A new chapter begins.</h2>
+                                <p>Your new allies, <strong>{userFaction.fullname}</strong>, welcome you warmly, whilst your old faction curses your name.</p>
                             </When>
                             <Otherwise>
                                 <h2>Successful maneuvers</h2>
@@ -178,12 +182,12 @@ function CrisisModeScreen({ realm }) {
                         <Choose>
                             <When condition={user.survivedNoConfidence > 1}>
                                 <p>
-                                    {user.survivedNoConfidence} times now you have managed to pull things back from the brink of disaster.
+                                    <strong>{user.survivedNoConfidence}</strong> times now you have managed to pull things back from the brink of disaster.
                                     Politics has grown on you.
                                 </p>
                             </When>
                             <Otherwise>
-                                <p>Your crafty political maneuvering has somehow manged to buy you a lifeline.</p>
+                                <p>Your crafty political maneuvering has somehow managed to buy you a lifeline.</p>
                             </Otherwise>
                         </Choose>
 

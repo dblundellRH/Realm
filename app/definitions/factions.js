@@ -22,7 +22,7 @@ export default {
         colour: 'blue',
         fontColour: 'white',
         keyResource: RESOURCES.SECURITY,
-        blurb: 'The Royalists are the old guard, who believe in birth rights and tradition. They still support the remnants of the royal family, the young Prince in particular.',
+        blurb: 'The Royalists are the old guard, who believe in tradition and birthright. They still support the remnants of the royal family, the young Prince in particular.',
         factionTitle: 'Lord Protector',
     },
     [FACTION_NAMES.GUILDS]: {
