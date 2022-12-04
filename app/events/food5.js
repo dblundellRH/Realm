@@ -6,8 +6,7 @@ import RAT from '../images/events/rat.png';
 export default {
     title: 'Law & food order',
     description: `
-        We've had reports of our soldiers, hungry whilst on patrol, have been 'requisitioning' food from the outlying farmsteds.
-        Quite rightly, the farmers have come to us, complaining.
+        We've had reports of our soldiers, hungry whilst on patrol, have been 'requisitioning' food from the outlying farmsteds. Quite rightly, the farmers have come to us, complaining.
     `,
     choices: [
         {

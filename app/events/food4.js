@@ -5,6 +5,7 @@ export default {
     title: 'Eastern roots',
     description: `
         A strangely dressed trader is selling a number of plain looking vegetables which they claim they are versatile and will feed dozens of families.
+
         People regard them wearily, and with suspicion. Should we trust them?
     `,
     choices: [

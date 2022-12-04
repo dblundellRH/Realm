@@ -5,8 +5,7 @@ import MONEY from '../images/events/money.png';
 export default {
     title: 'In my day we used our hands',
     description: `
-        A travelling inventor is showing off a new plow he developed.
-        He makes bold promises it will lead to increased yields for any of our farm.
+        A travelling inventor is showing off a new plough he developed. He makes bold promises it will lead to increased yields for any of our farm.
     `,
     choices: [
         {

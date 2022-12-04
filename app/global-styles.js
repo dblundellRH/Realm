@@ -121,6 +121,14 @@ const GlobalStyle = createGlobalStyle`
   .numbers {
     font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
   }
+
+  // CTAs
+  .button {
+      font-weight: 700;
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
 `;
 
 export default GlobalStyle;

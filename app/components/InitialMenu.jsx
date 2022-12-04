@@ -43,7 +43,7 @@ function InitialMenu({ realm }) {
 
           <If condition={user.name && user.faction && !realm.gameStart}>
             <button
-              className="start-game-button"
+              className="button"
               onClick={() => {
                 realm.setGameStart(true)
                 realm.setTurnCount(1)
@@ -74,7 +74,7 @@ function InitialMenu({ realm }) {
 
           <button
             disabled={!temporaryName}
-            className="start-game-button"
+            className="button"
             onClick={() => user.setName(temporaryName)}>
               Proceed
           </button>
@@ -144,8 +144,7 @@ const Container = styled.div`
   }
 
   .input-container {
-
-    margin-top: 1rem;
+    margin-top: 2rem;
     margin-bottom: 4rem;
 
     input {
@@ -154,18 +153,13 @@ const Container = styled.div`
       align-self: center;
 
       width: 100%;
-      min-width: 8rem;
+      min-width: 10rem;
 
       font-weight: 700;
 
       border: 0;
       border-bottom: 2px solid black;
     }
-  }
-
-  .start-game-button {
-    font-weight: 700;
-    margin-bottom: 2rem;
   }
 `
 

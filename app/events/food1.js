@@ -6,6 +6,7 @@ export default {
     title: 'There is a time for everything',
     description: `
         It's planting season, and we don't have enough hands to work the fields.
+
         Restoring confidence in our food supply is vital to our fledgling government, and the faith of the people.
     `,
     choices: [

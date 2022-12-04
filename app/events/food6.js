@@ -5,8 +5,7 @@ import SKULL from '../images/events/skull.png';
 export default {
     title: 'A foe beyond any of you',
     description: `
-        Perhaps our greatest enemy, fire, has broken out in the city.
-        Time is crucial, and must make a choice about where we concenrate our efforts.
+        Perhaps our greatest enemy, fire, has broken out in the city. Time is crucial, and must make a choice about where we concentrate our efforts.
     `,
     choices: [
         {
