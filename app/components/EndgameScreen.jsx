@@ -6,6 +6,7 @@ import { useUserProvider } from '../contexts/UserProvider';
 import BG_GAME_OVER from '../images/bgs/civil_wars_by_arkagandhi_deh6lx1-fullview.jpg';
 import BG_NORMAL from '../images/bgs/pokerswell___lady_of_the_manor_by_deivcalviz_dchnbii.jpg';
 import GAME_OVER_BG_MUSIC from '../sounds/Winter.mp3';
+import VICTORY_BG_MUSIC from '../sounds/LEGACY - The Precipice of Victory MP3.mp3';
 import ScrollContainer from './ScrollContainer';
 
 
@@ -23,6 +24,9 @@ function EndgameScreen({ realm }) {
     if (hasFailed) {
         realm.setActiveBackground(BG_GAME_OVER);
         realm.replaceAudioTrack(GAME_OVER_BG_MUSIC, 2);
+    }
+    else {
+        realm.replaceAudioTrack(VICTORY_BG_MUSIC, 2);
     }
 
     return (

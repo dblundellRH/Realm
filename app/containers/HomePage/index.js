@@ -29,18 +29,6 @@ function HomePage({ realm }) {
           />
         </When>
 
-        <When condition={realm.crisisMode}>
-          <CrisisModeScreen
-            realm={realm}
-          />
-        </When>
-
-        <When condition={realm.gameEnd}>
-          <EndgameScreen
-            realm={realm}
-          />
-        </When>
-
         <When condition={realm.gameStart && !realm.gameEnd && !realm.crisisMode}>
           <p>Gme</p>
           <StatusBar
@@ -67,6 +55,19 @@ function HomePage({ realm }) {
             realm={realm}
           />
         </When>
+
+        <When condition={realm.crisisMode}>
+          <CrisisModeScreen
+            realm={realm}
+          />
+        </When>
+
+        <When condition={realm.gameEnd}>
+          <EndgameScreen
+            realm={realm}
+          />
+        </When>
+
         <Otherwise>
           <p>Not sure wtf this means?</p>
         </Otherwise>

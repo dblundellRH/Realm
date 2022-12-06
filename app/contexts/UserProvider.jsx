@@ -21,7 +21,6 @@ function UserProvider({ children }) {
     }
 
     function resetUserState() {
-        setName(SETTINGS.DEFAULT_PLAYER_NAME);
         setFaction('');
     }
 
