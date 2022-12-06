@@ -23,13 +23,26 @@ function HomePage({ realm }) {
       </Helmet>
 
       <Choose>
-        <When condition={!realm.gameStart}>
+        <When condition={!realm.gameStart && !realm.gameEnd}>
           <InitialMenu
             realm={realm}
           />
         </When>
 
+        <When condition={realm.crisisMode}>
+          <CrisisModeScreen
+            realm={realm}
+          />
+        </When>
+
+        <When condition={realm.gameEnd}>
+          <EndgameScreen
+            realm={realm}
+          />
+        </When>
+
         <When condition={realm.gameStart && !realm.gameEnd && !realm.crisisMode}>
+          <p>Gme</p>
           <StatusBar
             realm={realm}
           />
@@ -54,19 +67,6 @@ function HomePage({ realm }) {
             realm={realm}
           />
         </When>
-
-        <When condition={realm.crisisMode}>
-          <CrisisModeScreen
-            realm={realm}
-          />
-        </When>
-
-        <When condition={realm.gameEnd}>
-          <EndgameScreen
-            realm={realm}
-          />
-        </When>
-
         <Otherwise>
           <p>Not sure wtf this means?</p>
         </Otherwise>

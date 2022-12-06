@@ -25,6 +25,7 @@ function EventSelector({ realm }) {
 
     return (
         <ScrollContainer>
+            <p>Selector</p>
             <If condition={!!events.showOutcome}>
                 <EventOutcome
                     events={events}

@@ -189,12 +189,9 @@ export default function useEventStore(realm, user) {
     }, [ eventStore ])
 
     useEffect(() => {
-        // console.log('*** active event updated ***',);
         if (realm.isEndOfGame()) {
             realm.setGameEnd(true);
         }
-
-        return () => realm.setGameEnd(false);
     }, [ activeEvent ])
 
     useEffect(() => {

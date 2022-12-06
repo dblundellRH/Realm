@@ -61,7 +61,7 @@ export default function useRealmStore() {
   }
 
   function replaceAudioTrack(newAudio, time = 0) {
-      // Pause current track
+    // Pause current track
     window.realm.audioPlaying.pause();
 
     // Setup new audio stream

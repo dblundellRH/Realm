@@ -37,7 +37,7 @@ function CrisisModeScreen({ realm }) {
         const modifier = user.survivedNoConfidence / 10;
 
         if (diceRoll < (0.5 - modifier)) {
-            console.log('rollTheDice check passed!', diceRoll)
+            // console.log('rollTheDice check passed!', diceRoll)
             realm.setActiveBackground(BG_CRISIS_RESOLVED);
             realm.replaceAudioTrack(CRISIS_RESOLVED_BG_MUSIC, 2.5);
 
@@ -45,7 +45,7 @@ function CrisisModeScreen({ realm }) {
             user.setSurvivedNoConfidence(previousValue => previousValue + 1);
         }
         else {
-            console.log('rollTheDice check failed...', diceRoll)
+            // console.log('rollTheDice check failed...', diceRoll)
 
             realm.setGameEnd(true);
             realm.setCrisisMode(false)
@@ -121,7 +121,7 @@ function CrisisModeScreen({ realm }) {
                                 <Choice
                                     disabled={user.items && !user.items.find(item => item.slug === MODIFIERS.ROUSING_SPEECH.slug)}
                                     className="choice-button"
-                                    onClick={() => console.log('rousing speech')}
+                                    // onClick={() => console.log('rousing speech')}
                                     factionIcon={FACTIONS[user.faction].logo}
                                 >
                                     {`Employ a Rousing Speech`}
