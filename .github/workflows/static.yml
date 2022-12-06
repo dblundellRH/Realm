@@ -23,11 +23,10 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     strategy:
       matrix:
         node_version: ['16']
-        runs-on: [ubuntu-latest, windows-latest]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
