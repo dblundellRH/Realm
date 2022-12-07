@@ -24,9 +24,6 @@ jobs:
   # Single deploy job since we're just deploying
   deploy:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        node_version: ['16']
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -35,10 +32,10 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v2
-      - name: Use Node.js ${{ matrix.node_version }}
+      - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: 16
       - name: Run build
         run: |
           npm install
